@@ -14,7 +14,7 @@ public class LoginExtension implements BeforeEachCallback {
     public void beforeEach(ExtensionContext context) {
         step("Set auth token to browser localstorage", () -> {
             open("/favicon.ico");
-            localStorage().setItem("AS_AUTH_2", authorizationData().toString());
+            localStorage().setItem("AS_AUTH_2", authorizationData().getAuth2());
         });
     }
 }

@@ -2,75 +2,66 @@ package cloud.autotests.pages;
 
 import cloud.autotests.data.dashboards.DashboardActionItem;
 import cloud.autotests.data.dashboards.WidgetActionItem;
-import cloud.autotests.pages.components.Alerts;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class DashboardsPage {
 
-    Alerts alert = new Alerts();
-
-    //dashboards page header elements
-    private ElementsCollection dashboardsList = $(".ProjectDashboards__tabs").$$(".Tabs__item");
-    private SelenideElement dashboardTitle = $(".BreadCrumbs");
-    private SelenideElement newDashboardButton = $(".ProjectDashboards__title .Button");
-    private SelenideElement dashboardActionsButton = $(".ProjectDashboards__navigation .Button");
-    private SelenideElement fullScreenControls = $(".Dashboard__fullscreen-controls");
-
-    //dashboard content elements
     private ElementsCollection widgetsList = $(".Dashboard__content").$$(".react-grid-item");
+    private ElementsCollection menuItems = $$(".Menu__item");
+
+    private SelenideElement newDashboardButton = $(".ProjectDashboards__title").$("button[type=button]");
+    private SelenideElement dashboardsTabs = $(".ProjectDashboards__tabs");
+    private SelenideElement dashboardActionsButton = $(".ProjectDashboards__navigation").$("button[type=button]");
+
+    private SelenideElement fullScreenControls = $(".Dashboard__fullscreen-controls");
     private SelenideElement addWidgetButton = $(".Dashboard__empty .Button");
+    private SelenideElement toastifyCloseButton = $(".Toastify__close-button");
 
     //region Get elements methods
-    public SelenideElement getDashboardTab(String dashboardName) {
-        return dashboardsList.find(text(dashboardName));
+    private SelenideElement getDashboardTabByName(String dashboardName) {
+        return dashboardsTabs.$(byText(dashboardName));
     }
 
-    public SelenideElement getDashboardActionItem(DashboardActionItem actionItem) {
-        return $$(".Menu__item").find(text(actionItem.getDisplayedName()));
+    private SelenideElement getExitFullScreenButton() {
+        return fullScreenControls.hover().$("button[type=button]");
     }
 
-    public SelenideElement getExitFullScreenButton() {
-        return fullScreenControls.hover().$("[type=button]");
-    }
-
-    public SelenideElement getWidgetByName(String widgetName) {
+    private SelenideElement getWidgetByName(String widgetName) {
         return widgetsList.find(text(widgetName));
     }
 
     private SelenideElement getWidgetActionsButton(String widgetName) {
         return getWidgetByName(widgetName).$(".Widget__header").$(".Button");
     }
-
-    public SelenideElement getWidgetActionItem(WidgetActionItem actionItem) {
-        return $$(".Menu__item").find(text(actionItem.getDisplayedName()));
-    }
     //endregion
 
     //region Alerts steps
     @Step("Close toastify")
     public DashboardsPage closeToastify() {
-        alert.getToastifyCloseButton().click();
+        toastifyCloseButton.click();
         return this;
     }
 
     @Step("Confirm alert")
     public DashboardsPage confirmAlert() {
-        alert.confirmAlert();
+        Selenide.confirm();
         return this;
     }
 
     @Step("Dismiss alert")
     public DashboardsPage dismissAlert() {
-        alert.dismissAlert();
+        Selenide.dismiss();
         return this;
     }
     //endregion
@@ -90,26 +81,26 @@ public class DashboardsPage {
 
     @Step("Select dashboard '{dashboardName}'")
     public DashboardsPage selectDashboard(String dashboardName) {
-        getDashboardTab(dashboardName).click();
+        getDashboardTabByName(dashboardName).click();
         return this;
     }
 
     @Step("Select dashboard action '{actionItem}'")
     public DashboardsPage selectDashboardAction(DashboardActionItem actionItem) {
         dashboardActionsButton.click();
-        getDashboardActionItem(actionItem).click();
+        menuItems.find(text(actionItem.getDisplayedName())).click();
         return this;
     }
 
     @Step("Check that dashboard '{dashboardName}' exist")
     public DashboardsPage checkThatDashboardExist(String dashboardName) {
-        getDashboardTab(dashboardName).shouldBe(visible);
+        getDashboardTabByName(dashboardName).shouldBe(visible);
         return this;
     }
 
     @Step("Check that dashboard '{dashboardName}' not exist")
     public DashboardsPage checkThatDashboardNotExist(String dashboardName) {
-        getDashboardTab(dashboardName).shouldNotBe(visible);
+        getDashboardTabByName(dashboardName).shouldNotBe(visible);
         return this;
     }
 
@@ -154,7 +145,7 @@ public class DashboardsPage {
     @Step("Select widget action '{actionItem}'")
     public DashboardsPage selectWidgetAction(String widgetName, WidgetActionItem actionItem) {
         getWidgetActionsButton(widgetName).click();
-        getWidgetActionItem(actionItem).click();
+        menuItems.find(text(actionItem.getDisplayedName())).click();
         return this;
     }
 
