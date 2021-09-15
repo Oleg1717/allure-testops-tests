@@ -5,22 +5,29 @@ import cloud.autotests.api.model.dashboards.DashboardsInfo;
 import cloud.autotests.api.model.dashboards.Widget;
 import cloud.autotests.api.model.dashboards.WidgetsInfo;
 import cloud.autotests.config.ConfigHelper;
+import cloud.autotests.helpers.AllureRestAssuredFilter;
 import io.qameta.allure.Step;
 
 import java.util.List;
 
-import static cloud.autotests.api.spec.RestAssuredSpec.spec;
+import static cloud.autotests.api.AuthorizationData.authorizationData;
+import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.format;
 
 public class DashboardsApi {
 
     //region Dashboards
-    @Step("Add dashboard using API")
+    @Step("Add dashboard '{dashboardName}' using API")
     public int addDashboard(String dashboardName) {
         Dashboard dashboard = new Dashboard(ConfigHelper.getProjectId(), dashboardName);
 
-        return spec().request()
+        return given()
+                .baseUri(ConfigHelper.getApiBaseUri())
+                .basePath(ConfigHelper.getApiBasePath())
+                .header("Authorization", authorizationData().getAccessToken())
+                .filter(AllureRestAssuredFilter.withCustomTemplates())
+                .log().uri()
                 .contentType(JSON)
                 .body(dashboard)
                 .when()
@@ -31,7 +38,12 @@ public class DashboardsApi {
     }
 
     public void deleteDashboardById(int dashboardId) {
-        spec().request()
+        given()
+                .baseUri(ConfigHelper.getApiBaseUri())
+                .basePath(ConfigHelper.getApiBasePath())
+                .header("Authorization", authorizationData().getAccessToken())
+                .filter(AllureRestAssuredFilter.withCustomTemplates())
+                .log().uri()
                 .when()
                 .delete("dashboard/" + dashboardId)
                 .then()
@@ -44,22 +56,32 @@ public class DashboardsApi {
     }
 
     public int getDashboardIdByName(String dashboardName) {
-        return spec().request()
+        return given()
+                .baseUri(ConfigHelper.getApiBaseUri())
+                .basePath(ConfigHelper.getApiBasePath())
+                .header("Authorization", authorizationData().getAccessToken())
+                .filter(AllureRestAssuredFilter.withCustomTemplates())
+                .log().uri()
                 .when()
                 .param("projectId", ConfigHelper.getProjectId())
                 .param("size", 2000)
-                .get("dashboard/")
+                .get("dashboard")
                 .then()
                 .statusCode(200)
                 .extract().path(format("content.find { it.name == '%s' }.id", dashboardName));
     }
 
     public List<Dashboard> getDashboardsList(int projectId) {
-        return spec().request()
+        return given()
+                .baseUri(ConfigHelper.getApiBaseUri())
+                .basePath(ConfigHelper.getApiBasePath())
+                .header("Authorization", authorizationData().getAccessToken())
+                .filter(AllureRestAssuredFilter.withCustomTemplates())
+                .log().uri()
                 .when()
                 .param("projectId", projectId)
                 .param("size", 2000)
-                .get("dashboard/")
+                .get("dashboard")
                 .then()
                 .statusCode(200)
                 .extract().as(DashboardsInfo.class).getDashboardsList();
@@ -77,7 +99,12 @@ public class DashboardsApi {
 
     //region Dashboard widgets
     public List<Widget> getWidgetsList(String dashboardId) {
-        return spec().request()
+        return given()
+                .baseUri(ConfigHelper.getApiBaseUri())
+                .basePath(ConfigHelper.getApiBasePath())
+                .header("Authorization", authorizationData().getAccessToken())
+                .filter(AllureRestAssuredFilter.withCustomTemplates())
+                .log().uri()
                 .when()
                 .get("dashboard/" + dashboardId)
                 .then()
@@ -86,7 +113,12 @@ public class DashboardsApi {
     }
 
     public void deleteWidget(int widgetId) {
-        spec().request()
+        given()
+                .baseUri(ConfigHelper.getApiBaseUri())
+                .basePath(ConfigHelper.getApiBasePath())
+                .header("Authorization", authorizationData().getAccessToken())
+                .filter(AllureRestAssuredFilter.withCustomTemplates())
+                .log().uri()
                 .when()
                 .delete("widget/" + widgetId)
                 .then()
