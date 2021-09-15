@@ -1,4 +1,4 @@
-package cloud.autotests.api.model.dashboards;
+package cloud.autotests.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,19 +10,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Dashboard {
+public class Project {
 
     @JsonProperty("id")
-    int id;
-
-    @JsonProperty("projectId")
-    int projectId;
+    String id;
 
     @JsonProperty("name")
     String name;
 
-    public Dashboard(int projectId, String name) {
-        this.projectId = projectId;
+    @JsonProperty("abbr")
+    String abbreviation;
+
+    @JsonProperty("isPublic")
+    boolean isPublic;
+
+    @JsonProperty("description")
+    String description;
+
+    public Project(String name, boolean isPublic) {
         this.name = name;
+        this.isPublic = isPublic;
     }
 }

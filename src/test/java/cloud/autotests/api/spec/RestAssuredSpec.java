@@ -14,7 +14,7 @@ public class RestAssuredSpec {
             .basePath(ConfigHelper.getApiBasePath())
             .header("Authorization", authorizationData().getAccessToken())
             .filter(AllureRestAssuredFilter.withCustomTemplates())
-            .log().uri();
+            .log().all();
 
     public static RestAssuredSpec spec() {
         return new RestAssuredSpec();
