@@ -60,7 +60,7 @@ public class ProjectsTests extends TestBase {
 
     @WithLogin
     @Story("Projects page pagination tests")
-    @ParameterizedTest(name = "Check pagination with 'Show' item = {1}")
+    @ParameterizedTest(name = "Check pagination with item = {0}")
     @EnumSource(value = ProjectsPaginationItem.class)
     void paginationTest(ProjectsPaginationItem item) {
         projectsPage.openProjectsPage(PROJECTS_URL)

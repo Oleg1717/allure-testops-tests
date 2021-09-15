@@ -76,7 +76,7 @@ public class ProjectsPage {
         return this;
     }
 
-    @Step("Select pagination element '{item}'")
+    @Step("Select pagination item '{paginationItem}'")
     public ProjectsPage selectPaginationElement(String paginationItem) {
         paginationSelect.click();
         paginationSelectItems.find(text(paginationItem)).click();
