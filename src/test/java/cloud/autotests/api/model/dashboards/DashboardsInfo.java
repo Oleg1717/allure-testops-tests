@@ -9,11 +9,11 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Dashboards {
+public class DashboardsInfo {
 
     @JsonProperty("content")
     List<Dashboard> dashboardsList;
 
     @JsonProperty("totalElements")
-    String totalElements;
+    int totalElements;
 }

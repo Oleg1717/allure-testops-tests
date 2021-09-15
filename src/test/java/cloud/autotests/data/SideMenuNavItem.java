@@ -1,6 +1,6 @@
 package cloud.autotests.data;
 
-public enum MenuItem {
+public enum SideMenuNavItem {
     DASHBOARD("Dashboards"),
     TEST_CASES("Test cases"),
     TEST_PLANS("Test plans"),
@@ -11,14 +11,13 @@ public enum MenuItem {
 
     private final String displayedName;
 
-    MenuItem(String displayedName) {
+    SideMenuNavItem(String displayedName) {
         this.displayedName = displayedName;
     }
 
     public String getDisplayedName() {
         return displayedName;
     }
-
 
     @Override
     public String toString() {

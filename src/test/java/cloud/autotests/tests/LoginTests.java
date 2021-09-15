@@ -1,7 +1,7 @@
 package cloud.autotests.tests;
 
 import cloud.autotests.config.ConfigHelper;
-import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.localStorage;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-@Epic("Login tests")
+@Feature("Login tests")
 public class LoginTests extends TestBase {
 
     @Test
@@ -41,7 +41,7 @@ public class LoginTests extends TestBase {
                     open("/favicon.ico"));
 
             step("Set auth token to to browser localstorage", () ->
-                    localStorage().setItem("AS_AUTH_2", authorizationData().toString()));
+                    localStorage().setItem("AS_AUTH_2", authorizationData().getAuth2()));
         });
 
         step("Open main page", () ->

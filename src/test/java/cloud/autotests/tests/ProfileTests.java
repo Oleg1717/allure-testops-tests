@@ -1,7 +1,7 @@
 package cloud.autotests.tests;
 
 import cloud.autotests.helpers.WithLogin;
-import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 
-@Epic("Profile tests")
+@Feature("Profile tests")
 public class ProfileTests extends TestBase {
 
     @WithLogin

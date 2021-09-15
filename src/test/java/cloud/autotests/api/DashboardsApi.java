@@ -1,9 +1,9 @@
 package cloud.autotests.api;
 
 import cloud.autotests.api.model.dashboards.Dashboard;
-import cloud.autotests.api.model.dashboards.Dashboards;
+import cloud.autotests.api.model.dashboards.DashboardsInfo;
 import cloud.autotests.api.model.dashboards.Widget;
-import cloud.autotests.api.model.dashboards.Widgets;
+import cloud.autotests.api.model.dashboards.WidgetsInfo;
 import cloud.autotests.config.ConfigHelper;
 import io.qameta.allure.Step;
 
@@ -11,15 +11,14 @@ import java.util.List;
 
 import static cloud.autotests.api.spec.RestAssuredSpec.spec;
 import static io.restassured.http.ContentType.JSON;
+import static java.lang.String.format;
 
 public class DashboardsApi {
 
     //region Dashboards
     @Step("Add dashboard using API")
     public int addDashboard(String dashboardName) {
-        Dashboard dashboard = new Dashboard();
-        dashboard.setProjectId(ConfigHelper.getProjectId());
-        dashboard.setName(dashboardName);
+        Dashboard dashboard = new Dashboard(ConfigHelper.getProjectId(), dashboardName);
 
         return spec().request()
                 .contentType(JSON)
@@ -31,12 +30,28 @@ public class DashboardsApi {
                 .extract().path("id");
     }
 
-    public void deleteDashboard(int dashboardId) {
+    public void deleteDashboardById(int dashboardId) {
         spec().request()
                 .when()
                 .delete("dashboard/" + dashboardId)
                 .then()
                 .statusCode(202);
+    }
+
+    public void deleteDashboardByName(String dashboardName) {
+        int dashboardId = getDashboardIdByName(dashboardName);
+        deleteDashboardById(dashboardId);
+    }
+
+    public int getDashboardIdByName(String dashboardName) {
+        return spec().request()
+                .when()
+                .param("projectId", ConfigHelper.getProjectId())
+                .param("size", 2000)
+                .get("dashboard/")
+                .then()
+                .statusCode(200)
+                .extract().path(format("content.find { it.name == '%s' }.id", dashboardName));
     }
 
     public List<Dashboard> getDashboardsList(int projectId) {
@@ -47,7 +62,7 @@ public class DashboardsApi {
                 .get("dashboard/")
                 .then()
                 .statusCode(200)
-                .extract().as(Dashboards.class).getDashboardsList();
+                .extract().as(DashboardsInfo.class).getDashboardsList();
     }
 
     @Step("Delete all tests dashboards using API")
@@ -55,7 +70,7 @@ public class DashboardsApi {
         List<Dashboard> dashboardsList = getDashboardsList(projectId);
 
         for (Dashboard dashboard : dashboardsList) {
-            deleteDashboard(dashboard.getId());
+            deleteDashboardById(dashboard.getId());
         }
     }
     //endregion
@@ -67,7 +82,7 @@ public class DashboardsApi {
                 .get("dashboard/" + dashboardId)
                 .then()
                 .statusCode(200)
-                .extract().as(Widgets.class).getWidgetsList();
+                .extract().as(WidgetsInfo.class).getWidgetsList();
     }
 
     public void deleteWidget(int widgetId) {

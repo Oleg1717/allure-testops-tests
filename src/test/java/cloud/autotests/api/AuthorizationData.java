@@ -1,8 +1,6 @@
 package cloud.autotests.api;
 
 import cloud.autotests.api.model.Authorization;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 
 public class AuthorizationData {
 
@@ -13,11 +11,10 @@ public class AuthorizationData {
         private static final AuthorizationData authorizationData = new AuthorizationData();
     }
 
-    @SneakyThrows
     private AuthorizationData() {
         Authorization authorization = new UserApi().getAuthorizationData();
         accessToken = "Bearer " + authorization.getAccessToken();
-        auth2 = new ObjectMapper().writeValueAsString(authorization);
+        auth2 = authorization.toString();
     }
 
     public static AuthorizationData authorizationData() {
@@ -28,8 +25,7 @@ public class AuthorizationData {
         return accessToken;
     }
 
-    @Override
-    public String toString() {
+    public String getAuth2() {
         return auth2;
     }
 
