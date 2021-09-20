@@ -1,9 +1,11 @@
 package cloud.autotests.tests;
 
 import cloud.autotests.config.ConfigHelper;
+import cloud.autotests.helpers.CustomTestWatcher;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static cloud.autotests.api.AuthorizationData.authorizationData;
 import static com.codeborne.selenide.Condition.attribute;
@@ -14,6 +16,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 @Feature("Login tests")
+@ExtendWith(CustomTestWatcher.class)
 public class LoginTests extends TestBase {
 
     @Test

@@ -9,6 +9,7 @@ import cloud.autotests.data.dashboards.FormTopTestCasesMetricItem;
 import cloud.autotests.data.dashboards.FormTreeItem;
 import cloud.autotests.data.dashboards.FormTypeItem;
 import cloud.autotests.data.dashboards.WidgetActionItem;
+import cloud.autotests.helpers.CustomTestWatcher;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.pages.DashboardsPage;
 import cloud.autotests.pages.components.forms.DashboardEditForm;
@@ -22,11 +23,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
 @Owner("Oleg1717")
 @Feature("Dashboards tests")
+@ExtendWith(CustomTestWatcher.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DashboardsTests extends TestBase {
 
