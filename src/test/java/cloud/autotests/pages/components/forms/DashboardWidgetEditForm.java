@@ -11,6 +11,7 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class DashboardWidgetEditForm {
 
@@ -39,7 +40,7 @@ public class DashboardWidgetEditForm {
             .$(".InputQuery__status");
     private SelenideElement launchersQueryCount = getFieldByLabel("Launchers query")
             .$(".InputQuery__count");
-    private SelenideElement typeSelect = getFieldByLabel("Type").$(".Select");
+    private SelenideElement typeSelect = getFieldByLabel("Type").$(".css-2b097c-container");
     private SelenideElement metricSelect = getFieldByLabel("Metric").$(".Select");
     private SelenideElement groupBySelect = getFieldByLabel("Group By").$(".Select");
     private SelenideElement treeSelect = getFieldByLabel("Tree").$(".Select");
@@ -118,6 +119,8 @@ public class DashboardWidgetEditForm {
     //region Select item steps
     @Step("Select item '{itemName}' from drop-down list 'Type'")
     public DashboardWidgetEditForm selectTypeItem(FormTypeItem itemName) {
+        typeSelect.click();
+        sleep(1000);
         typeSelect.click();
         getSelectedItem(itemName.getDisplayedName()).click();
         return this;

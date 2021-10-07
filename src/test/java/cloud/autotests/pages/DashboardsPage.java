@@ -14,10 +14,11 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class DashboardsPage {
 
-    private ElementsCollection widgetsList = $(".Dashboard__content").$$(".react-grid-item");
+    private ElementsCollection widgetsList = $(".ProjectDashboards__content").$$(".react-grid-item");
     private ElementsCollection menuItems = $$(".Menu__item");
 
     private SelenideElement newDashboardButton = $(".ProjectDashboards__title").$("button[type=button]");
@@ -26,7 +27,7 @@ public class DashboardsPage {
 
     private SelenideElement fullScreenControls = $(".Dashboard__fullscreen-controls");
     private SelenideElement addWidgetButton = $(".Dashboard__empty .Button");
-    private SelenideElement toastifyCloseButton = $(".Toastify__close-button");
+    private SelenideElement notification = $(".Toastify__toast-body");
 
     //region Get elements methods
     private SelenideElement getDashboardTabByName(String dashboardName) {
@@ -47,9 +48,9 @@ public class DashboardsPage {
     //endregion
 
     //region Alerts steps
-    @Step("Close toastify")
-    public DashboardsPage closeToastify() {
-        toastifyCloseButton.click();
+    @Step("Close notification")
+    public DashboardsPage closeNotification() {
+        notification.click();
         return this;
     }
 
@@ -88,6 +89,7 @@ public class DashboardsPage {
     @Step("Select dashboard action '{actionItem}'")
     public DashboardsPage selectDashboardAction(DashboardActionItem actionItem) {
         dashboardActionsButton.click();
+        sleep(1000);
         menuItems.find(text(actionItem.getDisplayedName())).click();
         return this;
     }
