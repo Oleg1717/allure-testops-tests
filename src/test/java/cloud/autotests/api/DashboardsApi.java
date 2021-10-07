@@ -12,7 +12,6 @@ import java.util.List;
 
 import static cloud.autotests.api.AuthorizationData.authorizationData;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static java.lang.String.format;
 
 public class DashboardsApi {
@@ -25,13 +24,14 @@ public class DashboardsApi {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .basePath(ConfigHelper.getApiBasePath())
-                .header("Authorization", authorizationData().getAccessToken())
+                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
+                .cookies(authorizationData().getSessionCookies())
+                .contentType("application/json; charset=UTF-8")
+                .body(dashboard)
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .log().uri()
-                .contentType(JSON)
-                .body(dashboard)
                 .when()
-                .post("dashboard")
+                .post("/dashboard")
                 .then()
                 .statusCode(200)
                 .extract().path("id");
@@ -41,11 +41,12 @@ public class DashboardsApi {
         given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .basePath(ConfigHelper.getApiBasePath())
-                .header("Authorization", authorizationData().getAccessToken())
+                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
+                .cookies(authorizationData().getSessionCookies())
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .log().uri()
                 .when()
-                .delete("dashboard/" + dashboardId)
+                .delete("/dashboard/" + dashboardId)
                 .then()
                 .statusCode(202);
     }
@@ -59,13 +60,13 @@ public class DashboardsApi {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .basePath(ConfigHelper.getApiBasePath())
-                .header("Authorization", authorizationData().getAccessToken())
+                .cookies(authorizationData().getSessionCookies())
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .log().uri()
                 .when()
                 .param("projectId", ConfigHelper.getProjectId())
                 .param("size", 2000)
-                .get("dashboard")
+                .get("/dashboard")
                 .then()
                 .statusCode(200)
                 .extract().path(format("content.find { it.name == '%s' }.id", dashboardName));
@@ -75,13 +76,13 @@ public class DashboardsApi {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .basePath(ConfigHelper.getApiBasePath())
-                .header("Authorization", authorizationData().getAccessToken())
+                .cookies(authorizationData().getSessionCookies())
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .log().uri()
                 .when()
                 .param("projectId", projectId)
                 .param("size", 2000)
-                .get("dashboard")
+                .get("/dashboard")
                 .then()
                 .statusCode(200)
                 .extract().as(DashboardsInfo.class).getDashboardsList();
@@ -102,11 +103,11 @@ public class DashboardsApi {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .basePath(ConfigHelper.getApiBasePath())
-                .header("Authorization", authorizationData().getAccessToken())
+                .cookies(authorizationData().getSessionCookies())
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .log().uri()
                 .when()
-                .get("dashboard/" + dashboardId)
+                .get("/dashboard/" + dashboardId)
                 .then()
                 .statusCode(200)
                 .extract().as(WidgetsInfo.class).getWidgetsList();
@@ -116,11 +117,12 @@ public class DashboardsApi {
         given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .basePath(ConfigHelper.getApiBasePath())
-                .header("Authorization", authorizationData().getAccessToken())
+                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
+                .cookies(authorizationData().getSessionCookies())
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .log().uri()
                 .when()
-                .delete("widget/" + widgetId)
+                .delete("/widget/" + widgetId)
                 .then()
                 .statusCode(202);
     }

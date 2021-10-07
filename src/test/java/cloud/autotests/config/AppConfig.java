@@ -11,16 +11,25 @@ public interface AppConfig extends Config {
 
     @Key("web.url")
     String webUrl();
+
     @Key("api.base.uri")
     String apiBaseUri();
+
     @Key("api.base.path")
     String apiBasePath();
+
     @Key("user.login")
     String userLogin();
+
     @Key("user.password")
     String userPassword();
+
     @Key("user.token")
     String userToken();
+
+    @Key("xsrf.token")
+    String xsrfToken();
+
     @Key("project.id")
     int projectId();
 }

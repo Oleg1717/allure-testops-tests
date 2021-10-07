@@ -16,6 +16,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import static io.qameta.allure.Allure.parameter;
+
 @Owner("Oleg1717")
 @Feature("Projects page tests")
 @ExtendWith(CustomTestWatcher.class)
@@ -65,8 +67,10 @@ public class ProjectsTests extends TestBase {
     @ParameterizedTest(name = "Check pagination with item = {0}")
     @EnumSource(value = ProjectsPaginationItem.class)
     void paginationTest(ProjectsPaginationItem item) {
+        parameter("Items per page", item.getItemsPerPage());
         projectsPage.openProjectsPage(PROJECTS_URL)
-                .selectPaginationElement(item.getDisplayedName())
-                .checkProjectsListCount(item.getShowCount());
+                .allProjectsButtonClick()
+                .selectPaginationElement(item)
+                .checkProjectsListCount(item);
     }
 }

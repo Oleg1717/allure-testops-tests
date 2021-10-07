@@ -28,6 +28,7 @@ public class Authorization {
     @JsonProperty("jti")
     private String jti;
 
+    @Override
     @SneakyThrows
     public String toString() {
         return new ObjectMapper().writeValueAsString(this);

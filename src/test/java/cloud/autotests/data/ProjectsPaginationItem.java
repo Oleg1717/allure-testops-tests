@@ -1,30 +1,24 @@
 package cloud.autotests.data;
 
 public enum ProjectsPaginationItem {
-    SHOW_5("Show 5", 5),
-    SHOW_10("Show 10", 10),
-    SHOW_25("Show 25", 25),
-    SHOW_50("Show 50", 50),
-    SHOW_100("Show 100", 100);
+    SHOW_5(5),
+    SHOW_10(10),
+    SHOW_25(25),
+    SHOW_50(50),
+    SHOW_100(100);
 
-    private final String displayedName;
-    private final int showCount;
+    private final int itemsPerPage;
 
-    ProjectsPaginationItem(String displayedName, int showCount) {
-        this.displayedName = displayedName;
-        this.showCount = showCount;
+    ProjectsPaginationItem(int itemsPerPage) {
+        this.itemsPerPage = itemsPerPage;
     }
 
-    public String getDisplayedName() {
-        return displayedName;
-    }
-
-    public int getShowCount() {
-        return showCount;
+    public int getItemsPerPage() {
+        return itemsPerPage;
     }
 
     @Override
     public String toString() {
-        return displayedName;
+        return String.valueOf(itemsPerPage);
     }
 }

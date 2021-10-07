@@ -12,7 +12,7 @@ public class RestAssuredSpec {
     private static final RequestSpecification request = given()
             .baseUri(ConfigHelper.getApiBaseUri())
             .basePath(ConfigHelper.getApiBasePath())
-            .header("Authorization", authorizationData().getAccessToken())
+            .cookies(authorizationData().getSessionCookies())
             .filter(AllureRestAssuredFilter.withCustomTemplates())
             .log().all();
 

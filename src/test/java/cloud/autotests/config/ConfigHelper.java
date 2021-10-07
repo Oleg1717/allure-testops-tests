@@ -37,6 +37,10 @@ public class ConfigHelper {
     public static String getUserToken() {
         return getAppConfig().userToken();
     }
+
+    public static String getXsrfToken() {
+        return getAppConfig().xsrfToken();
+    }
     //endregion
 
     //region Project config

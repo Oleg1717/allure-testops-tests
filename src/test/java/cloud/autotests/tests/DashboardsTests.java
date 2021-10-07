@@ -27,6 +27,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import static io.qameta.allure.Allure.parameter;
+
 @Owner("Oleg1717")
 @Feature("Dashboards tests")
 @ExtendWith(CustomTestWatcher.class)
@@ -230,7 +232,7 @@ public class DashboardsTests extends TestBase {
         dashboardWidgetEditForm.setNameInput(widgetName)
                 .selectTypeItem(FormTypeItem.LAUNCHES)
                 .clickSubmitButton();
-        dashboardsPage.closeToastify()
+        dashboardsPage.closeNotification()
                 .selectWidgetAction(widgetName, WidgetActionItem.EDIT);
         dashboardWidgetEditForm.setNameInput(newName)
                 .selectTypeItem(FormTypeItem.LAUNCH_STATISTIC_TREND)
@@ -251,7 +253,7 @@ public class DashboardsTests extends TestBase {
         dashboardWidgetEditForm.setNameInput(widgetName)
                 .selectTypeItem(FormTypeItem.LAUNCHES)
                 .clickSubmitButton();
-        dashboardsPage.closeToastify()
+        dashboardsPage.closeNotification()
                 .selectWidgetAction(widgetName, WidgetActionItem.CLONE);
         dashboardWidgetEditForm.setNameInput(newName)
                 .selectTypeItem(FormTypeItem.LAUNCHES)
@@ -270,7 +272,7 @@ public class DashboardsTests extends TestBase {
         dashboardWidgetEditForm.setNameInput(widgetName)
                 .selectTypeItem(FormTypeItem.LAUNCHES)
                 .clickSubmitButton();
-        dashboardsPage.closeToastify()
+        dashboardsPage.closeNotification()
                 .selectWidgetAction(widgetName, WidgetActionItem.DELETE)
                 .checkThatWidgetNotExist(widgetName);
     }
@@ -339,6 +341,7 @@ public class DashboardsTests extends TestBase {
     @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
     @EnumSource(value = FormLaunchAnalyticMetricItem.class)
     void addLaunchAnalyticsWidgets(FormLaunchAnalyticMetricItem item) {
+        parameter("'Metric' item", item.toString());
         String widgetName = item.toString();
         dashboardsPage.openDashboardPage(dashboardForTestsUrl)
                 .selectDashboardAction(DashboardActionItem.ADD_WIDGET);
@@ -354,6 +357,7 @@ public class DashboardsTests extends TestBase {
     @ParameterizedTest(name = "Add widget with: 'Group by' item = {0}")
     @EnumSource(value = FormGroupByItem.class)
     void addTestCasePieChartWidgets(FormGroupByItem item) {
+        parameter("'Group by' item", item.toString());
         String widgetName = item.toString();
         dashboardsPage.openDashboardPage(dashboardForTestsUrl)
                 .selectDashboardAction(DashboardActionItem.ADD_WIDGET);
@@ -369,6 +373,7 @@ public class DashboardsTests extends TestBase {
     @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
     @EnumSource(value = FormTopTestCasesMetricItem.class)
     void addTopTestCasesWidgets(FormTopTestCasesMetricItem item) {
+        parameter("'Metric' item", item.toString());
         String widgetName = item.toString();
         dashboardsPage.openDashboardPage(dashboardForTestsUrl)
                 .selectDashboardAction(DashboardActionItem.ADD_WIDGET);
@@ -384,6 +389,7 @@ public class DashboardsTests extends TestBase {
     @ParameterizedTest(name = "Add widget with: 'Tree' item = {0}")
     @EnumSource(value = FormTreeItem.class)
     void addTestCaseTreeMapChartWidgets(FormTreeItem item) {
+        parameter("'Tree' item", item.toString());
         String widgetName = item.toString();
         dashboardsPage.openDashboardPage(dashboardForTestsUrl)
                 .selectDashboardAction(DashboardActionItem.ADD_WIDGET);

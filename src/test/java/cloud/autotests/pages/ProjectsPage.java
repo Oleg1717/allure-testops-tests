@@ -1,5 +1,7 @@
 package cloud.autotests.pages;
 
+import cloud.autotests.data.ProjectsPaginationItem;
+import cloud.autotests.pages.components.Sidebar;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -14,16 +16,22 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ProjectsPage {
 
-    private SelenideElement header = $(".BasicLayout__header");
-    private SelenideElement headerName = header.$(".BreadCrumbs");
-    private SelenideElement findProjectInput = header.$("input[type=search]");
-    private SelenideElement newProjectButton = header.$("button[type=button]");
+    private Sidebar sidebar = new Sidebar();
 
-    private SelenideElement body = $(".BasicLayout__body");
-    private ElementsCollection projectsList = body.$$(".ProjectCard");
-    private SelenideElement paginationSelect = body.$(".css-19attta-control");
+    private SelenideElement header = $(".HomeLayout__filter");
+    private ElementsCollection headerButtons = header.$$("button[type=button]");
+    private SelenideElement myProjectsButton = headerButtons.find(text("My projects"));
+    private SelenideElement favoritesButton = headerButtons.find(text("Favorites"));
+    private SelenideElement allProjectsButton = headerButtons.find(text("All projects"));
+    private SelenideElement findProjectInput = header.$("input[type=search]");
+    private SelenideElement newProjectButton = headerButtons.find(text("New project"));
+
+    private ElementsCollection projectsList = $(".ColumnHeaders__content").$$(".list-row");
+
+    private SelenideElement paginationSelect = $(".Pagination__select");
+
     private ElementsCollection paginationSelectItems = $(".css-11unzgr").$$("div");
-    private SelenideElement toastifyCloseButton = $(".Toastify__close-button");
+    private SelenideElement notification = $(".Toastify__toast-body");
 
     //region Get elements methods
     private SelenideElement getProjectRowNameLink(String projectName) {
@@ -31,10 +39,14 @@ public class ProjectsPage {
     }
     //region
 
+    public Sidebar getSidebar() {
+        return sidebar;
+    }
+
     //region Alerts steps
-    @Step("Close toastify")
-    public ProjectsPage closeToastify() {
-        toastifyCloseButton.click();
+    @Step("Close notification")
+    public ProjectsPage closeNotification() {
+        notification.click();
         return this;
     }
 
@@ -54,6 +66,12 @@ public class ProjectsPage {
     @Step("Open allure projects page")
     public ProjectsPage openProjectsPage(String projectsUrl) {
         open(projectsUrl);
+        return this;
+    }
+
+    @Step("'All projects' button click")
+    public ProjectsPage allProjectsButtonClick() {
+        allProjectsButton.click();
         return this;
     }
 
@@ -77,15 +95,15 @@ public class ProjectsPage {
     }
 
     @Step("Select pagination item '{paginationItem}'")
-    public ProjectsPage selectPaginationElement(String paginationItem) {
+    public ProjectsPage selectPaginationElement(ProjectsPaginationItem paginationItem) {
         paginationSelect.click();
-        paginationSelectItems.find(text(paginationItem)).click();
+        paginationSelectItems.find(text(paginationItem.toString())).click();
         return this;
     }
 
     @Step("Check that projects list count = {paginationCount}")
-    public ProjectsPage checkProjectsListCount(int paginationCount) {
-        projectsList.shouldHave(size(paginationCount));
+    public ProjectsPage checkProjectsListCount(ProjectsPaginationItem paginationItem) {
+        projectsList.shouldHave(size(paginationItem.getItemsPerPage()));
         return this;
     }
 }
