@@ -14,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static java.lang.String.format;
 
 @ExtendWith({AllureJunit5.class, CustomTestWatcher.class})
-public class TestBase {
+public class TempTestBase {
 
     static final String PROJECT_URL = ConfigHelper.getWebUrl() + format("/project/%s/", ConfigHelper.getProjectId());
 

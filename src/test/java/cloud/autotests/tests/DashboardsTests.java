@@ -33,7 +33,7 @@ import static io.qameta.allure.Allure.parameter;
 @Feature("Dashboards tests")
 @ExtendWith(CustomTestWatcher.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DashboardsTests extends TestBase {
+public class DashboardsTests extends TempTestBase {
 
     DashboardsPage dashboardsPage = new DashboardsPage();
     DashboardEditForm dashboardEditForm = new DashboardEditForm();

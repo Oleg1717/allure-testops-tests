@@ -21,7 +21,7 @@ import static io.qameta.allure.Allure.step;
 
 @Feature("Login tests")
 @ExtendWith(CustomTestWatcher.class)
-public class LoginTests extends TestBase {
+public class LoginTests extends TempTestBase {
 
     LoginPage loginPage = new LoginPage();
     Sidebar sidebar = new ProjectsPage().getSidebar();

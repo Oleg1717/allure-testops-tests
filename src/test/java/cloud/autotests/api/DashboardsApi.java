@@ -4,12 +4,13 @@ import cloud.autotests.api.model.dashboards.Dashboard;
 import cloud.autotests.api.model.dashboards.DashboardsInfo;
 import cloud.autotests.api.model.dashboards.Widget;
 import cloud.autotests.api.model.dashboards.WidgetsInfo;
-import cloud.autotests.api.spec.RestAssuredSpec;
 import cloud.autotests.config.ConfigHelper;
 import io.qameta.allure.Step;
 
 import java.util.List;
 
+import static cloud.autotests.api.spec.RestAssuredSpec.spec;
+import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
 public class DashboardsApi {
@@ -17,10 +18,12 @@ public class DashboardsApi {
     //region Dashboards
     @Step("Add dashboard '{dashboardName}' using API")
     public int addDashboard(String dashboardName) {
-        Dashboard dashboard = new Dashboard(ConfigHelper.getProjectId(), dashboardName);
+        Dashboard dashboard = new Dashboard();
+        dashboard.setProjectId(ConfigHelper.getProjectId());
+        dashboard.setName(dashboardName);
 
-        return RestAssuredSpec.request
-                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
+        return given()
+                .spec(spec().request())
                 .contentType("application/json; charset=UTF-8")
                 .body(dashboard)
                 .when()
@@ -31,8 +34,8 @@ public class DashboardsApi {
     }
 
     public void deleteDashboardById(int dashboardId) {
-        RestAssuredSpec.request
-                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
+        given()
+                .spec(spec().request())
                 .when()
                 .delete("/dashboard/{dashboardId}", dashboardId)
                 .then()
@@ -45,7 +48,8 @@ public class DashboardsApi {
     }
 
     public int getDashboardIdByName(String dashboardName) {
-        return RestAssuredSpec.request
+        return given()
+                .spec(spec().request())
                 .param("projectId", ConfigHelper.getProjectId())
                 .param("size", 2000)
                 .when()
@@ -56,7 +60,8 @@ public class DashboardsApi {
     }
 
     public List<Dashboard> getDashboardsList(int projectId) {
-        return RestAssuredSpec.request
+        return given()
+                .spec(spec().request())
                 .param("projectId", projectId)
                 .param("size", 2000)
                 .when()
@@ -78,7 +83,8 @@ public class DashboardsApi {
 
     //region Dashboard widgets
     public List<Widget> getWidgetsList(String dashboardId) {
-        return RestAssuredSpec.request
+        return given()
+                .spec(spec().request())
                 .when()
                 .get("/dashboard/{dashboardId}", dashboardId)
                 .then()
@@ -87,8 +93,8 @@ public class DashboardsApi {
     }
 
     public void deleteWidget(int widgetId) {
-        RestAssuredSpec.request
-                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
+        given()
+                .spec(spec().request())
                 .when()
                 .delete("/widget/{widgetId}", widgetId)
                 .then()
