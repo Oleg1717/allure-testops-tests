@@ -9,7 +9,6 @@ import cloud.autotests.data.dashboards.FormTopTestCasesMetricItem;
 import cloud.autotests.data.dashboards.FormTreeItem;
 import cloud.autotests.data.dashboards.FormTypeItem;
 import cloud.autotests.data.dashboards.WidgetActionItem;
-import cloud.autotests.helpers.CustomTestWatcher;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.pages.DashboardsPage;
 import cloud.autotests.pages.components.forms.DashboardEditForm;
@@ -23,7 +22,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
@@ -31,9 +29,8 @@ import static io.qameta.allure.Allure.parameter;
 
 @Owner("Oleg1717")
 @Feature("Dashboards tests")
-@ExtendWith(CustomTestWatcher.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DashboardsTests extends TempTestBase {
+public class DashboardsTests extends TestBase {
 
     DashboardsPage dashboardsPage = new DashboardsPage();
     DashboardEditForm dashboardEditForm = new DashboardEditForm();

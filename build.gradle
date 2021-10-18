@@ -24,7 +24,6 @@ allure {
 
 dependencies {
     testImplementation(
-            //"org.aspectj:aspectjweaver:1.9.6",
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.rest-assured:rest-assured:4.3.1",
@@ -66,5 +65,11 @@ tasks.withType(Test) {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
+    }
+}
+
+task login_tests(type: Test) {
+    useJUnitPlatform() {
+        includeTags "login"
     }
 }
