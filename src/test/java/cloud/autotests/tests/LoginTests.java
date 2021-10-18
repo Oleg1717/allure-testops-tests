@@ -2,15 +2,14 @@ package cloud.autotests.tests;
 
 import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.data.sidebar.SideMenuNavItem;
-import cloud.autotests.helpers.CustomTestWatcher;
 import cloud.autotests.pages.LoginPage;
 import cloud.autotests.pages.ProjectsPage;
 import cloud.autotests.pages.components.Sidebar;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.Cookie;
 
 import static cloud.autotests.api.AuthorizationData.authorizationData;
@@ -19,9 +18,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
+@Tag("login")
 @Feature("Login tests")
-@ExtendWith(CustomTestWatcher.class)
-public class LoginTests extends TempTestBase {
+public class LoginTests extends TestBase {
 
     LoginPage loginPage = new LoginPage();
     Sidebar sidebar = new ProjectsPage().getSidebar();

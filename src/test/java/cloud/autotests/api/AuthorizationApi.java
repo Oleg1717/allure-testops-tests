@@ -2,12 +2,13 @@ package cloud.autotests.api;
 
 import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.helpers.AllureRestAssuredFilter;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
 public class AuthorizationApi {
 
-    public String getSessionToken() {
+    private Response getAuthorizationResponse() {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
@@ -15,11 +16,14 @@ public class AuthorizationApi {
                 .cookie("XSRF-TOKEN", ConfigHelper.getXsrfToken())
                 .formParam("username", ConfigHelper.getUserLogin())
                 .formParam("password", ConfigHelper.getUserPassword())
-                .log().uri()
                 .when()
                 .post("/api/login/system")
                 .then()
                 .statusCode(200)
-                .extract().response().getCookie("ALLURE_TESTOPS_SESSION");
+                .extract().response();
+    }
+
+    public String getSessionToken() {
+        return getAuthorizationResponse().getCookie("ALLURE_TESTOPS_SESSION");
     }
 }

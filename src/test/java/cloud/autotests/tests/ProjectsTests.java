@@ -3,7 +3,6 @@ package cloud.autotests.tests;
 import cloud.autotests.api.ProjectsApi;
 import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.data.ProjectsPaginationItem;
-import cloud.autotests.helpers.CustomTestWatcher;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.pages.ProjectsPage;
 import cloud.autotests.pages.components.forms.ProjectEditForm;
@@ -12,7 +11,6 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
@@ -20,8 +18,7 @@ import static io.qameta.allure.Allure.parameter;
 
 @Owner("Oleg1717")
 @Feature("Projects page tests")
-@ExtendWith(CustomTestWatcher.class)
-public class ProjectsTests extends TempTestBase {
+public class ProjectsTests extends TestBase {
 
     ProjectsPage projectsPage = new ProjectsPage();
     ProjectEditForm projectEditForm = new ProjectEditForm();
