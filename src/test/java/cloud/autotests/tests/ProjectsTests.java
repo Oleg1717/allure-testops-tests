@@ -21,7 +21,7 @@ import static io.qameta.allure.Allure.parameter;
 @Owner("Oleg1717")
 @Feature("Projects page tests")
 @ExtendWith(CustomTestWatcher.class)
-public class ProjectsTests extends TestBase {
+public class ProjectsTests extends TempTestBase {
 
     ProjectsPage projectsPage = new ProjectsPage();
     ProjectEditForm projectEditForm = new ProjectEditForm();
