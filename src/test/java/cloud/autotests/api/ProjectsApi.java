@@ -45,7 +45,7 @@ public class ProjectsApi {
                 .statusCode(204);
     }
 
-    @Step("Delete project 'projectName' using API")
+    @Step("Delete project '{projectName}' using API")
     public void deleteProjectByName(String projectName) {
         int projectId = getProjectIdByName(projectName);
         deleteProjectById(projectId);

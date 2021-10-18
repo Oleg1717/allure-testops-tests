@@ -34,7 +34,7 @@ public class Sidebar {
         return this;
     }
 
-    @Step("Check that user is '{user}'")
+    @Step("Check that user is '{username}'")
     public Sidebar checkUsername(String username) {
         userMenu.find(text(UserMenuItem.SIGNED_IN_AS.getDisplayedName())).shouldHave(text(username));
         return this;

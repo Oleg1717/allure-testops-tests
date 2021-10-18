@@ -5,7 +5,7 @@ import cloud.autotests.helpers.AllureRestAssuredFilter;
 
 import static io.restassured.RestAssured.given;
 
-public class UserApi {
+public class AuthorizationApi {
 
     public String getSessionToken() {
         return given()
