@@ -4,14 +4,12 @@ import cloud.autotests.api.model.dashboards.Dashboard;
 import cloud.autotests.api.model.dashboards.DashboardsInfo;
 import cloud.autotests.api.model.dashboards.Widget;
 import cloud.autotests.api.model.dashboards.WidgetsInfo;
+import cloud.autotests.api.spec.RestAssuredSpec;
 import cloud.autotests.config.ConfigHelper;
-import cloud.autotests.helpers.AllureRestAssuredFilter;
 import io.qameta.allure.Step;
 
 import java.util.List;
 
-import static cloud.autotests.api.AuthorizationData.authorizationData;
-import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 
 public class DashboardsApi {
@@ -21,15 +19,10 @@ public class DashboardsApi {
     public int addDashboard(String dashboardName) {
         Dashboard dashboard = new Dashboard(ConfigHelper.getProjectId(), dashboardName);
 
-        return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
+        return RestAssuredSpec.request
                 .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
-                .cookies(authorizationData().getSessionCookies())
                 .contentType("application/json; charset=UTF-8")
                 .body(dashboard)
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
                 .when()
                 .post("/dashboard")
                 .then()
@@ -38,15 +31,10 @@ public class DashboardsApi {
     }
 
     public void deleteDashboardById(int dashboardId) {
-        given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
+        RestAssuredSpec.request
                 .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
                 .when()
-                .delete("/dashboard/" + dashboardId)
+                .delete("/dashboard/{dashboardId}", dashboardId)
                 .then()
                 .statusCode(202);
     }
@@ -57,15 +45,10 @@ public class DashboardsApi {
     }
 
     public int getDashboardIdByName(String dashboardName) {
-        return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
-                .when()
+        return RestAssuredSpec.request
                 .param("projectId", ConfigHelper.getProjectId())
                 .param("size", 2000)
+                .when()
                 .get("/dashboard")
                 .then()
                 .statusCode(200)
@@ -73,15 +56,10 @@ public class DashboardsApi {
     }
 
     public List<Dashboard> getDashboardsList(int projectId) {
-        return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
-                .when()
+        return RestAssuredSpec.request
                 .param("projectId", projectId)
                 .param("size", 2000)
+                .when()
                 .get("/dashboard")
                 .then()
                 .statusCode(200)
@@ -100,29 +78,19 @@ public class DashboardsApi {
 
     //region Dashboard widgets
     public List<Widget> getWidgetsList(String dashboardId) {
-        return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
+        return RestAssuredSpec.request
                 .when()
-                .get("/dashboard/" + dashboardId)
+                .get("/dashboard/{dashboardId}", dashboardId)
                 .then()
                 .statusCode(200)
                 .extract().as(WidgetsInfo.class).getWidgetsList();
     }
 
     public void deleteWidget(int widgetId) {
-        given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
+        RestAssuredSpec.request
                 .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
                 .when()
-                .delete("/widget/" + widgetId)
+                .delete("/widget/{widgetId}", widgetId)
                 .then()
                 .statusCode(202);
     }

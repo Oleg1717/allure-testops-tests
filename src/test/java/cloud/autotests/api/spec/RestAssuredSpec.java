@@ -9,18 +9,11 @@ import static io.restassured.RestAssured.given;
 
 public class RestAssuredSpec {
 
-    private static final RequestSpecification request = given()
+    public static RequestSpecification request = given()
             .baseUri(ConfigHelper.getApiBaseUri())
             .basePath(ConfigHelper.getApiBasePath())
             .cookies(authorizationData().getSessionCookies())
             .filter(AllureRestAssuredFilter.withCustomTemplates())
             .log().all();
 
-    public static RestAssuredSpec spec() {
-        return new RestAssuredSpec();
-    }
-
-    public RequestSpecification request() {
-        return request;
-    }
 }
