@@ -15,7 +15,7 @@ public class AuthorizationData {
     }
 
     private AuthorizationData() {
-        sessionToken = new UserApi().getSessionToken();
+        sessionToken = new AuthorizationApi().getSessionToken();
         sessionCookies.put("XSRF-TOKEN", ConfigHelper.getXsrfToken());
         sessionCookies.put("ALLURE_TESTOPS_SESSION", sessionToken);
     }
