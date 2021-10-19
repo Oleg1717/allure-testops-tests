@@ -1,6 +1,7 @@
 package cloud.autotests.tests;
 
 import cloud.autotests.api.ProjectsApi;
+import cloud.autotests.api.model.Project;
 import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.data.ProjectsPaginationItem;
 import cloud.autotests.helpers.WithLogin;
@@ -26,6 +27,16 @@ public class ProjectsTests extends TestBase {
 
     static final String PROJECTS_URL = ConfigHelper.getWebUrl();
     static final String PROJECT_EXIST_ALERT = "This name is taken";
+
+    @Test
+    void tmp() {
+        String projectName = "123";
+        Project project = Project.builder()
+                .name(projectName)
+                .isPublic(true)
+                .build();
+        System.out.println(project);
+    }
 
     @Test
     @WithLogin

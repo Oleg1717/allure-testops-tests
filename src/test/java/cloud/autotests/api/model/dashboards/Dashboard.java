@@ -13,12 +13,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Dashboard {
 
-    @JsonProperty("id")
     int id;
-
-    @JsonProperty("projectId")
     int projectId;
-
-    @JsonProperty("name")
     String name;
 }
