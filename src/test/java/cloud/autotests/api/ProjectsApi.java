@@ -1,49 +1,67 @@
 package cloud.autotests.api;
 
 import cloud.autotests.api.model.Project;
-import cloud.autotests.config.ConfigHelper;
-import cloud.autotests.helpers.AllureRestAssuredFilter;
+import cloud.autotests.api.model.Projects;
 import io.qameta.allure.Step;
+import io.restassured.http.ContentType;
 
-import static cloud.autotests.api.AuthorizationData.authorizationData;
+import java.util.HashMap;
+import java.util.Map;
+
+import static cloud.autotests.api.spec.RestAssuredSpec.spec;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 
 public class ProjectsApi {
 
-    @Step("Add project '{projectName}' using API")
-    public int addProject(String projectName, boolean isPublic) {
-        Project project = new Project(projectName, isPublic);
+    public Projects getProjectsListResponse(Map<String, String> requestParams) {
         return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
-                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().all()
-                .contentType(JSON)
-                .body(project)
+                .spec(spec().request())
+                .params(requestParams)
+                .when()
+                .get("/project")
+                .then()
+                .statusCode(200)
+                .extract().as(Projects.class);
+    }
+
+    public Project getProjectDataResponse(int projectId) {
+        return given()
+                .spec(spec().request())
+                .when()
+                .get("/project/{projectId}", projectId)
+                .then()
+                .statusCode(200)
+                .extract().as(Project.class);
+    }
+
+    public Project getNewProjectResponse(Project projectData) {
+        return given()
+                .spec(spec().request())
+                .contentType(ContentType.JSON)
+                .body(projectData)
                 .when()
                 .post("/project")
                 .then()
                 .statusCode(200)
-                .extract().path("id");
+                .extract().as(Project.class);
     }
 
-    @Step("Delete project with id = {projectId} using API")
+    @Step("Delete project with id = {projectId}")
     public void deleteProjectById(int projectId) {
         given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
-                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
+                .spec(spec().request())
                 .when()
                 .delete("/project/" + projectId)
                 .then()
                 .statusCode(204);
     }
+
+    @Step("Add project '{projectName}' using API")
+    public int addProject(String projectName, boolean isPublic) {
+        Project project = new Project(projectName, isPublic);
+        return getNewProjectResponse(project).getId();
+    }
+
 
     @Step("Delete project '{projectName}' using API")
     public void deleteProjectByName(String projectName) {
@@ -51,32 +69,16 @@ public class ProjectsApi {
         deleteProjectById(projectId);
     }
 
-    public Project[] getProjectsList() {
-        return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
-                .when()
-                .get("/project")
-                .then()
-                .statusCode(200)
-                .extract().as(Project[].class);
-    }
-
+    @Step("Get id of project '{projectName}'")
     public int getProjectIdByName(String projectName) {
-        return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
-                .basePath(ConfigHelper.getApiBasePath())
-                .cookies(authorizationData().getSessionCookies())
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .log().uri()
-                .when()
-                .param("name", projectName)
-                .get("/project")
-                .then()
-                .statusCode(200)
-                .extract().path("[0].id");
+        Map<String, String> requestParams = new HashMap<String, String>() {{
+            put("v2", "true");
+            put("query", projectName);
+            put("sort", "id%2Cdesc");
+            put("size", "500");
+        }};
+
+        Project[] projects = getProjectsListResponse(requestParams).getContent();
+        return projects[0].getId();
     }
 }

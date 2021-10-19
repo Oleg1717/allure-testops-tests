@@ -7,7 +7,6 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 
 import static cloud.autotests.api.AuthorizationData.authorizationData;
-import static io.restassured.RestAssured.given;
 
 public class RestAssuredSpec {
 
