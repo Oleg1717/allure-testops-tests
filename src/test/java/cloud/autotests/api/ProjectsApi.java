@@ -58,7 +58,10 @@ public class ProjectsApi {
 
     @Step("Add project '{projectName}' using API")
     public int addProject(String projectName, boolean isPublic) {
-        Project project = new Project(projectName, isPublic);
+        Project project = Project.builder()
+                .name(projectName)
+                .isPublic(true)
+                .build();
         return getNewProjectResponse(project).getId();
     }
 
@@ -70,7 +73,7 @@ public class ProjectsApi {
     }
 
     @Step("Get id of project '{projectName}'")
-    public int getProjectIdByName(String projectName) {
+    public Integer getProjectIdByName(String projectName) {
         Map<String, String> requestParams = new HashMap<String, String>() {{
             put("v2", "true");
             put("query", projectName);
