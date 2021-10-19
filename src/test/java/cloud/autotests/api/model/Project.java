@@ -12,20 +12,21 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Project {
 
-    @JsonProperty("id")
-    String id;
 
+    @JsonProperty("id")
+    int id;
     @JsonProperty("name")
     String name;
-
     @JsonProperty("abbr")
     String abbreviation;
-
     @JsonProperty("isPublic")
     boolean isPublic;
-
+    @JsonProperty("favorite")
+    boolean favorite;
     @JsonProperty("description")
     String description;
+    @JsonProperty("createdBy")
+    String createdBy;
 
     public Project(String name, boolean isPublic) {
         this.name = name;
