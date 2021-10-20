@@ -1,7 +1,7 @@
 package cloud.autotests.pages;
 
 import cloud.autotests.data.ProjectsPaginationItem;
-import cloud.autotests.pages.components.Sidebar;
+import cloud.autotests.web.pages.components.Sidebar;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -33,11 +33,9 @@ public class ProjectsPage {
     private ElementsCollection paginationSelectItems = $(".css-11unzgr").$$("div");
     private SelenideElement notification = $(".Toastify__toast-body");
 
-    //region Get elements methods
     private SelenideElement getProjectRowNameLink(String projectName) {
         return $(byLinkText(projectName));
     }
-    //region
 
     public Sidebar getSidebar() {
         return sidebar;
@@ -101,7 +99,7 @@ public class ProjectsPage {
         return this;
     }
 
-    @Step("Check that projects list count = {paginationCount}")
+    @Step("Check that projects list count = {paginationItem}")
     public ProjectsPage checkProjectsListCount(ProjectsPaginationItem paginationItem) {
         projectsList.shouldHave(size(paginationItem.getItemsPerPage()));
         return this;

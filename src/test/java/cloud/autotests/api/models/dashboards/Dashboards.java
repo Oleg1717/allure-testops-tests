@@ -1,4 +1,4 @@
-package cloud.autotests.api.model.dashboards;
+package cloud.autotests.api.models.dashboards;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -9,11 +9,10 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DashboardsInfo {
+public class Dashboards {
 
     @JsonProperty("content")
     List<Dashboard> dashboardsList;
-
     @JsonProperty("totalElements")
-    int totalElements;
+    Integer dashboardsCount;
 }

@@ -1,4 +1,4 @@
-package cloud.autotests.helpers;
+package cloud.autotests.helpers.selenide;
 
 import com.codeborne.selenide.logevents.LogEvent;
 import io.qameta.allure.Allure;
@@ -12,17 +12,17 @@ import org.slf4j.LoggerFactory;
 import static io.qameta.allure.util.ResultsUtils.getStatus;
 import static io.qameta.allure.util.ResultsUtils.getStatusDetails;
 
-public class ExtendedSelenideListener extends AllureSelenide {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExtendedSelenideListener.class);
+public class SelenideExtendedListener extends AllureSelenide {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SelenideExtendedListener.class);
 
 
     private final AllureLifecycle lifecycle;
 
-    public ExtendedSelenideListener() {
+    public SelenideExtendedListener() {
         this(Allure.getLifecycle());
     }
 
-    public ExtendedSelenideListener(final AllureLifecycle lifecycle) {
+    public SelenideExtendedListener(final AllureLifecycle lifecycle) {
         this.lifecycle = lifecycle;
     }
 

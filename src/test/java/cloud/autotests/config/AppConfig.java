@@ -15,8 +15,11 @@ public interface AppConfig extends Config {
     @Key("api.base.uri")
     String apiBaseUri();
 
-    @Key("api.base.path")
-    String apiBasePath();
+    @Key("api.uaa.path")
+    String apiUaaPath();
+
+    @Key("api.rs.path")
+    String apiRsPath();
 
     @Key("user.login")
     String userLogin();

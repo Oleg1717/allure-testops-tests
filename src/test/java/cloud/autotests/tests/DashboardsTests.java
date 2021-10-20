@@ -1,6 +1,6 @@
 package cloud.autotests.tests;
 
-import cloud.autotests.api.DashboardsApi;
+import cloud.autotests.api.steps.DashboardsApi;
 import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.data.dashboards.DashboardActionItem;
 import cloud.autotests.data.dashboards.FormGroupByItem;

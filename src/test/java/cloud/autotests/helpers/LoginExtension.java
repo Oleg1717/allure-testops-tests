@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.Cookie;
 
-import static cloud.autotests.api.AuthorizationData.authorizationData;
+import static cloud.autotests.api.helpers.AuthorizationData.authorizationData;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 

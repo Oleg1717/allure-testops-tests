@@ -1,5 +1,6 @@
-package cloud.autotests.api;
+package cloud.autotests.api.helpers;
 
+import cloud.autotests.api.steps.AuthorizationApi;
 import cloud.autotests.config.ConfigHelper;
 
 import java.util.HashMap;

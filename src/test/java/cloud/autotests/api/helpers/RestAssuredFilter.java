@@ -1,8 +1,8 @@
-package cloud.autotests.helpers;
+package cloud.autotests.api.helpers;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 
-public class AllureRestAssuredFilter {
+public class RestAssuredFilter {
     private static final AllureRestAssured FILTER = new AllureRestAssured();
 
     public static AllureRestAssured withCustomTemplates() {
