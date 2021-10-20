@@ -1,7 +1,7 @@
 package cloud.autotests.tests;
 
-import cloud.autotests.api.ProjectsApi;
-import cloud.autotests.api.model.Project;
+import cloud.autotests.api.models.projects.Project;
+import cloud.autotests.api.steps.ProjectsApi;
 import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.data.ProjectsPaginationItem;
 import cloud.autotests.helpers.WithLogin;
@@ -15,6 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.qameta.allure.Allure.parameter;
 
 @Owner("Oleg1717")
@@ -27,16 +30,6 @@ public class ProjectsTests extends TestBase {
 
     static final String PROJECTS_URL = ConfigHelper.getWebUrl();
     static final String PROJECT_EXIST_ALERT = "This name is taken";
-
-    @Test
-    void tmp() {
-        String projectName = "123";
-        Project project = Project.builder()
-                .name(projectName)
-                .isPublic(true)
-                .build();
-        System.out.println(project);
-    }
 
     @Test
     @WithLogin
@@ -61,13 +54,13 @@ public class ProjectsTests extends TestBase {
     @DisplayName("Add new project with existing name")
     void addNewProjectWithExistingName() {
         String projectName = "C07-Oleg1717-new-project-exist-name";
-        int projectId = projectsApi.addProject(projectName, true);
+        Project project = projectsApi.addProject(projectName, true);
         projectsPage.openProjectsPage(PROJECTS_URL)
                 .newProjectButtonClick();
         projectEditForm.setNameInput(projectName)
                 .clickSubmitButton()
                 .checkThatFormAlertIs(PROJECT_EXIST_ALERT);
-        projectsApi.deleteProjectById(projectId);
+        projectsApi.deleteProject(project.getId());
     }
 
     @WithLogin

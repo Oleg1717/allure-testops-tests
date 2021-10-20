@@ -1,9 +1,7 @@
-package cloud.autotests.api.model.dashboards;
+package cloud.autotests.api.models.projects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Dashboard {
+public class ProjectStats {
 
-    int id;
-    int projectId;
-    String name;
+    Integer manualTestCases;
+    Integer automatedTestCases;
+    Integer launches;
 }

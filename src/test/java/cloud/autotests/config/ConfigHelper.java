@@ -18,8 +18,12 @@ public class ConfigHelper {
         return getAppConfig().apiBaseUri();
     }
 
-    public static String getApiBasePath() {
-        return getAppConfig().apiBasePath();
+    public static String getApiRsPath() {
+        return getAppConfig().apiRsPath();
+    }
+
+    public static String getApiUaaPath() {
+        return getAppConfig().apiUaaPath();
     }
 
     public static int getProjectId() {

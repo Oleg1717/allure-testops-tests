@@ -1,4 +1,4 @@
-package cloud.autotests.api.model.dashboards;
+package cloud.autotests.api.models.dashboards;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,16 +8,16 @@ import java.util.List;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WidgetsInfo {
+public class Widgets {
 
     @JsonProperty("projectId")
-    int projectId;
+    Integer projectId;
 
     @JsonProperty("id")
-    int dashboardId;
+    Integer dashboardId;
 
     @JsonProperty("name")
-    int dashboardName;
+    Integer dashboardName;
 
     @JsonProperty("widgets")
     List<Widget> widgetsList;

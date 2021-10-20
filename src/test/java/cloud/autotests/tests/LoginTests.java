@@ -4,7 +4,7 @@ import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.data.sidebar.SideMenuNavItem;
 import cloud.autotests.pages.LoginPage;
 import cloud.autotests.pages.ProjectsPage;
-import cloud.autotests.pages.components.Sidebar;
+import cloud.autotests.web.pages.components.Sidebar;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
-import static cloud.autotests.api.AuthorizationData.authorizationData;
+import static cloud.autotests.api.helpers.AuthorizationData.authorizationData;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
