@@ -1,7 +1,7 @@
 package cloud.autotests.pages;
 
 import cloud.autotests.data.ProjectsPaginationItem;
-import cloud.autotests.web.pages.components.Sidebar;
+import cloud.autotests.pages.components.Sidebar;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;

@@ -3,8 +3,6 @@ package cloud.autotests.api.steps;
 import cloud.autotests.api.helpers.EndPoints;
 import cloud.autotests.api.models.dashboards.Dashboard;
 import cloud.autotests.api.models.dashboards.Dashboards;
-import cloud.autotests.api.models.dashboards.Widget;
-import cloud.autotests.api.models.dashboards.Widgets;
 import cloud.autotests.config.ConfigHelper;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
@@ -91,7 +89,7 @@ public class DashboardsApi {
     //endregion
 
     //region Dashboard widgets
-    public List<Widget> getWidgetsList(String dashboardId) {
+/*    public List<Widget> getWidgetsList(String dashboardId) {
         return given()
                 .spec(spec().request())
                 .pathParam("id", dashboardId)
@@ -100,7 +98,7 @@ public class DashboardsApi {
                 .then()
                 .statusCode(200)
                 .extract().as(Widgets.class).getWidgetsList();
-    }
+    }*/
 
     public void deleteWidget(int widgetId) {
         given()
@@ -112,11 +110,11 @@ public class DashboardsApi {
                 .statusCode(202);
     }
 
-    public void deleteAllWidgets(String dashboardId) {
+/*    public void deleteAllWidgets(String dashboardId) {
         List<Widget> widgetList = getWidgetsList(dashboardId);
         for (Widget widget : widgetList) {
             deleteWidget(widget.getWidgetId());
         }
-    }
+    }*/
     //endregion
 }

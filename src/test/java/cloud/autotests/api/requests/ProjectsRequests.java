@@ -1,6 +1,5 @@
 package cloud.autotests.api.requests;
 
-import cloud.autotests.api.helpers.EndPoints;
 import cloud.autotests.api.models.projects.Project;
 import cloud.autotests.api.models.projects.Projects;
 import io.restassured.http.ContentType;
@@ -50,6 +49,18 @@ public class ProjectsRequests {
                 .body(projectData)
                 .when()
                 .post("/project")
+                .then()
+                .statusCode(200)
+                .extract().as(Project.class);
+    }
+
+    public Project editProjectRequest(Project projectData) {
+        return given()
+                .spec(spec().request())
+                .contentType(ContentType.JSON)
+                .body(projectData)
+                .when()
+                .patch("/project")
                 .then()
                 .statusCode(200)
                 .extract().as(Project.class);

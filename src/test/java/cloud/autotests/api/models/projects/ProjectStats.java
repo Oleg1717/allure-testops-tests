@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectStats {
 
-    Integer manualTestCases;
-    Integer automatedTestCases;
-    Integer launches;
+    private Integer manualTestCases;
+    private Integer automatedTestCases;
+    private Integer launches;
 }
