@@ -15,7 +15,7 @@ import java.util.List;
 public class Projects {
 
     @JsonProperty("content")
-    List<Project> projectsList;
+    private List<Project> projectsList;
     @JsonProperty("totalElements")
-    Integer projectsCount;
+    private Integer projectsCount;
 }

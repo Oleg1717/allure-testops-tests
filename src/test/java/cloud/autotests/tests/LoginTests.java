@@ -4,7 +4,7 @@ import cloud.autotests.config.ConfigHelper;
 import cloud.autotests.data.sidebar.SideMenuNavItem;
 import cloud.autotests.pages.LoginPage;
 import cloud.autotests.pages.ProjectsPage;
-import cloud.autotests.web.pages.components.Sidebar;
+import cloud.autotests.pages.components.Sidebar;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;

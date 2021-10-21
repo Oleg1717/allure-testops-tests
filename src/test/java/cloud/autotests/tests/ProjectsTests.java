@@ -15,9 +15,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static io.qameta.allure.Allure.parameter;
 
 @Owner("Oleg1717")

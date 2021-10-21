@@ -2,8 +2,10 @@ package cloud.autotests.api.helpers;
 
 import cloud.autotests.config.ConfigHelper;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
 
 import static cloud.autotests.api.helpers.AuthorizationData.authorizationData;
 

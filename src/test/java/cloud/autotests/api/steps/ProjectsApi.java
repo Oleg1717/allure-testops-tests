@@ -1,24 +1,17 @@
 package cloud.autotests.api.steps;
 
 import cloud.autotests.api.models.projects.Project;
-import cloud.autotests.api.models.projects.Projects;
-import cloud.autotests.api.helpers.EndPoints;
 import cloud.autotests.api.requests.ProjectsRequests;
 import io.qameta.allure.Step;
-import io.restassured.http.ContentType;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static cloud.autotests.api.helpers.RestAssuredSpec.spec;
-import static io.restassured.RestAssured.given;
 
 public class ProjectsApi {
 
     ProjectsRequests requests = new ProjectsRequests();
 
-    @Step("Delete project with id = {projectId}")
+    @Step("Delete project with id = {projectId} using API")
     public void deleteProject(int projectId) {
         requests.deleteProjectRequest(projectId);
     }
@@ -34,23 +27,34 @@ public class ProjectsApi {
 
     @Step("Delete project '{projectName}' using API")
     public void deleteProjectByName(String projectName) {
-        Project project = getProjectByName(projectName);
+        Project project = getProjectDataByName(projectName);
         deleteProject(project.getId());
     }
 
-    @Step("Get id of project '{projectName}' using API")
-    public Project getProjectByName(String projectName) {
+    @Step("Get data of project '{projectName}' using API")
+    public Project getProjectDataByName(String projectName) {
         Map<String, String> requestParams = new HashMap<String, String>() {{
             put("v2", "true");
             put("query", projectName);
             put("sort", "id%2Cdesc");
             put("size", "500");
         }};
-
-        List<Project> projects = requests.getProjectsDataRequest(requestParams).getProjectsList();
-        return projects.stream()
-                .filter(prj -> projectName.equals(prj.getName()))
+        return requests.getProjectsDataRequest(requestParams)
+                .getProjectsList()
+                .stream()
+                .filter(project -> project.getName().equals(projectName))
                 .findAny()
                 .orElse(null);
+    }
+
+    @Step("Get projects count by API")
+    public int getProjectsCount() {
+        Map<String, String> requestParams = new HashMap<String, String>() {{
+            put("v2", "true");
+            put("query", "");
+            put("sort", "id%2Cdesc");
+            put("size", "5000");
+        }};
+        return requests.getProjectsDataRequest(requestParams).getProjectsCount();
     }
 }

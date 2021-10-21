@@ -12,7 +12,7 @@ import java.util.List;
 public class Dashboards {
 
     @JsonProperty("content")
-    List<Dashboard> dashboardsList;
+    private List<Dashboard> dashboardsList;
     @JsonProperty("totalElements")
-    Integer dashboardsCount;
+    private Integer dashboardsCount;
 }
