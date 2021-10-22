@@ -9,6 +9,8 @@ public class EndPoints {
     public static final String DASHBOARD = "/dashboard";
     public static final String DASHBOARD_ID = "/dashboard/{dashboardId}";
 
+    public static final String WIDGET = "/widget";
     public static final String WIDGET_ID = "/widget/{widgetId}";
+    public static final String WIDGET_DATA = "/widget/{widgetId}/data";
 
 }

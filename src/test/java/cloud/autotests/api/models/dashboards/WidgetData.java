@@ -2,8 +2,6 @@ package cloud.autotests.api.models.dashboards;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,11 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Widget {
+public class WidgetData {
 
-    private Integer dashboardId;
-    private Integer id;
-    private String name;
-    private String type;
-    private String createdBy;
+    private Integer widgetId;
+
 }
