@@ -3,7 +3,9 @@ package cloud.autotests.allure.tests;
 import cloud.autotests.allure.api.models.projects.Project;
 import cloud.autotests.allure.api.steps.ProjectsApi;
 import cloud.autotests.allure.config.ConfigHelper;
+import cloud.autotests.allure.ui.data.ErrorMessages;
 import cloud.autotests.allure.ui.data.ProjectsPaginationItem;
+import cloud.autotests.allure.ui.data.TestData;
 import cloud.autotests.allure.ui.helpers.WithLogin;
 import cloud.autotests.allure.ui.pages.ProjectsPage;
 import cloud.autotests.allure.ui.components.forms.ProjectEditForm;
@@ -25,22 +27,19 @@ public class ProjectsTests extends TestBase {
     ProjectEditForm projectEditForm = new ProjectEditForm();
     ProjectsApi projectsApi = new ProjectsApi();
 
-    static final String PROJECTS_URL = ConfigHelper.getWebUrl();
-    static final String PROJECT_EXIST_ALERT = "This name is taken";
-
     @Test
     @WithLogin
     @Story("Add new project tests")
     @DisplayName("Add new project")
     void addNewProject() {
         String projectName = "C07-Oleg1717-new-project";
-        projectsPage.openProjectsPage(PROJECTS_URL)
+        projectsPage.openProjectsPage(TestData.PROJECTS_URL)
                 .newProjectButtonClick();
         projectEditForm.setNameInput(projectName)
                 .fillContentWriteTextArea(projectName)
                 .clickPublicCheckbox()
                 .clickSubmitButton();
-        projectsPage.openProjectsPage(PROJECTS_URL)
+        projectsPage.openProjectsPage(TestData.PROJECTS_URL)
                 .checkThatProjectExist(projectName);
         projectsApi.deleteProjectByName(projectName);
     }
@@ -52,11 +51,11 @@ public class ProjectsTests extends TestBase {
     void addNewProjectWithExistingName() {
         String projectName = "C07-Oleg1717-new-project-exist-name";
         Project project = projectsApi.addProject(projectName, true);
-        projectsPage.openProjectsPage(PROJECTS_URL)
+        projectsPage.openProjectsPage(TestData.PROJECTS_URL)
                 .newProjectButtonClick();
         projectEditForm.setNameInput(projectName)
                 .clickSubmitButton()
-                .checkThatFormAlertIs(PROJECT_EXIST_ALERT);
+                .checkThatFormAlertIs(ErrorMessages.PROJECT_EXIST);
         projectsApi.deleteProject(project.getId());
     }
 
@@ -66,7 +65,7 @@ public class ProjectsTests extends TestBase {
     @EnumSource(value = ProjectsPaginationItem.class)
     void paginationTest(ProjectsPaginationItem item) {
         parameter("Items per page", item.getItemsPerPage());
-        projectsPage.openProjectsPage(PROJECTS_URL)
+        projectsPage.openProjectsPage(TestData.PROJECTS_URL)
                 .allProjectsButtonClick()
                 .selectPaginationElement(item)
                 .checkProjectsListCount(item);

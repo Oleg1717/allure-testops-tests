@@ -1,4 +1,4 @@
-package cloud.autotests.allure.ui.helpers.selenide;
+package cloud.autotests.allure.ui.helpers;
 
 import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.helpers.AllureAttachments;

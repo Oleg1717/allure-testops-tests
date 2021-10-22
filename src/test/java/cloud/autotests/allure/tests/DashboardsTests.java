@@ -2,6 +2,8 @@ package cloud.autotests.allure.tests;
 
 import cloud.autotests.allure.api.steps.DashboardsApi;
 import cloud.autotests.allure.config.ConfigHelper;
+import cloud.autotests.allure.ui.data.ErrorMessages;
+import cloud.autotests.allure.ui.data.TestData;
 import cloud.autotests.allure.ui.data.dashboards.DashboardActionItem;
 import cloud.autotests.allure.ui.data.dashboards.FormGroupByItem;
 import cloud.autotests.allure.ui.data.dashboards.FormLaunchAnalyticMetricItem;
@@ -38,12 +40,11 @@ public class DashboardsTests extends TestBase {
     DeleteForm deleteForm = new DeleteForm();
     DashboardsApi dashboardsApi = new DashboardsApi();
 
-    String dashboardsUrl = PROJECT_URL + "dashboards/";
     String dashboardForTestsUrl;
 
     @BeforeAll
     void addDashboardForTests() {
-        dashboardForTestsUrl = dashboardsUrl + dashboardsApi.addDashboard("ForWidgetsTests");
+        dashboardForTestsUrl = TestData.DASHBOARDS_URL + dashboardsApi.addDashboard("ForWidgetsTests");
     }
 
     @AfterAll
@@ -58,7 +59,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Add new dashboard")
     void addDashboard() {
         String dashboardName = "NewDashboard";
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .clickNewDashboardButton();
         dashboardEditForm.setNameInput(dashboardName)
                 .clickSubmitButton();
@@ -71,11 +72,11 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Add dashboard with blank name")
     void addDashboardWithBlankName() {
         String dashboardName = "";
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .clickNewDashboardButton();
         dashboardEditForm.setNameInput(dashboardName)
                 .clickSubmitButton()
-                .checkThatNameErrorMessageIs("Name is required");
+                .checkThatNameErrorMessageIs(ErrorMessages.NAME_IS_REQUIRED);
     }
 
     @WithLogin
@@ -84,11 +85,11 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Add dashboard with only space characters in name")
     void addDashboardWithSpacesName() {
         String dashboardName = "   ";
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .clickNewDashboardButton();
         dashboardEditForm.setNameInput(dashboardName)
                 .clickSubmitButton()
-                .checkThatNameErrorMessageIs("Name should not be blank");
+                .checkThatNameErrorMessageIs(ErrorMessages.NAME_SHOULD_NOT_BE_BLANK);
     }
 
     @WithLogin
@@ -97,7 +98,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Cancel adding new dashboard using cancel button")
     void cancelAddingDashboardByCancelButton() {
         String dashboardName = "CancelButton";
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .clickNewDashboardButton();
         dashboardEditForm.setNameInput(dashboardName)
                 .clickCancelButton();
@@ -111,7 +112,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Cancel adding new dashboard using close button")
     void cancelAddingDashboardByCloseButton() {
         String dashboardName = "CloseButton";
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .clickNewDashboardButton();
         dashboardEditForm.setNameInput(dashboardName)
                 .clickCloseButton();
@@ -125,7 +126,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Cancel adding new dashboard with blank name using cancel button")
     void cancelAddingDashboardWithBlankNameByCancelButton() {
         String dashboardName = "";
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .clickNewDashboardButton();
         dashboardEditForm.setNameInput(dashboardName)
                 .clickCancelButton()
@@ -138,7 +139,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Cancel adding new dashboard with blank name using close button")
     void cancelAddingDashboardWithBlankNameByCloseButton() {
         String dashboardName = "";
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .clickNewDashboardButton();
         dashboardEditForm.setNameInput(dashboardName)
                 .clickCloseButton()
@@ -153,7 +154,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Switch dashboard full screen mode on/off")
     void dashboardFullScreenMode() {
         String dashboardName = "FullScreen";
-        String dashboardUrl = dashboardsUrl + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestData.DASHBOARDS_URL + dashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .selectDashboardAction(DashboardActionItem.FULLSCREEN_MODE)
                 .checkFullScreenModeIsOn()
@@ -168,7 +169,7 @@ public class DashboardsTests extends TestBase {
     void editDashboardName() {
         String dashboardName = "Edit";
         String newDashboardName = "EditNew";
-        String dashboardUrl = dashboardsUrl + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestData.DASHBOARDS_URL + dashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .selectDashboardAction(DashboardActionItem.EDIT_DASHBOARD);
         dashboardEditForm.setNameInput(newDashboardName)
@@ -182,7 +183,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Delete dashboard")
     void deleteDashboard() {
         String dashboardName = "Delete";
-        String dashboardUrl = dashboardsUrl + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestData.DASHBOARDS_URL + dashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .selectDashboardAction(DashboardActionItem.DELETE_DASHBOARD);
         deleteForm.clickDeleteButton();
@@ -196,7 +197,7 @@ public class DashboardsTests extends TestBase {
     @Story("Standard (Overview) dashboard widgets tests")
     @DisplayName("Standard dashboard should contains 5 widgets")
     void defaultDashboardShouldContains5Widgets() {
-        dashboardsPage.openDashboardPage(dashboardsUrl)
+        dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
                 .checkThatWidgetsDisplayed();
     }
     //endregion
@@ -208,7 +209,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Add widget using 'Add widget' button")
     void addWidgetByAddWidgetButton() {
         String dashboardName = "ByAddWidgetButton";
-        String dashboardUrl = dashboardsUrl + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestData.DASHBOARDS_URL + dashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .addWidgetButtonClick();
         dashboardWidgetEditForm.setNameInput(dashboardName)
