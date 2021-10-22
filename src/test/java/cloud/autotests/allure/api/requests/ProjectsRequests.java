@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.helpers.EndPoints;
+import cloud.autotests.allure.api.data.EndPoints;
 import cloud.autotests.allure.api.models.projects.Project;
 import cloud.autotests.allure.api.models.projects.Projects;
 import io.restassured.http.ContentType;
@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class ProjectsRequests {
 
-    public static Projects getProjectsDataRequest(Map<String, String> requestParams) {
+    public static Projects getProjectsData(Map<String, String> requestParams) {
         return given()
                 .spec(spec().request())
                 .params(requestParams)
@@ -23,7 +23,7 @@ public class ProjectsRequests {
                 .extract().as(Projects.class);
     }
 
-    public static Project getProjectDataRequest(int projectId) {
+    public static Project getProjectData(int projectId) {
         return given()
                 .spec(spec().request())
                 .when()
@@ -33,7 +33,7 @@ public class ProjectsRequests {
                 .extract().as(Project.class);
     }
 
-    public static Project getProjectStatsRequest(int projectId) {
+    public static Project getProjectStats(int projectId) {
         return given()
                 .spec(spec().request())
                 .when()
@@ -43,7 +43,7 @@ public class ProjectsRequests {
                 .extract().as(Project.class);
     }
 
-    public static Project addProjectRequest(Project projectData) {
+    public static Project addProject(Project projectData) {
         return given()
                 .spec(spec().request())
                 .contentType(ContentType.JSON)
@@ -55,7 +55,7 @@ public class ProjectsRequests {
                 .extract().as(Project.class);
     }
 
-    public static Project editProjectRequest(Project projectData) {
+    public static Project editProject(Project projectData) {
         return given()
                 .spec(spec().request())
                 .contentType(ContentType.JSON)
@@ -67,7 +67,7 @@ public class ProjectsRequests {
                 .extract().as(Project.class);
     }
 
-    public static void deleteProjectRequest(int projectId) {
+    public static void deleteProject(int projectId) {
         given()
                 .spec(spec().request())
                 .when()

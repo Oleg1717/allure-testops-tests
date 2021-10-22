@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.helpers.EndPoints;
+import cloud.autotests.allure.api.data.EndPoints;
 import cloud.autotests.allure.api.models.dashboards.Dashboard;
 import cloud.autotests.allure.api.models.dashboards.Dashboards;
 import io.restassured.http.ContentType;
@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class DashboardsRequests {
 
-    public static Dashboards getDashboardsDataRequest(int projectId) {
+    public static Dashboards getDashboardsData(int projectId) {
         return given()
                 .spec(spec().request())
                 .param("projectId", projectId)
@@ -22,7 +22,7 @@ public class DashboardsRequests {
                 .extract().as(Dashboards.class);
     }
 
-    public static Dashboard getDashboardDataRequest(int dashboardId) {
+    public static Dashboard getDashboardData(int dashboardId) {
         return given()
                 .spec(spec().request())
                 .when()
@@ -32,7 +32,7 @@ public class DashboardsRequests {
                 .extract().as(Dashboard.class);
     }
 
-    public static Dashboard addDashboardRequest(Dashboard dashboard) {
+    public static Dashboard addDashboard(Dashboard dashboard) {
         return given()
                 .spec(spec().request())
                 .contentType(ContentType.JSON)
@@ -44,7 +44,7 @@ public class DashboardsRequests {
                 .extract().as(Dashboard.class);
     }
 
-    public static Dashboard editDashboardRequest(Dashboard dashboardData) {
+    public static Dashboard editDashboard(Dashboard dashboardData) {
         return given()
                 .spec(spec().request())
                 .contentType(ContentType.JSON)
@@ -56,7 +56,7 @@ public class DashboardsRequests {
                 .extract().as(Dashboard.class);
     }
 
-    public static void deleteDashboardRequest(int dashboardId) {
+    public static void deleteDashboard(int dashboardId) {
         given()
                 .spec(spec().request())
                 .when()

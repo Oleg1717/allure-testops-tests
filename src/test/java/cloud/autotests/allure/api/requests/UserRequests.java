@@ -1,14 +1,15 @@
-package cloud.autotests.allure.api.steps;
+package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.config.ConfigHelper;
+import cloud.autotests.allure.api.data.EndPoints;
 import cloud.autotests.allure.api.helpers.RestAssuredFilter;
+import cloud.autotests.allure.config.ConfigHelper;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class AuthorizationApi {
+public class UserRequests {
 
-    private Response getAuthorizationResponse() {
+    public static Response authorize() {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .filter(RestAssuredFilter.withCustomTemplates())
@@ -17,13 +18,9 @@ public class AuthorizationApi {
                 .formParam("username", ConfigHelper.getUserLogin())
                 .formParam("password", ConfigHelper.getUserPassword())
                 .when()
-                .post("/api/login/system")
+                .post(EndPoints.USER_LOGIN)
                 .then()
                 .statusCode(200)
                 .extract().response();
-    }
-
-    public String getSessionToken() {
-        return getAuthorizationResponse().getCookie("ALLURE_TESTOPS_SESSION");
     }
 }

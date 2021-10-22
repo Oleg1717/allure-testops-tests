@@ -15,12 +15,12 @@ public class DashboardsApi {
                 .projectId(ConfigHelper.getProjectId())
                 .name(dashboardName)
                 .build();
-        return DashboardsRequests.addDashboardRequest(dashboard).getId();
+        return DashboardsRequests.addDashboard(dashboard).getId();
     }
 
     @Step("Delete dashboard with id = {dashboardId} using API")
     public void deleteDashboard(int dashboardId) {
-        DashboardsRequests.deleteDashboardRequest(dashboardId);
+        DashboardsRequests.deleteDashboard(dashboardId);
     }
 
     @Step("Delete dashboard '{dashboardName}' using API")
@@ -31,7 +31,7 @@ public class DashboardsApi {
 
     @Step("Get id of dashboard '{dashboardName}' using API")
     public Dashboard getDashboardIdByName(int projectId, String dashboardName) {
-        return DashboardsRequests.getDashboardsDataRequest(projectId)
+        return DashboardsRequests.getDashboardsData(projectId)
                 .getDashboardsList()
                 .stream()
                 .filter(dashboard -> dashboard.getName().equals(dashboardName))
@@ -42,7 +42,7 @@ public class DashboardsApi {
     @Step("Delete all tests dashboards using API")
     public void deleteAllDashboards(int projectId) {
         List<Dashboard> dashboardsList = DashboardsRequests
-                .getDashboardsDataRequest(projectId).getDashboardsList();
+                .getDashboardsData(projectId).getDashboardsList();
         for (Dashboard dashboard : dashboardsList) {
             deleteDashboard(dashboard.getId());
         }

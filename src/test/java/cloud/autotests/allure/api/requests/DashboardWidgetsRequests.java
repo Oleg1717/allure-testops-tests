@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.helpers.EndPoints;
+import cloud.autotests.allure.api.data.EndPoints;
 import cloud.autotests.allure.api.models.dashboards.Widget;
 import cloud.autotests.allure.api.models.dashboards.WidgetData;
 import io.restassured.http.ContentType;
@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class DashboardWidgetsRequests {
 
-    public static WidgetData getWidgetDataRequest(int widgetId) {
+    public static WidgetData getWidgetData(int widgetId) {
         return given()
                 .spec(spec().request())
                 .when()
@@ -20,7 +20,7 @@ public class DashboardWidgetsRequests {
                 .extract().as(WidgetData.class);
     }
 
-    public static Widget addWidgetRequest(Widget widget) {
+    public static Widget addWidget(Widget widget) {
         return given()
                 .spec(spec().request())
                 .contentType(ContentType.JSON)
@@ -32,7 +32,7 @@ public class DashboardWidgetsRequests {
                 .extract().as(Widget.class);
     }
 
-    public static Widget editWidgetRequest(Widget widget) {
+    public static Widget editWidget(Widget widget) {
         return given()
                 .spec(spec().request())
                 .contentType(ContentType.JSON)
