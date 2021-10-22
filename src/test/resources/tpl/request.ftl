@@ -26,14 +26,14 @@
 </div>
 
 <#if data.body??>
-    <h4>Body</h4>
+    <h5>Body</h5>
     <div>
         <pre><code>${data.body}</code></pre>
     </div>
 </#if>
 
 <#if (data.headers)?has_content>
-    <h4>Headers</h4>
+    <h5>Headers</h5>
     <div>
         <#list data.headers as name, value>
             <div>
@@ -45,7 +45,7 @@
 
 
 <#if (data.cookies)?has_content>
-    <h4>Cookies</h4>
+    <h5>Cookies</h5>
     <div>
         <#list data.cookies as name, value>
             <div>
@@ -56,7 +56,7 @@
 </#if>
 
 <#if data.curl??>
-    <h4>Curl</h4>
+    <h5>Curl</h5>
     <div>
         <pre><code>${data.curl}</code></pre>
     </div>

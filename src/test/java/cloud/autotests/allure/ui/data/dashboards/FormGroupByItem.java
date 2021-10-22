@@ -15,7 +15,6 @@ public enum FormGroupByItem {
         return displayedName;
     }
 
-
     @Override
     public String toString() {
         return displayedName;

@@ -4,7 +4,6 @@ public enum FormTreeItem {
     FEATURES("Features"),
     SUITES("Suites");
 
-
     private final String displayedName;
 
     FormTreeItem(String displayedName) {
@@ -14,7 +13,6 @@ public enum FormTreeItem {
     public String getDisplayedName() {
         return displayedName;
     }
-
 
     @Override
     public String toString() {

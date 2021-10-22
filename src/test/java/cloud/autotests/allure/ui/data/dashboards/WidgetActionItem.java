@@ -15,7 +15,6 @@ public enum WidgetActionItem {
         return displayedName;
     }
 
-
     @Override
     public String toString() {
         return displayedName;

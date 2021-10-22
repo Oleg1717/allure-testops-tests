@@ -6,7 +6,6 @@ public enum DashboardActionItem {
     EDIT_DASHBOARD("Edit dashboard"),
     DELETE_DASHBOARD("Delete dashboard");
 
-
     private final String displayedName;
 
     DashboardActionItem(String displayedName) {
@@ -16,7 +15,6 @@ public enum DashboardActionItem {
     public String getDisplayedName() {
         return displayedName;
     }
-
 
     @Override
     public String toString() {

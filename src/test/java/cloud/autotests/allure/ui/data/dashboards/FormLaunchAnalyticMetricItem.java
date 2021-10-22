@@ -11,7 +11,6 @@ public enum FormLaunchAnalyticMetricItem {
     SUMMARY_RETRIES_DURATION("Summary retries duration"),
     SUMMARY_DURATION_EXCLUDE_RETRIES("Summary duration exclude retries");
 
-
     private final String displayedName;
 
     FormLaunchAnalyticMetricItem(String displayedName) {
@@ -21,7 +20,6 @@ public enum FormLaunchAnalyticMetricItem {
     public String getDisplayedName() {
         return displayedName;
     }
-
 
     @Override
     public String toString() {
