@@ -1,5 +1,6 @@
 package cloud.autotests.api.requests;
 
+import cloud.autotests.api.helpers.EndPoints;
 import cloud.autotests.api.models.projects.Project;
 import cloud.autotests.api.models.projects.Projects;
 import io.restassured.http.ContentType;
@@ -11,66 +12,66 @@ import static io.restassured.RestAssured.given;
 
 public class ProjectsRequests {
 
-    public Projects getProjectsDataRequest(Map<String, String> requestParams) {
+    public static Projects getProjectsDataRequest(Map<String, String> requestParams) {
         return given()
                 .spec(spec().request())
                 .params(requestParams)
                 .when()
-                .get("/project")
+                .get(EndPoints.PROJECT)
                 .then()
                 .statusCode(200)
                 .extract().as(Projects.class);
     }
 
-    public Project getProjectDataRequest(int projectId) {
+    public static Project getProjectDataRequest(int projectId) {
         return given()
                 .spec(spec().request())
                 .when()
-                .get("/project/{projectId}", projectId)
+                .get(EndPoints.PROJECT_ID, projectId)
                 .then()
                 .statusCode(200)
                 .extract().as(Project.class);
     }
 
-    public Project getProjectStatsRequest(int projectId) {
+    public static Project getProjectStatsRequest(int projectId) {
         return given()
                 .spec(spec().request())
                 .when()
-                .get("/project/{projectId}/stats", projectId)
+                .get(EndPoints.PROJECT_STATS, projectId)
                 .then()
                 .statusCode(200)
                 .extract().as(Project.class);
     }
 
-    public Project addProjectRequest(Project projectData) {
-        return given()
-                .spec(spec().request())
-                .contentType(ContentType.JSON)
-                .body(projectData)
-                .when()
-                .post("/project")
-                .then()
-                .statusCode(200)
-                .extract().as(Project.class);
-    }
-
-    public Project editProjectRequest(Project projectData) {
+    public static Project addProjectRequest(Project projectData) {
         return given()
                 .spec(spec().request())
                 .contentType(ContentType.JSON)
                 .body(projectData)
                 .when()
-                .patch("/project")
+                .post(EndPoints.PROJECT)
                 .then()
                 .statusCode(200)
                 .extract().as(Project.class);
     }
 
-    public void deleteProjectRequest(int projectId) {
+    public static Project editProjectRequest(Project projectData) {
+        return given()
+                .spec(spec().request())
+                .contentType(ContentType.JSON)
+                .body(projectData)
+                .when()
+                .patch(EndPoints.PROJECT)
+                .then()
+                .statusCode(200)
+                .extract().as(Project.class);
+    }
+
+    public static void deleteProjectRequest(int projectId) {
         given()
                 .spec(spec().request())
                 .when()
-                .delete("/project/{projectId}", projectId)
+                .delete(EndPoints.PROJECT_ID, projectId)
                 .then()
                 .statusCode(204);
     }
