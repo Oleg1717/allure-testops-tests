@@ -9,11 +9,9 @@ import java.util.Map;
 
 public class ProjectsApi {
 
-    ProjectsRequests requests = new ProjectsRequests();
-
     @Step("Delete project with id = {projectId} using API")
     public void deleteProject(int projectId) {
-        requests.deleteProjectRequest(projectId);
+        ProjectsRequests.deleteProjectRequest(projectId);
     }
 
     @Step("Add project '{projectName}' using API")
@@ -22,7 +20,7 @@ public class ProjectsApi {
                 .name(projectName)
                 .isPublic(isPublic)
                 .build();
-        return requests.addProjectRequest(newProject);
+        return ProjectsRequests.addProjectRequest(newProject);
     }
 
     @Step("Delete project '{projectName}' using API")
@@ -39,7 +37,7 @@ public class ProjectsApi {
             put("sort", "id%2Cdesc");
             put("size", "500");
         }};
-        return requests.getProjectsDataRequest(requestParams)
+        return ProjectsRequests.getProjectsDataRequest(requestParams)
                 .getProjectsList()
                 .stream()
                 .filter(project -> project.getName().equals(projectName))
@@ -55,6 +53,6 @@ public class ProjectsApi {
             put("sort", "id%2Cdesc");
             put("size", "5000");
         }};
-        return requests.getProjectsDataRequest(requestParams).getProjectsCount();
+        return ProjectsRequests.getProjectsDataRequest(requestParams).getProjectsCount();
     }
 }
