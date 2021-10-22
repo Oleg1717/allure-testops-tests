@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.helpers;
 
-import cloud.autotests.allure.api.steps.AuthorizationApi;
+import cloud.autotests.allure.api.steps.UserApi;
 import cloud.autotests.allure.config.ConfigHelper;
 
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public class AuthorizationData {
     }
 
     private AuthorizationData() {
-        sessionToken = new AuthorizationApi().getSessionToken();
+        sessionToken = new UserApi().getSessionToken();
         sessionCookies.put("XSRF-TOKEN", ConfigHelper.getXsrfToken());
         sessionCookies.put("ALLURE_TESTOPS_SESSION", sessionToken);
     }
