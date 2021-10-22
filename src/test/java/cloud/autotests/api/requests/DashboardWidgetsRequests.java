@@ -1,7 +1,6 @@
 package cloud.autotests.api.requests;
 
 import cloud.autotests.api.helpers.EndPoints;
-import cloud.autotests.api.models.dashboards.Dashboard;
 import cloud.autotests.api.models.dashboards.Widget;
 import cloud.autotests.api.models.dashboards.WidgetData;
 import io.restassured.http.ContentType;
@@ -45,7 +44,7 @@ public class DashboardWidgetsRequests {
                 .extract().as(Widget.class);
     }
 
-    public void deleteWidget(int widgetId) {
+    public static void deleteWidget(int widgetId) {
         given()
                 .spec(spec().request())
                 .pathParam("id", widgetId)
