@@ -1,9 +1,9 @@
 package cloud.autotests.tests;
 
 import cloud.autotests.config.ConfigHelper;
-import cloud.autotests.helpers.selenide.SelenideTestWatcher;
-import cloud.autotests.helpers.DriverSettings;
-import cloud.autotests.helpers.selenide.SelenideExtendedListener;
+import cloud.autotests.ui.helpers.selenide.SelenideTestWatcher;
+import cloud.autotests.ui.helpers.DriverSettings;
+import cloud.autotests.ui.helpers.selenide.SelenideExtendedListener;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.junit5.AllureJunit5;
 import io.restassured.RestAssured;
