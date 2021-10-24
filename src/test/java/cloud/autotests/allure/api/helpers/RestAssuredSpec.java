@@ -5,7 +5,7 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 
-import static cloud.autotests.allure.api.helpers.AuthorizationData.authorizationData;
+import static cloud.autotests.allure.api.helpers.AuthorizationData.getAuthorizationData;
 
 public class RestAssuredSpec {
 
@@ -13,7 +13,7 @@ public class RestAssuredSpec {
             .setBaseUri(ConfigHelper.getApiBaseUri())
             .setBasePath(ConfigHelper.getApiRsPath())
             .addHeader("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
-            .addCookies(authorizationData().getSessionCookies())
+            .addCookies(getAuthorizationData().getSessionCookies())
             .addFilter(RestAssuredFilter.withCustomTemplates())
             .log(LogDetail.ALL)
             .build();

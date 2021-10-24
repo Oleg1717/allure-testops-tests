@@ -1,20 +1,22 @@
-package cloud.autotests.allure.api.models.projects;
+package cloud.autotests.allure.api.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Projects {
+public class Login {
 
-    @JsonProperty("content")
-    private List<Project> projectsList;
-    private Integer totalElements;
+    private Date timestamp;
+    private String redirectUri;
+    private Integer status;
+    private String message;
 }

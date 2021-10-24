@@ -1,24 +1,26 @@
-package cloud.autotests.allure.tests;
+package cloud.autotests.allure.tests.ui;
 
 import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.components.Sidebar;
 import cloud.autotests.allure.ui.data.sidebar.SideMenuNavItem;
+import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.LoginPage;
 import cloud.autotests.allure.ui.pages.ProjectsPage;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
-import static cloud.autotests.allure.api.helpers.AuthorizationData.authorizationData;
+import static cloud.autotests.allure.api.helpers.AuthorizationData.getAuthorizationData;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-@Tag("login")
+@Layer("ui")
+@Owner("OlegV")
 @Feature("Login tests")
 public class LoginTests extends TestBase {
 
@@ -47,7 +49,7 @@ public class LoginTests extends TestBase {
                 WebDriverRunner.getWebDriver().manage().addCookie(
                         new Cookie("XSRF-TOKEN", ConfigHelper.getXsrfToken()));
                 WebDriverRunner.getWebDriver().manage().addCookie(
-                        new Cookie("ALLURE_TESTOPS_SESSION", authorizationData().getSessionToken()));
+                        new Cookie("ALLURE_TESTOPS_SESSION", getAuthorizationData().getSessionToken()));
             });
         });
 
