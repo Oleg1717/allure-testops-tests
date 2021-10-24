@@ -10,12 +10,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserApi {
 
     public String getSessionToken(String xsrfToken, String login, String password) {
-        return new UserRequests().getAuthorizeResponse(xsrfToken, login, password)
+        return UserRequests.getAuthorizeResponse(xsrfToken, login, password)
                 .getCookie("ALLURE_TESTOPS_SESSION");
     }
 
     public Login getAuthorizeData(String xsrfToken, String login, String password) {
-        return new UserRequests().getAuthorizeResponse(xsrfToken, login, password).as(Login.class);
+        return UserRequests.getAuthorizeResponse(xsrfToken, login, password).as(Login.class);
     }
 
     @Step("Check that response error message is '{expectedErrorMessage}'")
