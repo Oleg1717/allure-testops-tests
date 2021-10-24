@@ -11,9 +11,13 @@ public class DashboardsApi {
 
     @Step("Add dashboard '{dashboardName}' using API")
     public Integer addDashboard(String dashboardName) {
-        Dashboard dashboard = new Dashboard();
+        Dashboard dashboard = Dashboard.builder()
+                .projectId(ConfigHelper.getProjectId())
+                .name(dashboardName)
+                .build();
+/*        Dashboard dashboard = new Dashboard();
         dashboard.setProjectId(ConfigHelper.getProjectId());
-        dashboard.setName(dashboardName);
+        dashboard.setName(dashboardName);*/
         return DashboardsRequests.addDashboard(dashboard).getId();
     }
 
