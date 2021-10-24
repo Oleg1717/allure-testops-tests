@@ -17,14 +17,14 @@ import org.junit.jupiter.api.Test;
 public class AuthorizationTests {
 
     UserApi userApi = new UserApi();
+    public static final String userLogin = "testuser";
+    public static final String userPassword = "testuser12354";
 
     @Test
     @Story("Authorization data tests")
     @DisplayName("Check authorization with valid user data")
     public void checkAuthorizationWithValidUserData() {
         String xsrfToken = ConfigHelper.getXsrfToken();
-        String userLogin = ConfigHelper.getUserLogin();
-        String userPassword = ConfigHelper.getUserPassword();
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         userApi.checkThatAuthorizationIsSuccess(loginData);
     }
@@ -35,7 +35,6 @@ public class AuthorizationTests {
     public void checkAuthorizationWithBlankLogin() {
         String xsrfToken = ConfigHelper.getXsrfToken();
         String userLogin = "";
-        String userPassword = ConfigHelper.getUserPassword();
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.VALIDATION_ERROR);
     }
@@ -46,7 +45,6 @@ public class AuthorizationTests {
     public void checkAuthorizationWithWrongLogin() {
         String xsrfToken = ConfigHelper.getXsrfToken();
         String userLogin = "usr";
-        String userPassword = ConfigHelper.getUserPassword();
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.BAD_CREDENTIALS);
     }
@@ -56,7 +54,6 @@ public class AuthorizationTests {
     @DisplayName("Check authorization with blank password")
     public void checkAuthorizationWithBlankPassword() {
         String xsrfToken = ConfigHelper.getXsrfToken();
-        String userLogin = ConfigHelper.getUserLogin();
         String userPassword = "";
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.VALIDATION_ERROR);
@@ -67,8 +64,6 @@ public class AuthorizationTests {
     @DisplayName("Check authorization with blank XSRF token")
     public void checkAuthorizationWithBlankXsrfToken() {
         String xsrfToken = "";
-        String userLogin = ConfigHelper.getUserLogin();
-        String userPassword = ConfigHelper.getUserPassword();
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         System.out.println(loginData.toString());
         userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND);
@@ -79,8 +74,6 @@ public class AuthorizationTests {
     @DisplayName("Check authorization with space characters in XSRF token")
     public void checkAuthorizationWithSpacesXsrfToken() {
         String xsrfToken = "   ";
-        String userLogin = ConfigHelper.getUserLogin();
-        String userPassword = ConfigHelper.getUserPassword();
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         System.out.println(loginData.toString());
         userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND);
