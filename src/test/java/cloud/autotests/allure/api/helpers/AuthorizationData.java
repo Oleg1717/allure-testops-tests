@@ -11,10 +11,6 @@ public class AuthorizationData {
     private final String sessionToken;
     private final Map<String, String> sessionCookies = new HashMap<>();
 
-    private static class InitAuthorizationData {
-        private static final AuthorizationData authorizationData = new AuthorizationData();
-    }
-
     private AuthorizationData() {
         String xsrfToken = ConfigHelper.getXsrfToken();
         String login = ConfigHelper.getUserLogin();
@@ -34,6 +30,10 @@ public class AuthorizationData {
 
     public Map<String, String> getSessionCookies() {
         return sessionCookies;
+    }
+
+    private static class InitAuthorizationData {
+        private static final AuthorizationData authorizationData = new AuthorizationData();
     }
 
 }

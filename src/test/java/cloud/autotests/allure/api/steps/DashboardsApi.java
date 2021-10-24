@@ -15,9 +15,6 @@ public class DashboardsApi {
                 .projectId(ConfigHelper.getProjectId())
                 .name(dashboardName)
                 .build();
-/*        Dashboard dashboard = new Dashboard();
-        dashboard.setProjectId(ConfigHelper.getProjectId());
-        dashboard.setName(dashboardName);*/
         return DashboardsRequests.addDashboard(dashboard).getId();
     }
 

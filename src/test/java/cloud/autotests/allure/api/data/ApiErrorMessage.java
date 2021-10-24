@@ -9,7 +9,11 @@ public enum ApiErrorMessage {
 
     private final String errorName;
 
-    ApiErrorMessage(String errorName) {this.errorName = errorName;}
+    ApiErrorMessage(String errorName) {
+        this.errorName = errorName;
+    }
 
-    public String getErrorName() {return this.errorName;}
+    public String getErrorName() {
+        return this.errorName;
+    }
 }
