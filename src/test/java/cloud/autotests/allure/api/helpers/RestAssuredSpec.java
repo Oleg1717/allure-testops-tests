@@ -9,13 +9,13 @@ import static cloud.autotests.allure.api.helpers.AuthorizationData.getAuthorizat
 
 public class RestAssuredSpec {
 
-    private RequestSpecification request = new RequestSpecBuilder()
+    private final RequestSpecification request = new RequestSpecBuilder()
             .setBaseUri(ConfigHelper.getApiBaseUri())
             .setBasePath(ConfigHelper.getApiRsPath())
             .addHeader("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
             .addCookies(getAuthorizationData().getSessionCookies())
             .addFilter(RestAssuredFilter.withCustomTemplates())
-            .log(LogDetail.ALL)
+            .log(LogDetail.URI)
             .build();
 
     public static RestAssuredSpec spec() {

@@ -1,6 +1,5 @@
 package cloud.autotests.allure.ui.helpers;
 
-import cloud.autotests.allure.api.helpers.AuthorizationData;
 import cloud.autotests.allure.config.ConfigHelper;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.extension.BeforeEachCallback;

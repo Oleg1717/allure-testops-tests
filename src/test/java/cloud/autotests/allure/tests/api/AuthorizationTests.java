@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 @Feature("Authorization tests")
 public class AuthorizationTests {
 
-    UserApi userApi = new UserApi();
     public static final String userLogin = "testuser";
     public static final String userPassword = "testuser12354";
+    UserApi userApi = new UserApi();
 
     @Test
     @Story("Authorization data tests")
@@ -26,7 +26,7 @@ public class AuthorizationTests {
     public void checkAuthorizationWithValidUserData() {
         String xsrfToken = ConfigHelper.getXsrfToken();
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatAuthorizationIsSuccess(loginData);
+        userApi.checkThatAuthorizationIsSuccess(loginData.getStatus());
     }
 
     @Test
@@ -36,7 +36,8 @@ public class AuthorizationTests {
         String xsrfToken = ConfigHelper.getXsrfToken();
         String userLogin = "";
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.VALIDATION_ERROR);
+        userApi.checkThatResponseErrorIs(loginData.getMessage(),
+                ApiErrorMessage.VALIDATION_ERROR.getErrorName());
     }
 
     @Test
@@ -46,7 +47,8 @@ public class AuthorizationTests {
         String xsrfToken = ConfigHelper.getXsrfToken();
         String userLogin = "usr";
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.BAD_CREDENTIALS);
+        userApi.checkThatResponseErrorIs(loginData.getMessage(),
+                ApiErrorMessage.BAD_CREDENTIALS.getErrorName());
     }
 
     @Test
@@ -56,7 +58,8 @@ public class AuthorizationTests {
         String xsrfToken = ConfigHelper.getXsrfToken();
         String userPassword = "";
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.VALIDATION_ERROR);
+        userApi.checkThatResponseErrorIs(loginData.getMessage(),
+                ApiErrorMessage.VALIDATION_ERROR.getErrorName());
     }
 
     @Test
@@ -66,7 +69,8 @@ public class AuthorizationTests {
         String xsrfToken = "";
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         System.out.println(loginData.toString());
-        userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND);
+        userApi.checkThatResponseErrorIs(loginData.getMessage(),
+                ApiErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.getErrorName());
     }
 
     @Test
@@ -76,6 +80,7 @@ public class AuthorizationTests {
         String xsrfToken = "   ";
         Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
         System.out.println(loginData.toString());
-        userApi.checkThatResponseErrorIs(loginData.getMessage(), ApiErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND);
+        userApi.checkThatResponseErrorIs(loginData.getMessage(),
+                ApiErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.getErrorName());
     }
 }

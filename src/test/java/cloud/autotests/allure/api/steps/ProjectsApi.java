@@ -22,11 +22,6 @@ public class ProjectsApi {
                 .name(projectName)
                 .isPublic(isPublic)
                 .build();
-/*
-        Project newProject = new Project();
-        newProject.setName(projectName);
-        newProject.setIsPublic(isPublic);
-*/
         return ProjectsRequests.addProject(newProject);
     }
 

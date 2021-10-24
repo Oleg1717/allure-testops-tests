@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class UserRequests {
 
-    public Response getAuthorizeResponse(String xsrfToken, String login, String password) {
+    public static Response getAuthorizeResponse(String xsrfToken, String login, String password) {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .filter(RestAssuredFilter.withCustomTemplates())
