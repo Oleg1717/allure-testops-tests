@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-<div><h4>Status code</h4> <#if data.responseCode??>
+<div><h5>Status code</h5> <#if data.responseCode??>
         <pre><code><b>${data.responseCode}</b></code></pre>
     <#else>Unknown</#if></div>
 <#if data.url??>
@@ -31,7 +31,7 @@
     </div></#if>
 
 <#if (data.headers)?has_content>
-    <h4>Headers</h4>
+    <h5>Headers</h5>
     <div>
         <#list data.headers as name, value>
             <div>
@@ -42,14 +42,14 @@
 </#if>
 
 <#if data.body??>
-    <h4>Body</h4>
+    <h5>Body</h5>
     <div>
         <pre><code>${data.body}</code></pre>
     </div>
 </#if>
 
 <#if (data.cookies)?has_content>
-    <h4>Cookies</h4>
+    <h5>Cookies</h5>
     <div>
         <#list data.cookies as name, value>
             <div>

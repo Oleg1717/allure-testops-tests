@@ -1,14 +1,14 @@
-package cloud.autotests.allure.tests;
+package cloud.autotests.allure.tests.ui;
 
 import cloud.autotests.allure.api.models.projects.Project;
 import cloud.autotests.allure.api.steps.ProjectsApi;
-import cloud.autotests.allure.config.ConfigHelper;
+import cloud.autotests.allure.ui.components.forms.ProjectEditForm;
 import cloud.autotests.allure.ui.data.ErrorMessages;
 import cloud.autotests.allure.ui.data.ProjectsPaginationItem;
 import cloud.autotests.allure.ui.data.TestData;
 import cloud.autotests.allure.ui.helpers.WithLogin;
+import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.ProjectsPage;
-import cloud.autotests.allure.ui.components.forms.ProjectEditForm;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -19,7 +19,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Owner("Oleg1717")
+@Owner("OlegV")
+@Layer("ui")
 @Feature("Projects page tests")
 public class ProjectsTests extends TestBase {
 
@@ -59,6 +60,17 @@ public class ProjectsTests extends TestBase {
         projectsApi.deleteProject(project.getId());
     }
 
+    @Test
+    @WithLogin
+    @Story("Projects page pagination tests")
+    @DisplayName("Check pagination items count")
+    void checkPaginationItemsCount() {
+        int projectsCount = projectsApi.getProjectsCount();
+        projectsPage.openProjectsPage(TestData.PROJECTS_URL)
+                .allProjectsButtonClick()
+                .checkPaginationItemsCount(projectsCount);
+    }
+
     @WithLogin
     @Story("Projects page pagination tests")
     @ParameterizedTest(name = "Check pagination with item = {0}")
@@ -68,6 +80,6 @@ public class ProjectsTests extends TestBase {
         projectsPage.openProjectsPage(TestData.PROJECTS_URL)
                 .allProjectsButtonClick()
                 .selectPaginationElement(item)
-                .checkProjectsListCount(item);
+                .checkDisplayedProjectsCount(item);
     }
 }

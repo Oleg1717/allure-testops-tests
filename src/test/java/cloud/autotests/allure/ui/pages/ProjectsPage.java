@@ -13,6 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byLinkText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static java.lang.String.format;
 
 public class ProjectsPage {
 
@@ -29,6 +30,7 @@ public class ProjectsPage {
     private ElementsCollection projectsList = $(".ColumnHeaders__content").$$(".list-row");
 
     private SelenideElement paginationSelect = $(".Pagination__select");
+    private SelenideElement paginationIndexes = $(".Pagination__indexes");
 
     private ElementsCollection paginationSelectItems = $(".css-11unzgr").$$("div");
     private SelenideElement notification = $(".Toastify__toast-body");
@@ -99,9 +101,15 @@ public class ProjectsPage {
         return this;
     }
 
-    @Step("Check that projects list count = {paginationItem}")
-    public ProjectsPage checkProjectsListCount(ProjectsPaginationItem paginationItem) {
+    @Step("Check that displayed projects count = {paginationItem}")
+    public ProjectsPage checkDisplayedProjectsCount(ProjectsPaginationItem paginationItem) {
         projectsList.shouldHave(size(paginationItem.getItemsPerPage()));
+        return this;
+    }
+
+    @Step("Check that all projects count = ")
+    public ProjectsPage checkPaginationItemsCount(int allProjectsCount) {
+        paginationIndexes.shouldHave(text(format("of %d items",allProjectsCount)));
         return this;
     }
 }

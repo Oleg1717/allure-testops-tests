@@ -1,5 +1,6 @@
-package cloud.autotests.allure.ui.helpers;
+package cloud.autotests.allure.ui.helpers.allure;
 
+import cloud.autotests.allure.ui.helpers.DriverUtils;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import org.slf4j.Logger;

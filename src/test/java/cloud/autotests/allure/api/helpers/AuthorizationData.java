@@ -16,12 +16,15 @@ public class AuthorizationData {
     }
 
     private AuthorizationData() {
-        sessionToken = new UserApi().getSessionToken();
+        String xsrfToken = ConfigHelper.getXsrfToken();
+        String login = ConfigHelper.getUserLogin();
+        String password = ConfigHelper.getUserPassword();
+        sessionToken = new UserApi().getSessionToken(xsrfToken, login, password);
         sessionCookies.put("XSRF-TOKEN", ConfigHelper.getXsrfToken());
         sessionCookies.put("ALLURE_TESTOPS_SESSION", sessionToken);
     }
 
-    public static AuthorizationData authorizationData() {
+    public static AuthorizationData getAuthorizationData() {
         return InitAuthorizationData.authorizationData;
     }
 

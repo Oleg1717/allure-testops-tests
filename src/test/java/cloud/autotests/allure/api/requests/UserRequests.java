@@ -9,18 +9,18 @@ import static io.restassured.RestAssured.given;
 
 public class UserRequests {
 
-    public static Response authorize() {
+    public static Response getAuthorizeResponse(String xsrfToken, String login, String password) {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .filter(RestAssuredFilter.withCustomTemplates())
-                .header("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
-                .cookie("XSRF-TOKEN", ConfigHelper.getXsrfToken())
-                .formParam("username", ConfigHelper.getUserLogin())
-                .formParam("password", ConfigHelper.getUserPassword())
+                .header("X-XSRF-TOKEN", xsrfToken)
+                .cookie("XSRF-TOKEN", xsrfToken)
+                .formParam("username", login)
+                .formParam("password", password)
+                .log().all()
                 .when()
                 .post(EndPoints.USER_LOGIN)
                 .then()
-                .statusCode(200)
                 .extract().response();
     }
 }

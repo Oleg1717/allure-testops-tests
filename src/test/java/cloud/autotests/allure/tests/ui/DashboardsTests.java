@@ -1,7 +1,10 @@
-package cloud.autotests.allure.tests;
+package cloud.autotests.allure.tests.ui;
 
 import cloud.autotests.allure.api.steps.DashboardsApi;
 import cloud.autotests.allure.config.ConfigHelper;
+import cloud.autotests.allure.ui.components.forms.DashboardEditForm;
+import cloud.autotests.allure.ui.components.forms.DashboardWidgetEditForm;
+import cloud.autotests.allure.ui.components.forms.DeleteForm;
 import cloud.autotests.allure.ui.data.ErrorMessages;
 import cloud.autotests.allure.ui.data.TestData;
 import cloud.autotests.allure.ui.data.dashboards.DashboardActionItem;
@@ -12,10 +15,8 @@ import cloud.autotests.allure.ui.data.dashboards.FormTreeItem;
 import cloud.autotests.allure.ui.data.dashboards.FormTypeItem;
 import cloud.autotests.allure.ui.data.dashboards.WidgetActionItem;
 import cloud.autotests.allure.ui.helpers.WithLogin;
+import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.DashboardsPage;
-import cloud.autotests.allure.ui.components.forms.DashboardEditForm;
-import cloud.autotests.allure.ui.components.forms.DashboardWidgetEditForm;
-import cloud.autotests.allure.ui.components.forms.DeleteForm;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -29,7 +30,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import static io.qameta.allure.Allure.parameter;
 
-@Owner("Oleg1717")
+@Owner("OlegV")
+@Layer("ui")
 @Feature("Dashboards tests")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DashboardsTests extends TestBase {

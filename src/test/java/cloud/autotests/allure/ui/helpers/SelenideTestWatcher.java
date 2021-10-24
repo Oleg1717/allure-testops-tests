@@ -1,8 +1,7 @@
 package cloud.autotests.allure.ui.helpers;
 
 import cloud.autotests.allure.config.ConfigHelper;
-import cloud.autotests.allure.ui.helpers.AllureAttachments;
-import cloud.autotests.allure.ui.helpers.DriverUtils;
+import cloud.autotests.allure.ui.helpers.allure.AllureAttachments;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestWatcher;

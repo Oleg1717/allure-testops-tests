@@ -55,6 +55,6 @@ public class ProjectsApi {
             put("sort", "id%2Cdesc");
             put("size", "5000");
         }};
-        return ProjectsRequests.getProjectsData(requestParams).getProjectsCount();
+        return ProjectsRequests.getProjectsData(requestParams).getTotalElements();
     }
 }
