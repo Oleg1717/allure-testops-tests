@@ -46,7 +46,7 @@ public class DashboardsTests extends TestBase {
 
     @BeforeAll
     void addDashboardForTests() {
-        dashboardForTestsUrl = TestData.DASHBOARDS_URL + dashboardsApi.addDashboard("ForWidgetsTests");
+        dashboardForTestsUrl = TestData.DASHBOARDS_URL + "/" + dashboardsApi.addDashboard("ForWidgetsTests");
     }
 
     @AfterAll
