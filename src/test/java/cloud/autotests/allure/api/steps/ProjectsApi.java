@@ -18,10 +18,9 @@ public class ProjectsApi {
 
     @Step("Add project '{projectName}' using API")
     public Project addProject(String projectName, boolean isPublic) {
-        Project newProject = Project.builder()
-                .name(projectName)
-                .isPublic(isPublic)
-                .build();
+        Project newProject = new Project();
+        newProject.setName(projectName);
+        newProject.setIsPublic(isPublic);
         return ProjectsRequests.addProject(newProject);
     }
 
