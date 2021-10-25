@@ -12,7 +12,7 @@ public class DashboardWidgetsRequests {
 
     public static WidgetData getWidgetData(int widgetId) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.WIDGET_DATA, widgetId)
                 .then()
@@ -22,7 +22,7 @@ public class DashboardWidgetsRequests {
 
     public static Widget addWidget(Widget widget) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
                 .body(widget)
                 .when()
@@ -34,7 +34,7 @@ public class DashboardWidgetsRequests {
 
     public static Widget editWidget(Widget widget) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
                 .body(widget)
                 .when()
@@ -46,7 +46,7 @@ public class DashboardWidgetsRequests {
 
     public static void deleteWidget(int widgetId) {
         given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .pathParam("id", widgetId)
                 .when()
                 .delete(EndPoints.WIDGET_ID)

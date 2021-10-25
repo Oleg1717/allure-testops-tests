@@ -14,7 +14,7 @@ public class JobsRequests {
 
     public static Response getJobsData(Map<String, String> requestParams) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
                 .get(EndPoints.JOB)
@@ -24,7 +24,7 @@ public class JobsRequests {
 
     public static Response addJob(Job jobData) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
                 .body(jobData)
                 .when()
@@ -35,7 +35,7 @@ public class JobsRequests {
 
     public static void deleteJob(int jobId) {
         given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .when()
                 .delete(EndPoints.JOB_ID, jobId)
                 .then()

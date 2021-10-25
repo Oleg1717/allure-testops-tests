@@ -5,6 +5,7 @@ import cloud.autotests.allure.api.helpers.RestAssuredFilter;
 import cloud.autotests.allure.config.ConfigHelper;
 import io.restassured.response.Response;
 
+import static cloud.autotests.allure.api.helpers.RestAssuredSpec.spec;
 import static io.restassured.RestAssured.given;
 
 public class UserRequests {
@@ -20,6 +21,15 @@ public class UserRequests {
                 .log().uri()
                 .when()
                 .post(EndPoints.USER_LOGIN)
+                .then()
+                .extract().response();
+    }
+
+    public static Response getLicenseDataResponse() {
+        return given()
+                .spec(spec().uaaRequest())
+                .when()
+                .get(EndPoints.LICENSE)
                 .then()
                 .extract().response();
     }

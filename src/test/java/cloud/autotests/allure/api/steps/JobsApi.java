@@ -9,10 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class JobsApi {
 
-    @Step("Add project '{projectName}' using API")
+    @Step("Add project using API")
     public Response addJob(Job newJob) {
         return JobsRequests.addJob(newJob);
-
     }
 
     @Step("Delete job with id = {jobId} using API")
