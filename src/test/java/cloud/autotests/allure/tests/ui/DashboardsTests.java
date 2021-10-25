@@ -32,7 +32,7 @@ import static io.qameta.allure.Allure.parameter;
 
 @Owner("OlegV")
 @Layer("ui")
-@Feature("Dashboards tests")
+@Feature("Dashboards")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DashboardsTests extends TestBase {
 
@@ -57,7 +57,7 @@ public class DashboardsTests extends TestBase {
     //region Add new dashboards tests
     @WithLogin
     @Test
-    @Story("Add new dashboards tests")
+    @Story("Add new dashboards")
     @DisplayName("Add new dashboard")
     void addDashboard() {
         String dashboardName = "NewDashboard";
@@ -70,7 +70,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add new dashboards tests")
+    @Story("Add new dashboards")
     @DisplayName("Add dashboard with blank name")
     void addDashboardWithBlankName() {
         String dashboardName = "";
@@ -83,7 +83,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add new dashboards tests")
+    @Story("Add new dashboards")
     @DisplayName("Add dashboard with only space characters in name")
     void addDashboardWithSpacesName() {
         String dashboardName = "   ";
@@ -96,7 +96,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add new dashboards tests")
+    @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard using cancel button")
     void cancelAddingDashboardByCancelButton() {
         String dashboardName = "CancelButton";
@@ -110,7 +110,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add new dashboards tests")
+    @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard using close button")
     void cancelAddingDashboardByCloseButton() {
         String dashboardName = "CloseButton";
@@ -124,7 +124,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add new dashboards tests")
+    @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard with blank name using cancel button")
     void cancelAddingDashboardWithBlankNameByCancelButton() {
         String dashboardName = "";
@@ -137,7 +137,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add new dashboards tests")
+    @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard with blank name using close button")
     void cancelAddingDashboardWithBlankNameByCloseButton() {
         String dashboardName = "";
@@ -152,7 +152,7 @@ public class DashboardsTests extends TestBase {
     //region Various dashboard tests
     @WithLogin
     @Test
-    @Story("Various dashboard tests")
+    @Story("Change dashboards")
     @DisplayName("Switch dashboard full screen mode on/off")
     void dashboardFullScreenMode() {
         String dashboardName = "FullScreen";
@@ -166,7 +166,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Various dashboard tests")
+    @Story("Change dashboards")
     @DisplayName("Edit dashboard name")
     void editDashboardName() {
         String dashboardName = "Edit";
@@ -181,7 +181,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Various dashboard tests")
+    @Story("Change dashboards")
     @DisplayName("Delete dashboard")
     void deleteDashboard() {
         String dashboardName = "Delete";
@@ -196,7 +196,7 @@ public class DashboardsTests extends TestBase {
     //region Standard (Overview) dashboard widgets tests
     @WithLogin
     @Test
-    @Story("Standard (Overview) dashboard widgets tests")
+    @Story("Check Standard (Overview) dashboard widgets")
     @DisplayName("Standard dashboard should contains 5 widgets")
     void defaultDashboardShouldContains5Widgets() {
         dashboardsPage.openDashboardPage(TestData.DASHBOARDS_URL)
@@ -207,7 +207,7 @@ public class DashboardsTests extends TestBase {
     //region Custom dashboard widgets tests
     @WithLogin
     @Test
-    @Story("Various dashboard widgets tests")
+    @Story("Change widgets")
     @DisplayName("Add widget using 'Add widget' button")
     void addWidgetByAddWidgetButton() {
         String dashboardName = "ByAddWidgetButton";
@@ -222,7 +222,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Various dashboard widgets tests")
+    @Story("Change widgets")
     @DisplayName("Edit widget")
     void editWidget() {
         String widgetName = "EditWidget";
@@ -243,7 +243,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Various dashboard widgets tests")
+    @Story("Change widgets")
     @DisplayName("Clone widget")
     void cloneWidget() {
         String widgetName = "CloneWidget";
@@ -263,7 +263,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Various dashboard widgets tests")
+    @Story("Change widgets")
     @DisplayName("Delete widget")
     void deleteWidget() {
         String widgetName = "DeleteWidget";
@@ -281,7 +281,7 @@ public class DashboardsTests extends TestBase {
     //region Add some types of widgets
     @WithLogin
     @Test
-    @Story("Add some types of dashboard widgets")
+    @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Markdown'")
     void addMarkdownTypeWidget() {
         String widgetName = FormTypeItem.MARKDOWN.toString();
@@ -296,7 +296,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add some types of dashboard widgets")
+    @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Launch statistic Trend'")
     void addLaunchStatisticTrendTypeWidget() {
         String widgetName = FormTypeItem.LAUNCH_STATISTIC_TREND.toString();
@@ -310,7 +310,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add some types of dashboard widgets")
+    @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Automation Trend'")
     void addAutomationTrendTypeWidget() {
         String widgetName = FormTypeItem.AUTOMATION_TREND.toString();
@@ -324,7 +324,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
-    @Story("Add some types of dashboard widgets")
+    @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Launches'")
     void addLaunchesTypeWidget() {
         String widgetName = FormTypeItem.LAUNCHES.toString();
@@ -337,7 +337,7 @@ public class DashboardsTests extends TestBase {
     }
 
     @WithLogin
-    @Story("Add dashboard widgets with type 'Launch Analytics'")
+    @Story("Add widgets with type 'Launch Analytics'")
     @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
     @EnumSource(value = FormLaunchAnalyticMetricItem.class)
     void addLaunchAnalyticsWidgets(FormLaunchAnalyticMetricItem item) {
@@ -353,7 +353,7 @@ public class DashboardsTests extends TestBase {
     }
 
     @WithLogin
-    @Story("Add dashboard widgets with type 'Test Case Pie Chart'")
+    @Story("Add widgets with type 'Test Case Pie Chart'")
     @ParameterizedTest(name = "Add widget with: 'Group by' item = {0}")
     @EnumSource(value = FormGroupByItem.class)
     void addTestCasePieChartWidgets(FormGroupByItem item) {
@@ -369,7 +369,7 @@ public class DashboardsTests extends TestBase {
     }
 
     @WithLogin
-    @Story("Add dashboard widgets with type 'Top Test Cases'")
+    @Story("Add widgets with type 'Top Test Cases'")
     @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
     @EnumSource(value = FormTopTestCasesMetricItem.class)
     void addTopTestCasesWidgets(FormTopTestCasesMetricItem item) {
@@ -385,7 +385,7 @@ public class DashboardsTests extends TestBase {
     }
 
     @WithLogin
-    @Story("Add dashboard widgets with type 'Test Case Tree Map Chart'")
+    @Story("Add widgets with type 'Test Case Tree Map Chart'")
     @ParameterizedTest(name = "Add widget with: 'Tree' item = {0}")
     @EnumSource(value = FormTreeItem.class)
     void addTestCaseTreeMapChartWidgets(FormTreeItem item) {

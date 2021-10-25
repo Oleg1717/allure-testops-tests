@@ -9,6 +9,7 @@ import cloud.autotests.allure.ui.pages.ProjectsPage;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
@@ -19,15 +20,16 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-@Layer("ui")
 @Owner("OlegV")
-@Feature("Login tests")
-public class LoginTests extends TestBase {
+@Feature("Authorization")
+@Layer("ui")
+public class UiAuthorizationTests extends TestBase {
 
     LoginPage loginPage = new LoginPage();
     Sidebar sidebar = new ProjectsPage().getSidebar();
 
     @Test
+    @Story("Authorize with valid data")
     @DisplayName("Successful login as testuser")
     void loginTest() {
         loginPage.openLoginPage("")
@@ -39,6 +41,7 @@ public class LoginTests extends TestBase {
     }
 
     @Test
+    @Story("Authorize with valid data")
     @DisplayName("Successful login with localStorage (API + UI)")
     void loginWithCookieTest() {
         step("Set auth tokens to browser cookies", () -> {

@@ -1,6 +1,6 @@
-package cloud.autotests.allure.api.data;
+package cloud.autotests.allure.api.data.error_messages;
 
-public enum ApiErrorMessage {
+public enum LoginErrorMessage {
 
     BAD_CREDENTIALS("Bad credentials"),
     VALIDATION_ERROR("Validation error"),
@@ -9,7 +9,7 @@ public enum ApiErrorMessage {
 
     private final String errorName;
 
-    ApiErrorMessage(String errorName) {
+    LoginErrorMessage(String errorName) {
         this.errorName = errorName;
     }
 
