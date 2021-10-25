@@ -21,7 +21,7 @@ import static io.qameta.allure.Allure.parameter;
 
 @Owner("OlegV")
 @Layer("ui")
-@Feature("Projects page tests")
+@Feature("Projects")
 public class ProjectsTests extends TestBase {
 
     ProjectsPage projectsPage = new ProjectsPage();
@@ -30,8 +30,8 @@ public class ProjectsTests extends TestBase {
 
     @Test
     @WithLogin
-    @Story("Add new project tests")
-    @DisplayName("Add new project")
+    @Story("Add new projects")
+    @DisplayName("Add project")
     void addNewProject() {
         String projectName = "C07-Oleg1717-new-project";
         projectsPage.openProjectsPage(TestData.PROJECTS_URL)
@@ -47,8 +47,8 @@ public class ProjectsTests extends TestBase {
 
     @Test
     @WithLogin
-    @Story("Add new project tests")
-    @DisplayName("Add new project with existing name")
+    @Story("Add new projects")
+    @DisplayName("Add project with existing name")
     void addNewProjectWithExistingName() {
         String projectName = "C07-Oleg1717-new-project-exist-name";
         Project project = projectsApi.addProject(projectName, true);
@@ -62,7 +62,7 @@ public class ProjectsTests extends TestBase {
 
     @Test
     @WithLogin
-    @Story("Projects page pagination tests")
+    @Story("Check projects page pagination")
     @DisplayName("Check pagination items count")
     void checkPaginationItemsCount() {
         int projectsCount = projectsApi.getProjectsCount();
@@ -72,7 +72,7 @@ public class ProjectsTests extends TestBase {
     }
 
     @WithLogin
-    @Story("Projects page pagination tests")
+    @Story("Check projects page pagination")
     @ParameterizedTest(name = "Check pagination with item = {0}")
     @EnumSource(value = ProjectsPaginationItem.class)
     void paginationTest(ProjectsPaginationItem item) {

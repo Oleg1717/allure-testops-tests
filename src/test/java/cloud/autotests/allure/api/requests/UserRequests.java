@@ -17,7 +17,7 @@ public class UserRequests {
                 .cookie("XSRF-TOKEN", xsrfToken)
                 .formParam("username", login)
                 .formParam("password", password)
-                .log().all()
+                .log().uri()
                 .when()
                 .post(EndPoints.USER_LOGIN)
                 .then()

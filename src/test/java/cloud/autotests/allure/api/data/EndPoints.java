@@ -15,4 +15,7 @@ public class EndPoints {
     public static final String WIDGET_ID = "/widget/{widgetId}";
     public static final String WIDGET_DATA = "/widget/{widgetId}/data";
 
+    public static final String JOB = "/job";
+    public static final String JOB_ID = "/job/{jobId}";
+    public static final String JOB_SYNC = "/job/{jobId}/sync";
 }
