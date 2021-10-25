@@ -12,7 +12,7 @@ public class DashboardsRequests {
 
     public static Dashboards getDashboardsData(int projectId) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .param("projectId", projectId)
                 .param("size", "500")
                 .when()
@@ -24,7 +24,7 @@ public class DashboardsRequests {
 
     public static Dashboard getDashboardData(int dashboardId) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.DASHBOARD_ID, dashboardId)
                 .then()
@@ -34,7 +34,7 @@ public class DashboardsRequests {
 
     public static Dashboard addDashboard(Dashboard dashboard) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
                 .body(dashboard)
                 .when()
@@ -46,7 +46,7 @@ public class DashboardsRequests {
 
     public static Dashboard editDashboard(Dashboard dashboardData) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
                 .body(dashboardData)
                 .when()
@@ -58,7 +58,7 @@ public class DashboardsRequests {
 
     public static void deleteDashboard(int dashboardId) {
         given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .when()
                 .delete(EndPoints.DASHBOARD_ID, dashboardId)
                 .then()

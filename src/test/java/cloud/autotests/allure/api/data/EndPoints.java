@@ -3,6 +3,7 @@ package cloud.autotests.allure.api.data;
 public class EndPoints {
 
     public static final String USER_LOGIN = "/api/login/system";
+    public static final String LICENSE = "/license";
 
     public static final String PROJECT = "/project";
     public static final String PROJECT_ID = "/project/{projectId}";

@@ -1,7 +1,7 @@
 package cloud.autotests.allure.tests.api;
 
 import cloud.autotests.allure.api.data.error_messages.LoginErrorMessage;
-import cloud.autotests.allure.api.models.Login;
+import cloud.autotests.allure.api.models.user.Login;
 import cloud.autotests.allure.api.steps.UserApi;
 import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.helpers.allure.Layer;

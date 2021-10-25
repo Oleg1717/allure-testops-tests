@@ -14,7 +14,7 @@ public class ProjectsRequests {
 
     public static Projects getProjectsData(Map<String, String> requestParams) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
                 .get(EndPoints.PROJECT)
@@ -25,7 +25,7 @@ public class ProjectsRequests {
 
     public static Project getProjectData(int projectId) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.PROJECT_ID, projectId)
                 .then()
@@ -35,7 +35,7 @@ public class ProjectsRequests {
 
     public static Project getProjectStats(int projectId) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.PROJECT_STATS, projectId)
                 .then()
@@ -45,7 +45,7 @@ public class ProjectsRequests {
 
     public static Project addProject(Project projectData) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
                 .body(projectData)
                 .when()
@@ -57,7 +57,7 @@ public class ProjectsRequests {
 
     public static Project editProject(Project projectData) {
         return given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
                 .body(projectData)
                 .when()
@@ -69,7 +69,7 @@ public class ProjectsRequests {
 
     public static void deleteProject(int projectId) {
         given()
-                .spec(spec().request())
+                .spec(spec().rsRequest())
                 .when()
                 .delete(EndPoints.PROJECT_ID, projectId)
                 .then()

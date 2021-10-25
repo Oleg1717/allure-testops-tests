@@ -1,8 +1,7 @@
-package cloud.autotests.allure.api.models;
+package cloud.autotests.allure.api.models.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,13 +9,14 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Login {
+public class License {
 
-    private Date timestamp;
-    private String redirectUri;
-    private Integer status;
-    private String message;
+    private String company;
+    private Date activatedAt;
+    private Date nextBillingAt;
+    private Integer seats;
+    private Boolean valid;
+    private Boolean offline;
 }
