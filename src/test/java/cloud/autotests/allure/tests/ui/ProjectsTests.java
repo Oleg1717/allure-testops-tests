@@ -9,6 +9,7 @@ import cloud.autotests.allure.ui.data.TestData;
 import cloud.autotests.allure.ui.helpers.WithLogin;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.ProjectsPage;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -29,6 +30,7 @@ public class ProjectsTests extends TestBase {
     ProjectsApi projectsApi = new ProjectsApi();
 
     @Test
+    @AllureId("5548")
     @WithLogin
     @Story("Add new projects")
     @DisplayName("Add project")
@@ -46,6 +48,7 @@ public class ProjectsTests extends TestBase {
     }
 
     @Test
+    @AllureId("5548")
     @WithLogin
     @Story("Add new projects")
     @DisplayName("Add project with existing name")
@@ -61,6 +64,7 @@ public class ProjectsTests extends TestBase {
     }
 
     @Test
+    @AllureId("5544")
     @WithLogin
     @Story("Check projects page pagination")
     @DisplayName("Check pagination items count")
@@ -74,6 +78,7 @@ public class ProjectsTests extends TestBase {
     @WithLogin
     @Story("Check projects page pagination")
     @ParameterizedTest(name = "Check pagination with item = {0}")
+    @AllureId("5546")
     @EnumSource(value = ProjectsPaginationItem.class)
     void paginationTest(ProjectsPaginationItem item) {
         parameter("Items per page", item.getItemsPerPage());

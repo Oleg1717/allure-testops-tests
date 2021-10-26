@@ -1,13 +1,15 @@
 package cloud.autotests.allure.tests.api;
 
-import cloud.autotests.allure.api.data.error_messages.LoginErrorMessage;
+import cloud.autotests.allure.api.data.LoginErrorMessage;
 import cloud.autotests.allure.api.models.user.Login;
 import cloud.autotests.allure.api.steps.UserApi;
 import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,71 +18,90 @@ import org.junit.jupiter.api.Test;
 @Layer("api")
 public class ApiAuthorizationTests {
 
-    public static final String userLogin = "testuser";
-    public static final String userPassword = "testuser12354";
+    private String userLogin = ConfigHelper.getUser2Login();
+    private String userPassword = ConfigHelper.getUser2Password();
+    private String xsrfToken = ConfigHelper.getXsrfToken();
     UserApi userApi = new UserApi();
 
     @Test
+    @AllureId("5607")
     @Story("Authorize with valid data")
     @DisplayName("Check authorization with valid user data")
     public void checkAuthorizationWithValidUserData() {
-        String xsrfToken = ConfigHelper.getXsrfToken();
-        Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatAuthorizationIsSuccess(loginData.getStatus());
+        //given
+        //when
+        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        //then
+        userApi.checkThatAuthorizationIsSuccess(response.as(Login.class).getStatus());
     }
 
     @Test
+    @AllureId("5608")
     @Story("Authorize with wrong data")
     @DisplayName("Check authorization with blank login")
     public void checkAuthorizationWithBlankLogin() {
-        String xsrfToken = ConfigHelper.getXsrfToken();
+        //given
         String userLogin = "";
-        Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatResponseErrorIs(loginData.getMessage(),
-                LoginErrorMessage.VALIDATION_ERROR.getErrorName());
+        //when
+        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        //then
+        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+                LoginErrorMessage.VALIDATION_ERROR.text());
     }
 
     @Test
+    @AllureId("5604")
     @Story("Authorize with wrong data")
     @DisplayName("Check authorization with wrong login")
     public void checkAuthorizationWithWrongLogin() {
-        String xsrfToken = ConfigHelper.getXsrfToken();
+        //given
         String userLogin = "usr";
-        Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatResponseErrorIs(loginData.getMessage(),
-                LoginErrorMessage.BAD_CREDENTIALS.getErrorName());
+        //when
+        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        //then
+        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+                LoginErrorMessage.BAD_CREDENTIALS.text());
     }
 
     @Test
+    @AllureId("5609")
     @Story("Authorize with wrong data")
     @DisplayName("Check authorization with blank password")
     public void checkAuthorizationWithBlankPassword() {
-        String xsrfToken = ConfigHelper.getXsrfToken();
+        //given
         String userPassword = "";
-        Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        userApi.checkThatResponseErrorIs(loginData.getMessage(),
-                LoginErrorMessage.VALIDATION_ERROR.getErrorName());
+        //when
+        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        //then
+        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+                LoginErrorMessage.VALIDATION_ERROR.text());
     }
 
     @Test
+    @AllureId("5603")
     @Story("Authorize with wrong XSRF token")
     @DisplayName("Check authorization with blank XSRF token")
     public void checkAuthorizationWithBlankXsrfToken() {
+        //given
         String xsrfToken = "";
-        Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        System.out.println(loginData.toString());
-        userApi.checkThatResponseErrorIs(loginData.getMessage(),
-                LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.getErrorName());
+        //when
+        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        //then
+        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+                LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.text());
     }
 
     @Test
+    @AllureId("5606")
     @Story("Authorize with wrong XSRF token")
     @DisplayName("Check authorization with space characters in XSRF token")
     public void checkAuthorizationWithSpacesXsrfToken() {
+        //given
         String xsrfToken = "   ";
-        Login loginData = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
-        System.out.println(loginData.toString());
-        userApi.checkThatResponseErrorIs(loginData.getMessage(),
-                LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.getErrorName());
+        //when
+        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        //then
+        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+                LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.text());
     }
 }

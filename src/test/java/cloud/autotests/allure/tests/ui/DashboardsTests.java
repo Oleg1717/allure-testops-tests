@@ -17,6 +17,7 @@ import cloud.autotests.allure.ui.data.dashboards.WidgetActionItem;
 import cloud.autotests.allure.ui.helpers.WithLogin;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.DashboardsPage;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -57,6 +58,7 @@ public class DashboardsTests extends TestBase {
     //region Add new dashboards tests
     @WithLogin
     @Test
+    @AllureId("5576")
     @Story("Add new dashboards")
     @DisplayName("Add new dashboard")
     void addDashboard() {
@@ -70,6 +72,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5572")
     @Story("Add new dashboards")
     @DisplayName("Add dashboard with blank name")
     void addDashboardWithBlankName() {
@@ -83,6 +86,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5576")
     @Story("Add new dashboards")
     @DisplayName("Add dashboard with only space characters in name")
     void addDashboardWithSpacesName() {
@@ -96,6 +100,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5569")
     @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard using cancel button")
     void cancelAddingDashboardByCancelButton() {
@@ -110,6 +115,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5561")
     @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard using close button")
     void cancelAddingDashboardByCloseButton() {
@@ -124,6 +130,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5574")
     @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard with blank name using cancel button")
     void cancelAddingDashboardWithBlankNameByCancelButton() {
@@ -137,6 +144,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5563")
     @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard with blank name using close button")
     void cancelAddingDashboardWithBlankNameByCloseButton() {
@@ -152,6 +160,7 @@ public class DashboardsTests extends TestBase {
     //region Various dashboard tests
     @WithLogin
     @Test
+    @AllureId("5566")
     @Story("Change dashboards")
     @DisplayName("Switch dashboard full screen mode on/off")
     void dashboardFullScreenMode() {
@@ -166,6 +175,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5570")
     @Story("Change dashboards")
     @DisplayName("Edit dashboard name")
     void editDashboardName() {
@@ -181,6 +191,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5565")
     @Story("Change dashboards")
     @DisplayName("Delete dashboard")
     void deleteDashboard() {
@@ -196,6 +207,7 @@ public class DashboardsTests extends TestBase {
     //region Standard (Overview) dashboard widgets tests
     @WithLogin
     @Test
+    @AllureId("5555")
     @Story("Check Standard (Overview) dashboard widgets")
     @DisplayName("Standard dashboard should contains 5 widgets")
     void defaultDashboardShouldContains5Widgets() {
@@ -207,6 +219,7 @@ public class DashboardsTests extends TestBase {
     //region Custom dashboard widgets tests
     @WithLogin
     @Test
+    @AllureId("5571")
     @Story("Change widgets")
     @DisplayName("Add widget using 'Add widget' button")
     void addWidgetByAddWidgetButton() {
@@ -222,6 +235,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5577")
     @Story("Change widgets")
     @DisplayName("Edit widget")
     void editWidget() {
@@ -243,6 +257,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5568")
     @Story("Change widgets")
     @DisplayName("Clone widget")
     void cloneWidget() {
@@ -263,6 +278,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5564")
     @Story("Change widgets")
     @DisplayName("Delete widget")
     void deleteWidget() {
@@ -281,6 +297,7 @@ public class DashboardsTests extends TestBase {
     //region Add some types of widgets
     @WithLogin
     @Test
+    @AllureId("5558")
     @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Markdown'")
     void addMarkdownTypeWidget() {
@@ -296,6 +313,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5557")
     @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Launch statistic Trend'")
     void addLaunchStatisticTrendTypeWidget() {
@@ -310,6 +328,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5560")
     @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Automation Trend'")
     void addAutomationTrendTypeWidget() {
@@ -324,6 +343,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @AllureId("5556")
     @Story("Add some types of widgets")
     @DisplayName("Add widget with type 'Launches'")
     void addLaunchesTypeWidget() {
@@ -339,6 +359,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Story("Add widgets with type 'Launch Analytics'")
     @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
+    @AllureId("5573")
     @EnumSource(value = FormLaunchAnalyticMetricItem.class)
     void addLaunchAnalyticsWidgets(FormLaunchAnalyticMetricItem item) {
         parameter("'Metric' item", item.toString());
@@ -355,6 +376,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Story("Add widgets with type 'Test Case Pie Chart'")
     @ParameterizedTest(name = "Add widget with: 'Group by' item = {0}")
+    @AllureId("5567")
     @EnumSource(value = FormGroupByItem.class)
     void addTestCasePieChartWidgets(FormGroupByItem item) {
         parameter("'Group by' item", item.toString());
@@ -371,6 +393,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Story("Add widgets with type 'Top Test Cases'")
     @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
+    @AllureId("5575")
     @EnumSource(value = FormTopTestCasesMetricItem.class)
     void addTopTestCasesWidgets(FormTopTestCasesMetricItem item) {
         parameter("'Metric' item", item.toString());
@@ -387,6 +410,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Story("Add widgets with type 'Test Case Tree Map Chart'")
     @ParameterizedTest(name = "Add widget with: 'Tree' item = {0}")
+    @AllureId("5559")
     @EnumSource(value = FormTreeItem.class)
     void addTestCaseTreeMapChartWidgets(FormTreeItem item) {
         parameter("'Tree' item", item.toString());

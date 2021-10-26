@@ -1,4 +1,4 @@
-package cloud.autotests.allure.testdata;
+package cloud.autotests.allure.api.testdata;
 
 import cloud.autotests.allure.api.models.jobs.Job;
 import cloud.autotests.allure.api.models.jobs.JobParameter;

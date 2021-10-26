@@ -7,6 +7,7 @@ import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.LoginPage;
 import cloud.autotests.allure.ui.pages.ProjectsPage;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -29,6 +30,7 @@ public class UiAuthorizationTests extends TestBase {
     Sidebar sidebar = new ProjectsPage().getSidebar();
 
     @Test
+    @AllureId("5611")
     @Story("Authorize with valid data")
     @DisplayName("Successful login as testuser")
     void loginTest() {
@@ -41,6 +43,7 @@ public class UiAuthorizationTests extends TestBase {
     }
 
     @Test
+    @AllureId("5610")
     @Story("Authorize with valid data")
     @DisplayName("Successful login with localStorage (API + UI)")
     void loginWithCookieTest() {

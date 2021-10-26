@@ -2,8 +2,9 @@ package cloud.autotests.allure.tests.api;
 
 import cloud.autotests.allure.api.models.jobs.Job;
 import cloud.autotests.allure.api.steps.JobsApi;
-import cloud.autotests.allure.testdata.JobData;
+import cloud.autotests.allure.api.testdata.JobData;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -19,6 +20,7 @@ public class ApiJobsTests {
     JobsApi jobsApi = new JobsApi();
 
     @Test
+    @AllureId("5605")
     @Story("Add a job")
     @DisplayName("Add a job with max valid data")
     public void addJobWithFullValidData() {
@@ -35,6 +37,7 @@ public class ApiJobsTests {
     }
 
     @Test
+    @AllureId("5602")
     @Story("Add a job")
     @DisplayName("Add a job with min valid data")
     public void addJobWithMinValidData() {

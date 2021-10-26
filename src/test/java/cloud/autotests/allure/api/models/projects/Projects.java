@@ -16,5 +16,6 @@ public class Projects {
 
     @JsonProperty("content")
     private List<Project> projectsList;
-    private Integer totalElements;
+    @JsonProperty("totalElements")
+    private Integer projectsCount;
 }

@@ -30,6 +30,12 @@ public interface AppConfig extends Config {
     @Key("user.token")
     String userToken();
 
+    @Key("user2.login")
+    String user2Login();
+
+    @Key("user2.password")
+    String user2Password();
+
     @Key("xsrf.token")
     String xsrfToken();
 

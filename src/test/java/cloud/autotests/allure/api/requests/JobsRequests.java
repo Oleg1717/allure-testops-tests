@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.data.EndPoints;
+import cloud.autotests.allure.api.data.ApiEndpoint;
 import cloud.autotests.allure.api.models.jobs.Job;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -17,7 +17,7 @@ public class JobsRequests {
                 .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
-                .get(EndPoints.JOB)
+                .get(ApiEndpoint.JOB.path())
                 .then()
                 .extract().response();
     }
@@ -28,7 +28,7 @@ public class JobsRequests {
                 .contentType(ContentType.JSON)
                 .body(jobData)
                 .when()
-                .post(EndPoints.JOB)
+                .post(ApiEndpoint.JOB.path())
                 .then()
                 .extract().response();
     }
@@ -37,7 +37,7 @@ public class JobsRequests {
         given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(EndPoints.JOB_ID, jobId)
+                .delete(ApiEndpoint.JOB_ID.path(), jobId)
                 .then()
                 .statusCode(204);
     }
