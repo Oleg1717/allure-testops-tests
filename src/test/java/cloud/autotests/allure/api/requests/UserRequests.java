@@ -10,13 +10,13 @@ import static io.restassured.RestAssured.given;
 
 public class UserRequests {
 
-    public static Response getAuthorizeResponse(String xsrfToken, String login, String password) {
+    public static Response getAuthorizeResponse(String xsrfToken, String username, String password) {
         return given()
                 .baseUri(ConfigHelper.getApiBaseUri())
                 .filter(RestAssuredFilter.withCustomTemplates())
                 .header("X-XSRF-TOKEN", xsrfToken)
                 .cookie("XSRF-TOKEN", xsrfToken)
-                .formParam("username", login)
+                .formParam("username", username)
                 .formParam("password", password)
                 .log().uri()
                 .when()

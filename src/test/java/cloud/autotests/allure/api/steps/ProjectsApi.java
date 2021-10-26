@@ -1,19 +1,18 @@
 package cloud.autotests.allure.api.steps;
 
 import cloud.autotests.allure.api.models.projects.Project;
+import cloud.autotests.allure.api.models.projects.Projects;
 import cloud.autotests.allure.api.requests.ProjectsRequests;
 import io.qameta.allure.Step;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static cloud.autotests.allure.api.requests.ProjectsRequests.getProjectsData;
-
 public class ProjectsApi {
 
     @Step("Delete project with id = {projectId} using API")
     public void deleteProject(int projectId) {
-        ProjectsRequests.deleteProject(projectId);
+        ProjectsRequests.getDeleteProjectResponse(projectId);
     }
 
     @Step("Add project '{projectName}' using API")
@@ -22,7 +21,9 @@ public class ProjectsApi {
                 .name(projectName)
                 .isPublic(isPublic)
                 .build();
-        return ProjectsRequests.addProject(newProject);
+        return ProjectsRequests
+                .getNewProjectResponse(newProject)
+                .as(Project.class);
     }
 
     @Step("Delete project '{projectName}' using API")
@@ -39,7 +40,9 @@ public class ProjectsApi {
             put("sort", "id%2Cdesc");
             put("size", "500");
         }};
-        return getProjectsData(requestParams)
+        return ProjectsRequests
+                .getProjectsDataResponse(requestParams)
+                .as(Projects.class)
                 .getProjectsList()
                 .stream()
                 .filter(project -> project.getName().equals(projectName))
@@ -55,6 +58,9 @@ public class ProjectsApi {
             put("sort", "id%2Cdesc");
             put("size", "5000");
         }};
-        return ProjectsRequests.getProjectsData(requestParams).getTotalElements();
+        return ProjectsRequests
+                .getProjectsDataResponse(requestParams)
+                .as(Projects.class)
+                .getTotalElements();
     }
 }
