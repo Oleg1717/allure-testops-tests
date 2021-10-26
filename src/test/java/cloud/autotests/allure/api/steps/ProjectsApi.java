@@ -61,6 +61,6 @@ public class ProjectsApi {
         return ProjectsRequests
                 .getProjectsDataResponse(requestParams)
                 .as(Projects.class)
-                .getTotalElements();
+                .getProjectsCount();
     }
 }
