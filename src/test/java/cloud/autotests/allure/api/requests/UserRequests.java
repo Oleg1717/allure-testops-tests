@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.data.EndPoints;
+import cloud.autotests.allure.api.data.ApiEndpoint;
 import cloud.autotests.allure.api.helpers.RestAssuredFilter;
 import cloud.autotests.allure.config.ConfigHelper;
 import io.restassured.response.Response;
@@ -20,7 +20,7 @@ public class UserRequests {
                 .formParam("password", password)
                 .log().uri()
                 .when()
-                .post(EndPoints.USER_LOGIN)
+                .post(ApiEndpoint.USER_LOGIN.path())
                 .then()
                 .extract().response();
     }
@@ -29,7 +29,7 @@ public class UserRequests {
         return given()
                 .spec(spec().uaaRequest())
                 .when()
-                .get(EndPoints.LICENSE)
+                .get(ApiEndpoint.LICENSE.path())
                 .then()
                 .extract().response();
     }

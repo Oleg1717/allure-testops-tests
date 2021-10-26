@@ -1,4 +1,4 @@
-package cloud.autotests.allure.api.data.error_messages;
+package cloud.autotests.allure.api.data;
 
 public enum LoginErrorMessage {
 
@@ -7,13 +7,13 @@ public enum LoginErrorMessage {
     INVALID_CSRF_TOKEN("Invalid CSRF Token"),
     AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND("An expected CSRF token cannot be found");
 
-    private final String errorName;
+    private final String text;
 
-    LoginErrorMessage(String errorName) {
-        this.errorName = errorName;
+    LoginErrorMessage(String text) {
+        this.text = text;
     }
 
-    public String getErrorName() {
-        return this.errorName;
+    public String text() {
+        return this.text;
     }
 }

@@ -14,12 +14,10 @@ public class SelenideTestWatcher implements TestWatcher {
 
     @Override
     public void testAborted(ExtensionContext extensionContext, Throwable throwable) {
-        // do something
     }
 
     @Override
     public void testDisabled(ExtensionContext extensionContext, Optional<String> optional) {
-        // do something
     }
 
     @Override

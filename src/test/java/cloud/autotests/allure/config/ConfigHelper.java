@@ -38,6 +38,14 @@ public class ConfigHelper {
         return getAppConfig().userPassword();
     }
 
+    public static String getUser2Login() {
+        return getAppConfig().user2Login();
+    }
+
+    public static String getUser2Password() {
+        return getAppConfig().user2Password();
+    }
+
     public static String getUserToken() {
         return getAppConfig().userToken();
     }

@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.data.EndPoints;
+import cloud.autotests.allure.api.data.ApiEndpoint;
 import cloud.autotests.allure.api.models.dashboards.Dashboard;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -17,9 +17,8 @@ public class DashboardsRequests {
                 .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
-                .get(EndPoints.DASHBOARD)
+                .get(ApiEndpoint.DASHBOARD.path())
                 .then()
-                .statusCode(200)
                 .extract().response();
     }
 
@@ -27,7 +26,7 @@ public class DashboardsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(EndPoints.DASHBOARD_ID, dashboardId)
+                .get(ApiEndpoint.DASHBOARD_ID.path(), dashboardId)
                 .then()
                 .extract().response();
     }
@@ -38,7 +37,7 @@ public class DashboardsRequests {
                 .contentType(ContentType.JSON)
                 .body(dashboardData)
                 .when()
-                .post(EndPoints.DASHBOARD)
+                .post(ApiEndpoint.DASHBOARD.path())
                 .then()
                 .extract().response();
     }
@@ -49,7 +48,7 @@ public class DashboardsRequests {
                 .contentType(ContentType.JSON)
                 .body(dashboardData)
                 .when()
-                .patch(EndPoints.DASHBOARD_ID, dashboardData.getId())
+                .patch(ApiEndpoint.DASHBOARD_ID.path(), dashboardData.getId())
                 .then()
                 .extract().response();
     }
@@ -58,7 +57,7 @@ public class DashboardsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(EndPoints.DASHBOARD_ID, dashboardId)
+                .delete(ApiEndpoint.DASHBOARD_ID.path(), dashboardId)
                 .then()
                 .extract().response();
     }

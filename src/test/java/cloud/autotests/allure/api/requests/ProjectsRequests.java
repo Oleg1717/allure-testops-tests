@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.data.EndPoints;
+import cloud.autotests.allure.api.data.ApiEndpoint;
 import cloud.autotests.allure.api.models.projects.Project;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -17,7 +17,7 @@ public class ProjectsRequests {
                 .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
-                .get(EndPoints.PROJECT)
+                .get(ApiEndpoint.PROJECT.path())
                 .then()
                 .extract().response();
     }
@@ -26,7 +26,7 @@ public class ProjectsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(EndPoints.PROJECT_ID, projectId)
+                .get(ApiEndpoint.PROJECT_ID.path(), projectId)
                 .then()
                 .extract().response();
     }
@@ -35,7 +35,7 @@ public class ProjectsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(EndPoints.PROJECT_STATS, projectId)
+                .get(ApiEndpoint.PROJECT_STATS.path(), projectId)
                 .then()
                 .extract().response();
     }
@@ -46,7 +46,7 @@ public class ProjectsRequests {
                 .contentType(ContentType.JSON)
                 .body(projectData)
                 .when()
-                .post(EndPoints.PROJECT)
+                .post(ApiEndpoint.PROJECT.path())
                 .then()
                 .extract().response();
     }
@@ -57,7 +57,7 @@ public class ProjectsRequests {
                 .contentType(ContentType.JSON)
                 .body(projectData)
                 .when()
-                .patch(EndPoints.PROJECT)
+                .patch(ApiEndpoint.PROJECT.path())
                 .then()
                 .extract().response();
     }
@@ -66,7 +66,7 @@ public class ProjectsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(EndPoints.PROJECT_ID, projectId)
+                .delete(ApiEndpoint.PROJECT_ID.path(), projectId)
                 .then()
                 .extract().response();
     }

@@ -1,6 +1,6 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.data.EndPoints;
+import cloud.autotests.allure.api.data.ApiEndpoint;
 import cloud.autotests.allure.api.models.dashboards.Widget;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -14,7 +14,7 @@ public class DashboardWidgetsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(EndPoints.WIDGET_DATA, widgetId)
+                .get(ApiEndpoint.WIDGET_DATA.path(), widgetId)
                 .then()
                 .extract().response();
     }
@@ -25,7 +25,7 @@ public class DashboardWidgetsRequests {
                 .contentType(ContentType.JSON)
                 .body(widget)
                 .when()
-                .post(EndPoints.WIDGET)
+                .post(ApiEndpoint.WIDGET.path())
                 .then()
                 .extract().response();
     }
@@ -36,7 +36,7 @@ public class DashboardWidgetsRequests {
                 .contentType(ContentType.JSON)
                 .body(widget)
                 .when()
-                .patch(EndPoints.WIDGET_ID, widget.getId())
+                .patch(ApiEndpoint.WIDGET_ID.path(), widget.getId())
                 .then()
                 .extract().response();
     }
@@ -45,7 +45,7 @@ public class DashboardWidgetsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(EndPoints.WIDGET_ID, widgetId)
+                .delete(ApiEndpoint.WIDGET_ID.path(), widgetId)
                 .then()
                 .extract().response();
     }

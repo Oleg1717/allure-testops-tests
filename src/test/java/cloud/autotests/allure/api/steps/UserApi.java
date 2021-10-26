@@ -1,6 +1,5 @@
 package cloud.autotests.allure.api.steps;
 
-import cloud.autotests.allure.api.models.user.Login;
 import cloud.autotests.allure.api.requests.UserRequests;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -15,8 +14,8 @@ public class UserApi {
     }
 
     @Step("Login using API")
-    public Login getAuthorizeData(String xsrfToken, String login, String password) {
-        return UserRequests.getAuthorizeResponse(xsrfToken, login, password).as(Login.class);
+    public Response getAuthorizeData(String xsrfToken, String login, String password) {
+        return UserRequests.getAuthorizeResponse(xsrfToken, login, password);
     }
 
     @Step("Get license data using API")

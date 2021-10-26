@@ -16,5 +16,6 @@ public class Jobs {
 
     @JsonProperty("content")
     private List<Job> jobsList;
-    private Integer totalElements;
+    @JsonProperty("totalElements")
+    private Integer jobsCount;
 }
