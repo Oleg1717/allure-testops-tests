@@ -2,25 +2,24 @@ package cloud.autotests.allure.api.requests;
 
 import cloud.autotests.allure.api.data.EndPoints;
 import cloud.autotests.allure.api.models.dashboards.Widget;
-import cloud.autotests.allure.api.models.dashboards.WidgetData;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 import static cloud.autotests.allure.api.helpers.RestAssuredSpec.spec;
 import static io.restassured.RestAssured.given;
 
 public class DashboardWidgetsRequests {
 
-    public static WidgetData getWidgetData(int widgetId) {
+    public static Response getWidgetData(int widgetId) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.WIDGET_DATA, widgetId)
                 .then()
-                .statusCode(200)
-                .extract().as(WidgetData.class);
+                .extract().response();
     }
 
-    public static Widget addWidget(Widget widget) {
+    public static Response addWidget(Widget widget) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -28,11 +27,10 @@ public class DashboardWidgetsRequests {
                 .when()
                 .post(EndPoints.WIDGET)
                 .then()
-                .statusCode(200)
-                .extract().as(Widget.class);
+                .extract().response();
     }
 
-    public static Widget editWidget(Widget widget) {
+    public static Response editWidget(Widget widget) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -40,17 +38,15 @@ public class DashboardWidgetsRequests {
                 .when()
                 .patch(EndPoints.WIDGET_ID, widget.getId())
                 .then()
-                .statusCode(200)
-                .extract().as(Widget.class);
+                .extract().response();
     }
 
-    public static void deleteWidget(int widgetId) {
-        given()
+    public static Response deleteWidget(int widgetId) {
+        return given()
                 .spec(spec().rsRequest())
-                .pathParam("id", widgetId)
                 .when()
-                .delete(EndPoints.WIDGET_ID)
+                .delete(EndPoints.WIDGET_ID, widgetId)
                 .then()
-                .statusCode(202);
+                .extract().response();
     }
 }

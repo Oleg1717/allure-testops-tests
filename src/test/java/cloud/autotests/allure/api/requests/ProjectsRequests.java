@@ -2,8 +2,8 @@ package cloud.autotests.allure.api.requests;
 
 import cloud.autotests.allure.api.data.EndPoints;
 import cloud.autotests.allure.api.models.projects.Project;
-import cloud.autotests.allure.api.models.projects.Projects;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
 import java.util.Map;
 
@@ -12,38 +12,35 @@ import static io.restassured.RestAssured.given;
 
 public class ProjectsRequests {
 
-    public static Projects getProjectsData(Map<String, String> requestParams) {
+    public static Response getProjectsDataResponse(Map<String, String> requestParams) {
         return given()
                 .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
                 .get(EndPoints.PROJECT)
                 .then()
-                .statusCode(200)
-                .extract().as(Projects.class);
+                .extract().response();
     }
 
-    public static Project getProjectData(int projectId) {
+    public static Response getProjectDataResponse(int projectId) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.PROJECT_ID, projectId)
                 .then()
-                .statusCode(200)
-                .extract().as(Project.class);
+                .extract().response();
     }
 
-    public static Project getProjectStats(int projectId) {
+    public static Response getProjectStatsResponse(int projectId) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.PROJECT_STATS, projectId)
                 .then()
-                .statusCode(200)
-                .extract().as(Project.class);
+                .extract().response();
     }
 
-    public static Project addProject(Project projectData) {
+    public static Response getNewProjectResponse(Project projectData) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -51,11 +48,10 @@ public class ProjectsRequests {
                 .when()
                 .post(EndPoints.PROJECT)
                 .then()
-                .statusCode(200)
-                .extract().as(Project.class);
+                .extract().response();
     }
 
-    public static Project editProject(Project projectData) {
+    public static Response getEditProjectResponse(Project projectData) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -63,16 +59,15 @@ public class ProjectsRequests {
                 .when()
                 .patch(EndPoints.PROJECT)
                 .then()
-                .statusCode(200)
-                .extract().as(Project.class);
+                .extract().response();
     }
 
-    public static void deleteProject(int projectId) {
-        given()
+    public static Response getDeleteProjectResponse(int projectId) {
+        return given()
                 .spec(spec().rsRequest())
                 .when()
                 .delete(EndPoints.PROJECT_ID, projectId)
                 .then()
-                .statusCode(204);
+                .extract().response();
     }
 }

@@ -2,49 +2,48 @@ package cloud.autotests.allure.api.requests;
 
 import cloud.autotests.allure.api.data.EndPoints;
 import cloud.autotests.allure.api.models.dashboards.Dashboard;
-import cloud.autotests.allure.api.models.dashboards.Dashboards;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+
+import java.util.Map;
 
 import static cloud.autotests.allure.api.helpers.RestAssuredSpec.spec;
 import static io.restassured.RestAssured.given;
 
 public class DashboardsRequests {
 
-    public static Dashboards getDashboardsData(int projectId) {
+    public static Response getDashboardsDataResponse(Map<String, String> requestParams) {
         return given()
                 .spec(spec().rsRequest())
-                .param("projectId", projectId)
-                .param("size", "500")
+                .params(requestParams)
                 .when()
                 .get(EndPoints.DASHBOARD)
                 .then()
                 .statusCode(200)
-                .extract().as(Dashboards.class);
+                .extract().response();
     }
 
-    public static Dashboard getDashboardData(int dashboardId) {
+    public static Response getDashboardDataResponse(int dashboardId) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
                 .get(EndPoints.DASHBOARD_ID, dashboardId)
                 .then()
-                .statusCode(200)
-                .extract().as(Dashboard.class);
+                .extract().response();
     }
 
-    public static Dashboard addDashboard(Dashboard dashboard) {
+    public static Response getNewDashboardResponse(Dashboard dashboardData) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
-                .body(dashboard)
+                .body(dashboardData)
                 .when()
                 .post(EndPoints.DASHBOARD)
                 .then()
-                .statusCode(200)
-                .extract().as(Dashboard.class);
+                .extract().response();
     }
 
-    public static Dashboard editDashboard(Dashboard dashboardData) {
+    public static Response getEditDashboardResponse(Dashboard dashboardData) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -52,16 +51,15 @@ public class DashboardsRequests {
                 .when()
                 .patch(EndPoints.DASHBOARD_ID, dashboardData.getId())
                 .then()
-                .statusCode(200)
-                .extract().as(Dashboard.class);
+                .extract().response();
     }
 
-    public static void deleteDashboard(int dashboardId) {
-        given()
+    public static Response getDeleteDashboardResponse(int dashboardId) {
+        return given()
                 .spec(spec().rsRequest())
                 .when()
                 .delete(EndPoints.DASHBOARD_ID, dashboardId)
                 .then()
-                .statusCode(202);
+                .extract().response();
     }
 }
