@@ -12,9 +12,6 @@ public class AuthorizationData {
     private final Map<String, String> sessionCookies = new HashMap<>();
 
     private AuthorizationData() {
-        String xsrfToken = ConfigHelper.getXsrfToken();
-        String login = ConfigHelper.getUserLogin();
-        String password = ConfigHelper.getUserPassword();
         sessionToken = new UserApi().getSessionToken(
                 ConfigHelper.getXsrfToken(),
                 ConfigHelper.getUserLogin(),

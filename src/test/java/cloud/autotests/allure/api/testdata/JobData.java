@@ -5,7 +5,6 @@ import cloud.autotests.allure.api.models.jobs.JobParameter;
 import cloud.autotests.allure.config.ConfigHelper;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class JobData {
 
@@ -18,10 +17,6 @@ public class JobData {
             .name("THREADS")
             .defaultValue("5")
             .build();
-
-    private static List<JobParameter> createJobParametersList(JobParameter... params) {
-        return Arrays.asList(params);
-    }
 
     public static Job minJobData = Job.builder()
             .projectId(ConfigHelper.getProjectId())
@@ -37,6 +32,6 @@ public class JobData {
             .url("https://jenkins.autotests.cloud/job/c07-ov-regform/")
             .type("jenkins")
             .externalId("co7-ov-regform-max")
-            .parameters(createJobParametersList(allureNotificationVersion, threads))
+            .parameters(Arrays.asList(allureNotificationVersion, threads))
             .build();
 }
