@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class JobsRequests {
 
-    public static Response getJobsData(Map<String, String> requestParams) {
+    public static Response getJobsDataResponse(Map<String, String> requestParams) {
         return given()
                 .spec(spec().rsRequest())
                 .params(requestParams)
@@ -22,7 +22,7 @@ public class JobsRequests {
                 .extract().response();
     }
 
-    public static Response addJob(Job jobData) {
+    public static Response getAddJobResponse(Job jobData) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -33,7 +33,7 @@ public class JobsRequests {
                 .extract().response();
     }
 
-    public static void deleteJob(int jobId) {
+    public static void getDeleteJobResponse(int jobId) {
         given()
                 .spec(spec().rsRequest())
                 .when()

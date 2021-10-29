@@ -11,12 +11,12 @@ public class JobsApi {
 
     @Step("Add project using API")
     public Response addJob(Job newJob) {
-        return JobsRequests.addJob(newJob);
+        return JobsRequests.getAddJobResponse(newJob);
     }
 
     @Step("Delete job with id = {jobId} using API")
     public void deleteJob(int jobId) {
-        JobsRequests.deleteJob(jobId);
+        JobsRequests.getDeleteJobResponse(jobId);
     }
 
     @Step("Check that response status code is '{expectedCode}'")
