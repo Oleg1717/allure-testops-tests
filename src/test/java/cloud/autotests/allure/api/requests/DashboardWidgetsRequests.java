@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class DashboardWidgetsRequests {
 
-    public static Response getWidgetData(int widgetId) {
+    public static Response getWidgetDataResponse(int widgetId) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
@@ -19,7 +19,7 @@ public class DashboardWidgetsRequests {
                 .extract().response();
     }
 
-    public static Response addWidget(Widget widget) {
+    public static Response getAddWidgetResponse(Widget widget) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -30,7 +30,7 @@ public class DashboardWidgetsRequests {
                 .extract().response();
     }
 
-    public static Response editWidget(Widget widget) {
+    public static Response getEditWidgetResponse(Widget widget) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -41,7 +41,7 @@ public class DashboardWidgetsRequests {
                 .extract().response();
     }
 
-    public static Response deleteWidget(int widgetId) {
+    public static Response getDeleteWidgetResponse(int widgetId) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
