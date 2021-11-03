@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Owner("OlegV")
 @Feature("Jobs")
 @Layer("api")
-public class ApiJobsTests {
+public class JobsTests {
 
     JobsApi jobsApi = new JobsApi();
 
