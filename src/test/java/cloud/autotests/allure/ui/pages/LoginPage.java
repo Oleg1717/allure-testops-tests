@@ -11,6 +11,7 @@ public class LoginPage {
     private SelenideElement usernameInput = $("input[type=text]");
     private SelenideElement passwordInput = $("input[type=password]");
     private SelenideElement continueButton = $("button[type=submit]");
+    private SelenideElement signUpLink = $(".SystemLoginLayout__footer .link");
 
     @Step("Open login page")
     public LoginPage openLoginPage(String url) {
@@ -33,6 +34,12 @@ public class LoginPage {
     @Step("Click 'Continue' button")
     public LoginPage clickContinueButton() {
         continueButton.click();
+        return this;
+    }
+
+    @Step("Click 'Sign Up!' link")
+    public LoginPage clickSignUpLink() {
+        signUpLink.click();
         return this;
     }
 }

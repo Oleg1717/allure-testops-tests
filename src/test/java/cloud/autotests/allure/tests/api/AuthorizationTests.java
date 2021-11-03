@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Owner("OlegV")
 @Feature("Authorization")
 @Layer("api")
-public class ApiAuthorizationTests {
+public class AuthorizationTests {
 
     private String userLogin = ConfigHelper.getUser2Login();
     private String userPassword = ConfigHelper.getUser2Password();

@@ -24,7 +24,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("OlegV")
 @Feature("Authorization")
 @Layer("ui")
-public class UiAuthorizationTests extends TestBase {
+public class AuthorizationTests extends TestBase {
 
     LoginPage loginPage = new LoginPage();
     Sidebar sidebar = new ProjectsPage().getSidebar();
