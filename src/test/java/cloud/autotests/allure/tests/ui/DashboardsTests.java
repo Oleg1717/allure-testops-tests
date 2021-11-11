@@ -24,6 +24,7 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,6 +35,7 @@ import static io.qameta.allure.Allure.parameter;
 @Owner("OlegV")
 @Layer("ui")
 @Feature("Dashboards")
+@Tag("dashboards")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DashboardsTests extends TestBase {
 
