@@ -4,14 +4,14 @@ pipeline {
     parameters{
         string(defaultValue: '5', name: 'THREADS')
         choice(choices: ['chrome', 'firefox'], name: 'BROWSER_NAME')
-        choice(choices: ['master', 'api'], name: 'BRANCH_NAME')
+        choice(choices: ['master', 'login-tests'], name: 'BRANCH_NAME')
         choice(choices: ['test', 'login'], name: 'TASK_NAME')
     }
 
     stages {
         stage('Source code') {
             steps {
-                git branch: '*/${GIT_BRANCH}',
+                git branch: '${GIT_BRANCH}',
                         credentialsId: '0338b4f6-cbc3-4550-8e91-99976debed8d',
                         url: 'ssh://git@github.com:Oleg1717/allure-testops-tests-my.git'
             }
@@ -59,7 +59,7 @@ pipeline {
 				"-Denv=prod" \\
 				"-DreportLink=${BUILD_URL}" \\
 				"-Dconfig.file=/home/testuser/.allure-notifications/config/ov_autotests_bot.json" \\
-				-jar /home/testuser/.allure-notifications/releases/allure-notifications-${ALLURE_NOTIFICATIONS_VERSION}.jar '''
+				-jar /home/testuser/.allure-notifications/releases/allure-notifications-3.1.1.jar '''
         }
     }
 }
