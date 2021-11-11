@@ -12,6 +12,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
@@ -24,6 +25,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("OlegV")
 @Feature("Authorization")
 @Layer("ui")
+@Tag("login")
 public class AuthorizationTests extends TestBase {
 
     LoginPage loginPage = new LoginPage();

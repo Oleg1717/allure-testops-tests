@@ -51,6 +51,7 @@ public class DashboardsPage {
     @Step("Close notification")
     public DashboardsPage closeNotification() {
         notification.click();
+        addWidgetButton.hover();
         return this;
     }
 

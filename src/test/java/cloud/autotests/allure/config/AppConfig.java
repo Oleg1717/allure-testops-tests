@@ -40,5 +40,5 @@ public interface AppConfig extends Config {
     String xsrfToken();
 
     @Key("project.id")
-    int projectId();
+    Integer projectId();
 }

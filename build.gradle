@@ -73,3 +73,9 @@ tasks.withType(Test) {
         }
     }
 }
+
+task login(type: Test) {
+    useJUnitPlatform {
+        includeTags 'login'
+    }
+}
