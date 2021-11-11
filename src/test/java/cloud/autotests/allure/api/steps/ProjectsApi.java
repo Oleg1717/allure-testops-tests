@@ -28,12 +28,12 @@ public class ProjectsApi {
 
     @Step("Delete project '{projectName}' using API")
     public void deleteProjectByName(String projectName) {
-        Project project = getProjectDataByName(projectName);
+        Project project = getProjectByName(projectName);
         deleteProject(project.getId());
     }
 
     @Step("Get data of project '{projectName}' using API")
-    public Project getProjectDataByName(String projectName) {
+    public Project getProjectByName(String projectName) {
         Map<String, String> requestParams = new HashMap<String, String>() {{
             put("v2", "true");
             put("query", projectName);

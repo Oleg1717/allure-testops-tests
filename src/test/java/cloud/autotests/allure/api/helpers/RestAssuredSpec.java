@@ -15,7 +15,7 @@ public class RestAssuredSpec {
             .addHeader("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
             .addCookies(getAuthorizationData().getSessionCookies())
             .addFilter(RestAssuredFilter.withCustomTemplates())
-            .log(LogDetail.URI)
+            .log(LogDetail.ALL)
             .build();
 
     private final RequestSpecification uaaSpec = new RequestSpecBuilder()

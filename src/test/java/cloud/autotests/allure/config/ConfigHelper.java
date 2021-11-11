@@ -26,7 +26,7 @@ public class ConfigHelper {
         return getAppConfig().apiUaaPath();
     }
 
-    public static int getProjectId() {
+    public static Integer getProjectId() {
         return getAppConfig().projectId();
     }
 

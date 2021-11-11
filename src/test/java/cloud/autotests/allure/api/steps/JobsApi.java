@@ -1,5 +1,6 @@
 package cloud.autotests.allure.api.steps;
 
+import cloud.autotests.allure.api.data.JobsErrorMessage;
 import cloud.autotests.allure.api.models.jobs.Job;
 import cloud.autotests.allure.api.requests.JobsRequests;
 import io.qameta.allure.Step;
@@ -20,7 +21,7 @@ public class JobsApi {
     }
 
     @Step("Check that response status code is '{expectedCode}'")
-    public void checkStatusCodeIs(Integer expectedCode, Integer actualCode) {
+    public void checkStatusCode(Integer actualCode, Integer expectedCode) {
         assertThat(actualCode).isEqualTo(expectedCode);
     }
 
@@ -32,5 +33,9 @@ public class JobsApi {
                 .isEqualTo(expectedBody);
     }
 
+    @Step("Check that response error message is '{expectedErrorMessage}'")
+    public void checkResponseErrorMessage(String actualErrorMessage, JobsErrorMessage expectedErrorMessage) {
 
+        assertThat(actualErrorMessage).contains(expectedErrorMessage.text());
+    }
 }

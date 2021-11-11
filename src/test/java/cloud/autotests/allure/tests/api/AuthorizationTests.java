@@ -11,11 +11,13 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Owner("OlegV")
 @Feature("Authorization")
 @Layer("api")
+@Tag("login")
 public class AuthorizationTests {
 
     private String userLogin = ConfigHelper.getUser2Login();
