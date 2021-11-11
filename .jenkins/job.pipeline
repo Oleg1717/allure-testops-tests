@@ -5,15 +5,15 @@ pipeline {
         string(defaultValue: '5', name: 'THREADS')
         choice(choices: ['chrome', 'firefox'], name: 'BROWSER_NAME')
         choice(choices: ['master', 'login-tests'], name: 'BRANCH_NAME')
-        choice(choices: ['test', 'login'], name: 'TASK_NAME')
+        choice(choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests'], name: 'TASK_NAME')
     }
 
     stages {
         stage('Source code') {
             steps {
-                git branch: '${GIT_BRANCH}',
-                        credentialsId: '0338b4f6-cbc3-4550-8e91-99976debed8d',
-                        url: 'ssh://git@github.com:Oleg1717/allure-testops-tests-my.git'
+                git branch: '$BRANCH_NAME',
+                    credentialsId: '0338b4f6-cbc3-4550-8e91-99976debed8d',
+                    url: 'git@github.com:Oleg1717/allure-testops-tests-my.git'
             }
         }
 
@@ -43,8 +43,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: '398', results: [[path: 'build/allure-results']], serverId: 'allure-server') {
-                    sh '/home/testuser/.sdkman/candidates/gradle/6.8.3/bin/gradle clean ${TASK_NAME} -Dthreads=${THREADS} -Dbrowser=${BROWSER_NAME}'
+                withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: '443', results: [[path: 'build/allure-results']], serverId: 'allure-server') {
+                    sh '$GRADLE_HOME/bin/gradle clean ${TASK_NAME} -Dthreads=${THREADS} -Dbrowser=${BROWSER_NAME}'
                 }
             }
         }
@@ -58,8 +58,8 @@ pipeline {
 				"-DprojectName=REG-FORM-TESTS" \\
 				"-Denv=prod" \\
 				"-DreportLink=${BUILD_URL}" \\
-				"-Dconfig.file=/home/testuser/.allure-notifications/config/ov_autotests_bot.json" \\
-				-jar /home/testuser/.allure-notifications/releases/allure-notifications-3.1.1.jar '''
+				"-Dconfig.file=$ALLURE_NOTIFICATIONS_HOME/config/ov_autotests_bot.json" \\
+				-jar $ALLURE_NOTIFICATIONS_HOME/releases/allure-notifications-3.1.1.jar '''
         }
     }
 }

@@ -74,8 +74,26 @@ tasks.withType(Test) {
     }
 }
 
-task login(type: Test) {
+task login_tests(type: Test) {
     useJUnitPlatform {
         includeTags 'login'
+    }
+}
+
+task jobs_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'jobs'
+    }
+}
+
+task projects_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'projects'
+    }
+}
+
+task dashboards_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'dashboards'
     }
 }
