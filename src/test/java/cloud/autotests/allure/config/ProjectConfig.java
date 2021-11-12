@@ -4,6 +4,7 @@ import org.aeonbits.owner.Config;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
+        "system:properties",
         "file:/var/lib/jenkins/workspace/allure-testops-tests-pipeline/properties/remote.properties"
 })
 public interface ProjectConfig extends Config {
