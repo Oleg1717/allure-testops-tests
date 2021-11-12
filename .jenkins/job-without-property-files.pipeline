@@ -26,31 +26,6 @@ pipeline {
             }
         }
 
-        stage('Add property files') {
-            steps {
-                writeFile file: 'src/test/resources/config/remote.properties',
-                    text: '''browser.name=chrome
-                        browser.version=91.0
-                        browser.size=1920x1080
-                        browser.mobile.view=
-                        remote.driver.url=https://user1:1234@selenoid.autotests.cloud/wd/hub/
-                        video.storage.url=https://selenoid.autotests.cloud/video/'''
-
-                writeFile file: 'src/test/resources/config/app.properties',
-                    text: '''web.url=https://allure.autotests.cloud
-                        api.base.uri=https://allure.autotests.cloud
-                        api.uaa.path=/api/uaa/
-                        api.rs.path=/api/rs/
-                        project.id=308
-                        user.login=qaguru6
-                        user.password=qaguru
-                        user2.login=testuser
-                        user2.password=testuser12354
-                        user.token=cf46557d-09e9-49f1-b4e0-4d47ff246f6d
-                        xsrf.token=cf46557d-09e9-49f1-b4e0-4d47ff246f6d'''
-            }
-        }
-
         stage('Build') {
             steps {
                 withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: '443', results: [[path: 'build/allure-results']], serverId: 'allure-server') {
