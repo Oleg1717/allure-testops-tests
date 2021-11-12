@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "$JENKINS_WORKSPACE/allure-testops-tests-pipeline/properties/remote.properties",
+        "file:$JENKINS_WORKSPACE/allure-testops-tests-pipeline/properties/remote.properties",
         "classpath:config/local.properties",
         "classpath:config/remote.properties"
 })
