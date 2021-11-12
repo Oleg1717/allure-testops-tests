@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "$JENKINS_WORKSPACE/allure-testops-tests-pipeline/properties/app.properties",
+        "file:$JENKINS_WORKSPACE/allure-testops-tests-pipeline/properties/app.properties",
         "classpath:config/app.properties"
 })
 public interface AppConfig extends Config {
