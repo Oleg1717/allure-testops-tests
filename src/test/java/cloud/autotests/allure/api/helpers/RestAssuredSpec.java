@@ -10,7 +10,7 @@ import static cloud.autotests.allure.api.helpers.AuthorizationData.getAuthorizat
 public class RestAssuredSpec {
 
     private final RequestSpecification rsSpec = new RequestSpecBuilder()
-            .setBaseUri(ConfigHelper.getApiBaseUri())
+            .setBaseUri(ConfigHelper.getBaseUrl())
             .setBasePath(ConfigHelper.getApiRsPath())
             .addHeader("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
             .addCookies(getAuthorizationData().getSessionCookies())
@@ -19,7 +19,7 @@ public class RestAssuredSpec {
             .build();
 
     private final RequestSpecification uaaSpec = new RequestSpecBuilder()
-            .setBaseUri(ConfigHelper.getApiBaseUri())
+            .setBaseUri(ConfigHelper.getBaseUrl())
             .setBasePath(ConfigHelper.getApiUaaPath())
             .addHeader("X-XSRF-TOKEN", ConfigHelper.getXsrfToken())
             .addCookies(getAuthorizationData().getSessionCookies())
