@@ -5,16 +5,13 @@ import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class DriverSettings {
 
     public static void configure() {
         Configuration.browser = ConfigHelper.getBrowserName();
         Configuration.browserVersion = ConfigHelper.getBrowserVersion();
         Configuration.browserSize = ConfigHelper.getBrowserSize();
-        Configuration.baseUrl = ConfigHelper.getWebUrl();
+        Configuration.baseUrl = ConfigHelper.getBaseUrl();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -25,16 +22,10 @@ public class DriverSettings {
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--lang=en-en");
 
-        if (ConfigHelper.isWebMobile()) { // for chrome only
-            Map<String, Object> mobileDevice = new HashMap<>();
-            mobileDevice.put("deviceName", ConfigHelper.getBrowserMobileView());
-            chromeOptions.setExperimentalOption("mobileEmulation", mobileDevice);
-        }
-
         if (ConfigHelper.isRemoteWebDriver()) {
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
-            Configuration.remote = ConfigHelper.getRemoteDriverUrl();
+            Configuration.remote = ConfigHelper.getSelenoidUrl();
         }
 
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
