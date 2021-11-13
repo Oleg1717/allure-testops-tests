@@ -73,20 +73,12 @@ public class ConfigHelper {
         return getProjectConfig().browserSize();
     }
 
-    public static String getBrowserMobileView() {
-        return getProjectConfig().browserMobileView();
-    }
-
     public static String getRemoteDriverUrl() {
         return getProjectConfig().remoteDriverUrl();
     }
 
     public static String getVideoStorageUrl() {
         return getProjectConfig().videoStorageUrl();
-    }
-
-    public static boolean isWebMobile() {
-        return !getProjectConfig().browserMobileView().equals("");
     }
 
     public static boolean isRemoteWebDriver() {
