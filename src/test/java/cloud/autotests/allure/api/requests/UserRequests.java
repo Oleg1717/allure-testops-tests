@@ -12,7 +12,7 @@ public class UserRequests {
 
     public static Response getAuthorizeResponse(String xsrfToken, String username, String password) {
         return given()
-                .baseUri(ConfigHelper.getApiBaseUri())
+                .baseUri(ConfigHelper.getBaseUrl())
                 .filter(RestAssuredFilter.withCustomTemplates())
                 .header("X-XSRF-TOKEN", xsrfToken)
                 .cookie("XSRF-TOKEN", xsrfToken)
