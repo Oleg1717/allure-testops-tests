@@ -5,24 +5,19 @@ import org.aeonbits.owner.Config;
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
         "system:properties",
-        "file:/var/lib/jenkins/workspace/allure-testops-tests-pipeline/properties/remote.properties"
+        "file:/var/lib/jenkins/workspace/allure-testops-tests-pipeline/properties/remote.properties",
+        "classpath:config/local.properties"
 })
 public interface ProjectConfig extends Config {
 
-    @DefaultValue("firefox")
     @Key("browser.name")
     String browserName();
 
-    @DefaultValue("88.0")
     @Key("browser.version")
     String browserVersion();
 
-    @DefaultValue("1920x1080")
     @Key("browser.size")
     String browserSize();
-
-    @Key("browser.mobile.view")
-    String browserMobileView();
 
     @Key("remote.driver.url")
     String remoteDriverUrl();
