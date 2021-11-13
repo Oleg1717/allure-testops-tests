@@ -10,12 +10,8 @@ public class ConfigHelper {
                 .create(AppConfig.class, System.getProperties());
     }
 
-    public static String getWebUrl() {
-        return getAppConfig().webUrl();
-    }
-
-    public static String getApiBaseUri() {
-        return getAppConfig().apiBaseUri();
+    public static String getBaseUrl() {
+        return getAppConfig().baseUrl();
     }
 
     public static String getApiRsPath() {
@@ -73,8 +69,8 @@ public class ConfigHelper {
         return getProjectConfig().browserSize();
     }
 
-    public static String getRemoteDriverUrl() {
-        return getProjectConfig().remoteDriverUrl();
+    public static String getSelenoidUrl() {
+        return getProjectConfig().selenoidUrl();
     }
 
     public static String getVideoStorageUrl() {
@@ -82,7 +78,7 @@ public class ConfigHelper {
     }
 
     public static boolean isRemoteWebDriver() {
-        return !getProjectConfig().remoteDriverUrl().equals("");
+        return !getProjectConfig().selenoidUrl().equals("");
     }
 
     public static boolean isVideoOn() {

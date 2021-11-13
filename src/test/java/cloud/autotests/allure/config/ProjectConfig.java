@@ -4,23 +4,24 @@ import org.aeonbits.owner.Config;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "system:properties",
-        "file:/var/lib/jenkins/workspace/allure-testops-tests-pipeline/properties/remote.properties",
-        "classpath:config/local.properties"
+        "system:properties"
 })
 public interface ProjectConfig extends Config {
 
     @Key("browser.name")
+    @DefaultValue("chrome")
     String browserName();
 
     @Key("browser.version")
+    @DefaultValue("95.0")
     String browserVersion();
 
     @Key("browser.size")
+    @DefaultValue("1920x1080")
     String browserSize();
 
-    @Key("remote.driver.url")
-    String remoteDriverUrl();
+    @Key("selenoid.url")
+    String selenoidUrl();
 
     @Key("video.storage.url")
     String videoStorageUrl();

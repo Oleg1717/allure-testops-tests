@@ -4,17 +4,13 @@ import org.aeonbits.owner.Config;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "system:properties",
         "file:/var/lib/jenkins/workspace/allure-testops-tests-pipeline/properties/app.properties",
         "classpath:config/app.properties"
 })
 public interface AppConfig extends Config {
 
-    @Key("web.url")
-    String webUrl();
-
-    @Key("api.base.uri")
-    String apiBaseUri();
+    @Key("base.url")
+    String baseUrl();
 
     @Key("api.uaa.path")
     String apiUaaPath();
@@ -28,7 +24,7 @@ public interface AppConfig extends Config {
     @Key("user.password")
     String userPassword();
 
-    @Key("user.token")
+    @Key("user.api.token")
     String userToken();
 
     @Key("user2.login")
