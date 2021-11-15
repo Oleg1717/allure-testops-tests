@@ -4,11 +4,12 @@ import org.aeonbits.owner.Config;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "system:properties"
+        "system:properties",
+        "classpath:config/local.properties"
 })
 public interface ProjectConfig extends Config {
 
-    @Key("browser.name")
+    @Key("browser")
     @DefaultValue("chrome")
     String browserName();
 
