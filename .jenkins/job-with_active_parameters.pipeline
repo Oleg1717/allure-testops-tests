@@ -1,5 +1,5 @@
 properties([
-	parameters([
+    parameters([
         string(defaultValue: '5', name: 'THREADS'),
         string(defaultValue: 'https://allure.autotests.cloud', name: 'BASE_URL'),
         gitParameter(branch: '',
