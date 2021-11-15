@@ -16,36 +16,36 @@ properties([
              useRepository: 'git@github.com:Oleg1717/allure-testops-tests.git'),
         choice(choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests'], name: 'TASK_NAME'),
         choice(choices: ['chrome', 'firefox', 'opera'], name: 'BROWSER_NAME'),
-        		[$class: 'CascadeChoiceParameter',
-        			choiceType: 'PT_SINGLE_SELECT',
-        			filterLength: 1,
-        			filterable: false,
-        			name: 'BROWSER_VERSION',
-        			randomName: 'choice-parameter-28281155397613',
-        			referencedParameters: 'BROWSER_NAME',
-        			script: [
-        				$class: 'GroovyScript',
-        				fallbackScript: [
-        					classpath: [],
-        					sandbox: false,
-        					script: 'return ["error"]'
-        				],
-        				script: [
-        					classpath: [],
-        					sandbox: false,
-        					script: '''switch (BROWSER_NAME) {
-        						case "chrome":
-        							return ["91.0","90.0"]
-        						case "firefox":
-        							return ["89.0","88.0"]
-        						case "opera":
-        							return ["77.0","76.0"]
-        						default:
-        							return [""]
-        					}'''
-        				]
-        			]
-        		],
+        [$class: 'CascadeChoiceParameter',
+            choiceType: 'PT_SINGLE_SELECT',
+            filterLength: 1,
+            filterable: false,
+            name: 'BROWSER_VERSION',
+            randomName: 'choice-parameter-28281155397613',
+            referencedParameters: 'BROWSER_NAME',
+            script: [
+                $class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: false,
+                    script: 'return ["error"]'
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: false,
+                    script: '''switch (BROWSER_NAME) {
+                        case "chrome":
+                            return ["91.0","90.0"]
+                        case "firefox":
+                            return ["89.0","88.0"]
+                        case "opera":
+                            return ["77.0","76.0"]
+                        default:
+                            return [""]
+                    }'''
+                ]
+            ]
+        ],
         choice(choices: ['1920x1080', '1440x900', '1280x1024', '1366x768', '1280x720', '1024x768'], name: 'BROWSER_SIZE')
     ])
 ])
