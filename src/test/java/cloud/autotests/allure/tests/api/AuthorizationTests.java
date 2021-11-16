@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 public class AuthorizationTests {
 
     private String userName = AuthData.SECOND_USER.username();
-    private String userPassword = AuthData.SECOND_USER.username();
+    private String userPassword = AuthData.SECOND_USER.password();
     private String xsrfToken = AuthData.SECOND_USER.xsrfToken();
     UserApi userApi = new UserApi();
 

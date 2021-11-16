@@ -37,7 +37,7 @@ public class AuthorizationTests extends TestBase {
     void loginTest() {
         loginPage.openLoginPage("")
                 .setUsernameInput(AuthData.MAIN_USER.username())
-                .setPasswordInput(AuthData.MAIN_USER.username())
+                .setPasswordInput(AuthData.MAIN_USER.password())
                 .clickContinueButton();
         sidebar.navigateTo(SideMenuNavItem.USER_MENU)
                 .checkUsername(AuthData.MAIN_USER.username());
