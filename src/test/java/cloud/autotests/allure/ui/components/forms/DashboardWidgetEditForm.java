@@ -25,7 +25,7 @@ public class DashboardWidgetEditForm {
     private SelenideElement closeButton = formHeader.$("button[type=button]");
 
     private ElementsCollection contentFields = formContent.$$(".FormLabel__name");
-    private ElementsCollection dropDawnList = $(".css-11unzgr").$$("div");
+    private ElementsCollection dropDownList = $(".css-11unzgr").$$("div");
 
     private SelenideElement nameInput = getFieldByLabel("Name").$("input[name=name]");
     private SelenideElement nameErrorMessage = getFieldByLabel("Name").$(".Form__error");
@@ -54,7 +54,7 @@ public class DashboardWidgetEditForm {
     }
 
     private SelenideElement getSelectedItem(String listItemName) {
-        return dropDawnList.find(text(listItemName));
+        return dropDownList.find(text(listItemName));
     }
     //endregion
 
