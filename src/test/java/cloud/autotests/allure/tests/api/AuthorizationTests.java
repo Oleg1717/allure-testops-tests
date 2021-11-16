@@ -1,9 +1,9 @@
 package cloud.autotests.allure.tests.api;
 
 import cloud.autotests.allure.api.data.LoginErrorMessage;
+import cloud.autotests.allure.api.helpers.AuthData;
 import cloud.autotests.allure.api.models.user.Login;
 import cloud.autotests.allure.api.steps.UserApi;
-import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
@@ -20,9 +20,9 @@ import org.junit.jupiter.api.Test;
 @Tag("login")
 public class AuthorizationTests {
 
-    private String userLogin = ConfigHelper.getUser2Login();
-    private String userPassword = ConfigHelper.getUser2Password();
-    private String xsrfToken = ConfigHelper.getXsrfToken();
+    private String userName = AuthData.SECOND_USER.username();
+    private String userPassword = AuthData.SECOND_USER.username();
+    private String xsrfToken = AuthData.SECOND_USER.xsrfToken();
     UserApi userApi = new UserApi();
 
     @Test
@@ -32,7 +32,7 @@ public class AuthorizationTests {
     public void checkAuthorizationWithValidUserData() {
         //given
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
         userApi.checkThatAuthorizationIsSuccess(response.as(Login.class).getStatus());
     }
@@ -73,7 +73,7 @@ public class AuthorizationTests {
         //given
         String userPassword = "";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
         userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.VALIDATION_ERROR.text());
@@ -87,7 +87,7 @@ public class AuthorizationTests {
         //given
         String xsrfToken = "";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
         userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.text());
@@ -101,7 +101,7 @@ public class AuthorizationTests {
         //given
         String xsrfToken = "   ";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
         userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.text());

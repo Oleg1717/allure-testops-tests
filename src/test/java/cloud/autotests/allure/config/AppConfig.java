@@ -18,23 +18,17 @@ public interface AppConfig extends Config {
     @Key("api.rs.path")
     String apiRsPath();
 
-    @Key("user.login")
-    String userLogin();
+    @Key("main.user.name")
+    String mainUserName();
 
-    @Key("user.password")
-    String userPassword();
+    @Key("main.user.password")
+    String mainUserPassword();
 
-    @Key("user.api.token")
-    String userToken();
+    @Key("second.user.name")
+    String secondUserName();
 
-    @Key("user2.login")
-    String user2Login();
-
-    @Key("user2.password")
-    String user2Password();
-
-    @Key("xsrf.token")
-    String xsrfToken();
+    @Key("second.user.password")
+    String secondUserPassword();
 
     @Key("project.id")
     Integer projectId();

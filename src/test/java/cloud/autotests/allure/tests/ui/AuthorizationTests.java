@@ -1,6 +1,6 @@
 package cloud.autotests.allure.tests.ui;
 
-import cloud.autotests.allure.config.ConfigHelper;
+import cloud.autotests.allure.api.helpers.AuthData;
 import cloud.autotests.allure.ui.components.Sidebar;
 import cloud.autotests.allure.ui.data.sidebar.SideMenuNavItem;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Cookie;
 
-import static cloud.autotests.allure.api.helpers.AuthorizationData.getAuthorizationData;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -37,11 +36,11 @@ public class AuthorizationTests extends TestBase {
     @DisplayName("Successful login as testuser")
     void loginTest() {
         loginPage.openLoginPage("")
-                .setUsernameInput(ConfigHelper.getUserLogin())
-                .setPasswordInput(ConfigHelper.getUserPassword())
+                .setUsernameInput(AuthData.MAIN_USER.username())
+                .setPasswordInput(AuthData.MAIN_USER.username())
                 .clickContinueButton();
         sidebar.navigateTo(SideMenuNavItem.USER_MENU)
-                .checkUsername(ConfigHelper.getUserLogin());
+                .checkUsername(AuthData.MAIN_USER.username());
     }
 
     @Test
@@ -55,9 +54,9 @@ public class AuthorizationTests extends TestBase {
 
             step("Set auths token to to browser cookies", () -> {
                 WebDriverRunner.getWebDriver().manage().addCookie(
-                        new Cookie("XSRF-TOKEN", ConfigHelper.getXsrfToken()));
+                        new Cookie("XSRF-TOKEN", AuthData.MAIN_USER.xsrfToken()));
                 WebDriverRunner.getWebDriver().manage().addCookie(
-                        new Cookie("ALLURE_TESTOPS_SESSION", getAuthorizationData().getSessionToken()));
+                        new Cookie("ALLURE_TESTOPS_SESSION", AuthData.MAIN_USER.sessionToken()));
             });
         });
 
@@ -66,6 +65,6 @@ public class AuthorizationTests extends TestBase {
 
         step("Verify successful authorization", () ->
                 $("img.Avatar__img").shouldHave(
-                        attribute("alt", ConfigHelper.getUserLogin())));
+                        attribute("alt", AuthData.MAIN_USER.username())));
     }
 }
