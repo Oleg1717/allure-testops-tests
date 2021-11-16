@@ -10,7 +10,7 @@ import java.util.Optional;
 
 import static io.qameta.allure.Allure.step;
 
-public class SelenideTestWatcher implements TestWatcher {
+public class CustomTestWatcher implements TestWatcher {
 
     @Override
     public void testAborted(ExtensionContext extensionContext, Throwable throwable) {

@@ -3,6 +3,7 @@ package cloud.autotests.allure.ui.helpers;
 import cloud.autotests.allure.config.ConfigHelper;
 import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class DriverSettings {
