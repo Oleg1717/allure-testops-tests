@@ -63,7 +63,7 @@ pipeline {
         stage('Check URLs') {
             steps {
                 httpRequest url: "https://${SELENOID_DOMAIN}/status", validResponseCodes: '200'
-                httpRequest "${BASE_URL}/favicon.ico", validResponseCodes: '200'
+                httpRequest url: "${BASE_URL}/favicon.ico", validResponseCodes: '200'
             }
         }
 
@@ -78,7 +78,15 @@ pipeline {
         stage('Build') {
             steps {
                 withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}', projectId: '443', results: [[path: 'build/allure-results']], serverId: 'allure-server') {
-                    sh "$GRADLE_HOME/bin/gradle clean ${TASK_NAME} -Dthreads=${THREADS} -Dselenoid.url=${SELENOID_URL} -Dvideo.storage.url=${VIDEO_STORAGE_URL} -Dbrowser=${BROWSER_NAME} -Dbrowser.version=${BROWSER_VERSION} -Dbrowser.size=${BROWSER_SIZE}"
+                    sh '''
+                        $GRADLE_HOME/bin/gradle clean ${TASK_NAME} \
+                            -Dthreads=${THREADS} \
+                            -Dselenoid.url=${SELENOID_URL} \
+                            -Dvideo.storage.url=${VIDEO_STORAGE_URL} \
+                            -Dbrowser=${BROWSER_NAME} \
+                            -Dbrowser.version=${BROWSER_VERSION} \
+                            -Dbrowser.size=${BROWSER_SIZE}
+                    '''
                 }
             }
         }
@@ -87,13 +95,14 @@ pipeline {
     post {
         always {
             allure results: [[path: 'build/allure-results']]
-
-            sh '''java  \\
-				"-DprojectName=REG-FORM-TESTS" \\
-				"-Denv=prod" \\
-				"-DreportLink=${BUILD_URL}" \\
-				"-Dconfig.file=$ALLURE_NOTIFICATIONS_HOME/config/ov_autotests_bot.json" \\
-				-jar $ALLURE_NOTIFICATIONS_HOME/releases/allure-notifications-3.1.1.jar '''
+            sh '''
+                java  \
+                    "-DprojectName=REG-FORM-TESTS" \
+                    "-Denv=prod" \
+                    "-DreportLink=${BUILD_URL}" \
+                    "-Dconfig.file=$ALLURE_NOTIFICATIONS_HOME/config/ov_autotests_bot.json" \
+                    -jar $ALLURE_NOTIFICATIONS_HOME/releases/allure-notifications-3.1.1.jar
+			'''
         }
     }
 }
