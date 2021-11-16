@@ -43,9 +43,9 @@ public class AuthorizationTests {
     @DisplayName("Check authorization with blank login")
     public void checkAuthorizationWithBlankLogin() {
         //given
-        String userLogin = "";
+        String userName = "";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
         userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.VALIDATION_ERROR.text());
@@ -57,9 +57,9 @@ public class AuthorizationTests {
     @DisplayName("Check authorization with wrong login")
     public void checkAuthorizationWithWrongLogin() {
         //given
-        String userLogin = "usr";
+        String userName = "usr";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userLogin, userPassword);
+        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
         userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.BAD_CREDENTIALS.text());
