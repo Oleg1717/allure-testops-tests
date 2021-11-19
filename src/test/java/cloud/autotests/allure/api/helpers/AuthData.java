@@ -8,7 +8,7 @@ import java.util.Map;
 
 public enum AuthData {
     MAIN_USER(ConfigHelper.getMainUserName(), ConfigHelper.getMainUserPassword()),
-    SECOND_USER(ConfigHelper.getSecondUserName(), ConfigHelper.getSecondUserPassword()),;
+    SECOND_USER(ConfigHelper.getSecondUserName(), ConfigHelper.getSecondUserPassword());
 
     private String username;
     private String password;
