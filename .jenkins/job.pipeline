@@ -97,7 +97,7 @@ pipeline {
             allure results: [[path: 'build/allure-results']]
             sh '''
                 java  \
-                    "-DprojectName=REG-FORM-TESTS" \
+                    "-DprojectName=ALLURE-TESTOPS-TESTS" \
                     "-Denv=prod" \
                     "-DreportLink=${BUILD_URL}" \
                     "-Dconfig.file=$ALLURE_NOTIFICATIONS_HOME/config/ov_autotests_bot.json" \
