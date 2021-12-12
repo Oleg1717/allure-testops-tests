@@ -1,6 +1,6 @@
 package cloud.autotests.allure.ui.pages;
 
-import cloud.autotests.allure.ui.data.ProjectsPaginationItem;
+import cloud.autotests.allure.ui.data.projects.ProjectsPaginationItem;
 import cloud.autotests.allure.ui.components.Sidebar;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;

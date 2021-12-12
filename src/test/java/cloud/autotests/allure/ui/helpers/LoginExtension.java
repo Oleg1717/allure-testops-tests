@@ -13,14 +13,13 @@ public class LoginExtension implements BeforeEachCallback {
 
     @Override
     public void beforeEach(ExtensionContext context) {
-        String sessionToken = AuthData.MAIN_USER.sessionToken();
         step("Set session token to browser cookies", () -> {
             step("Open browser with minimum content", () -> open("/favicon.ico"));
             step("Add cookie in browser cookie storage", () -> {
                 WebDriverRunner.getWebDriver().manage().addCookie(
                         new Cookie("XSRF-TOKEN", AuthData.MAIN_USER.xsrfToken()));
                 WebDriverRunner.getWebDriver().manage().addCookie(
-                        new Cookie("ALLURE_TESTOPS_SESSION", sessionToken));
+                        new Cookie("ALLURE_TESTOPS_SESSION", AuthData.MAIN_USER.sessionToken()));
             });
 
         });

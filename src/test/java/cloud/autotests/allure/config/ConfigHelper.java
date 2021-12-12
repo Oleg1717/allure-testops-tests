@@ -57,13 +57,13 @@ public class ConfigHelper {
         return getProjectConfig().browserSize();
     }
 
-    public static String getSelenoidUrl() { return getProjectConfig().selenoidUrl(); }
+    public static String getRemoteDriverUrl() { return getProjectConfig().remoteDriverUrl(); }
 
     public static String getVideoStorageUrl() {
         return getProjectConfig().videoStorageUrl();
     }
 
-    public static boolean isRemoteWebDriver() { return !getProjectConfig().selenoidUrl().equals(""); }
+    public static boolean isRemoteWebDriver() { return !getProjectConfig().remoteDriverUrl().equals(""); }
 
     public static boolean isVideoOn() {
         return !getProjectConfig().videoStorageUrl().equals("");

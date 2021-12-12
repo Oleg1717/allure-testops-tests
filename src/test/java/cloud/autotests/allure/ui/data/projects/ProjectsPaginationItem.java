@@ -1,4 +1,4 @@
-package cloud.autotests.allure.ui.data;
+package cloud.autotests.allure.ui.data.projects;
 
 public enum ProjectsPaginationItem {
     SHOW_5(5),
