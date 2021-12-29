@@ -1,5 +1,7 @@
 package cloud.autotests.allure.api.models.dashboards;
 
+import cloud.autotests.allure.api.models.ElementBody;
+import cloud.autotests.allure.api.models.ModelsInterface;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Dashboard {
+public class Dashboard implements ModelsInterface {
 
     private Integer id;
     private Integer projectId;

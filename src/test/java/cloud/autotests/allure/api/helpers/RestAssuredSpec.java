@@ -7,23 +7,20 @@ import io.restassured.specification.RequestSpecification;
 
 public class RestAssuredSpec {
 
-    private final RequestSpecification rsSpec = new RequestSpecBuilder()
-            .setBaseUri(ConfigHelper.getBaseUrl())
-            .setBasePath(ConfigHelper.getApiRsPath())
-            .addHeader("X-XSRF-TOKEN", AuthData.MAIN_USER.xsrfToken())
-            .addCookies(AuthData.MAIN_USER.sessionCookies())
-            .addFilter(RestAssuredFilter.withCustomTemplates())
-            .log(LogDetail.URI)
-            .build();
+    private final RequestSpecification rsSpec = getRequestSpec(ConfigHelper.getApiRsPath());
 
-    private final RequestSpecification uaaSpec = new RequestSpecBuilder()
-            .setBaseUri(ConfigHelper.getBaseUrl())
-            .setBasePath(ConfigHelper.getApiUaaPath())
-            .addHeader("X-XSRF-TOKEN", AuthData.MAIN_USER.xsrfToken())
-            .addCookies(AuthData.MAIN_USER.sessionCookies())
-            .addFilter(RestAssuredFilter.withCustomTemplates())
-            .log(LogDetail.URI)
-            .build();
+    private final RequestSpecification uaaSpec = getRequestSpec(ConfigHelper.getApiUaaPath());
+
+    private RequestSpecification getRequestSpec(String basePath) {
+        return new RequestSpecBuilder()
+                .setBaseUri(ConfigHelper.getBaseUrl())
+                .setBasePath(basePath)
+                .addHeader("X-XSRF-TOKEN", AuthData.MAIN_USER.xsrfToken())
+                .addCookies(AuthData.MAIN_USER.sessionCookies())
+                .addFilter(RestAssuredFilter.withCustomTemplates())
+                .log(LogDetail.URI)
+                .build();
+    }
 
     public static RestAssuredSpec spec() {
         return new RestAssuredSpec();

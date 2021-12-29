@@ -59,7 +59,7 @@ public class AuthorizationTests {
         //given
         String userName = "usr";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
+        Response response = userApi.getAuthorizeData(xsrfToken, "usr", userPassword);
         //then
         userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.BAD_CREDENTIALS.text());

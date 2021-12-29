@@ -6,8 +6,10 @@ import static java.lang.String.format;
 
 public enum TestUrls {
 
+    MIN_CONTENT(ConfigHelper.getBaseUrl() + "favicon.ico"),
+    USER_PROFILE(ConfigHelper.getBaseUrl() + "user/" + ConfigHelper.getMainUserId()),
     PROJECTS(ConfigHelper.getBaseUrl()),
-    PROJECT(PROJECTS.url() + format("project/%s/", ConfigHelper.getProjectId())),
+    PROJECT(ConfigHelper.getBaseUrl() + format("project/%s/", ConfigHelper.getProjectId())),
     DASHBOARDS(PROJECT.url() + "dashboards/"),
     JOBS(PROJECT.url() + "jobs/");
 

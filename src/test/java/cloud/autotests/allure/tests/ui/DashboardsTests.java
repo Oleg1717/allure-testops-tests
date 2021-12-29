@@ -18,13 +18,19 @@ import cloud.autotests.allure.ui.helpers.WithLogin;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.DashboardsPage;
 import io.qameta.allure.AllureId;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Lead;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,8 +40,11 @@ import static io.qameta.allure.Allure.parameter;
 
 @Owner("OlegV")
 @Layer("ui")
+@Severity(SeverityLevel.BLOCKER)
+@Epic("Regression")
 @Feature("Dashboards")
-@Tag("dashboards")
+@Tags({@Tag("dashboards"), @Tag("microservice")})
+//@Tag("dashboards")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DashboardsTests extends TestBase {
 
@@ -46,6 +55,7 @@ public class DashboardsTests extends TestBase {
     DashboardsApi dashboardsApi = new DashboardsApi();
 
     String dashboardForTestsUrl;
+
 
     @BeforeAll
     void addDashboardForTests() {
@@ -238,6 +248,28 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Test
     @AllureId("5577")
+    @Severity(SeverityLevel.MINOR)
+    @Description("Check that widget name and data can be changed")
+    @Lead("s_vasenkov")
+    @Story("Change widgets")
+    @DisplayName("Edit widget")
+    void editWidget() {
+        String widgetName = "EditWidget";
+        String newName = widgetName + "New";
+        dashboardsPage.openDashboardPage(dashboardForTestsUrl)
+                .selectDashboardAction(DashboardActionItem.ADD_WIDGET);
+        dashboardWidgetEditForm.addWidgetWithType(widgetName, FormTypeItem.LAUNCHES);
+        dashboardsPage.closeNotification()
+                .selectWidgetAction(widgetName, WidgetActionItem.EDIT);
+        dashboardWidgetEditForm.addWidgetWithType(newName, FormTypeItem.LAUNCH_STATISTIC_TREND);
+        dashboardsPage.checkThatWidgetExist(newName)
+                .checkWidgetHaveTrendChartGraph(newName);
+    }
+
+/*
+    @WithLogin
+    @Test
+    @AllureId("5577")
     @Story("Change widgets")
     @DisplayName("Edit widget")
     void editWidget() {
@@ -256,6 +288,7 @@ public class DashboardsTests extends TestBase {
         dashboardsPage.checkThatWidgetExist(newName)
                 .checkWidgetHaveTrendChartGraph(newName);
     }
+*/
 
     @WithLogin
     @Test

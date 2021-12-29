@@ -35,7 +35,6 @@ public class JobsApi {
 
     @Step("Check that response error message is '{expectedErrorMessage}'")
     public void checkResponseErrorMessage(String actualErrorMessage, JobsErrorMessage expectedErrorMessage) {
-
         assertThat(actualErrorMessage).contains(expectedErrorMessage.text());
     }
 }

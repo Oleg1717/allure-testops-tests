@@ -1,6 +1,6 @@
 package cloud.autotests.allure.ui.data.profile;
 
-public enum PaneSectionNameItem {
+public enum SectionName {
     USERNAME("Username"),
     FULL_NAME("Full name"),
     EMAIL("Email"),
@@ -10,7 +10,7 @@ public enum PaneSectionNameItem {
 
     private final String value;
 
-    PaneSectionNameItem(String value) {
+    SectionName(String value) {
         this.value = value;
     }
 
