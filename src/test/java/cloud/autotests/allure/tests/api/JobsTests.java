@@ -7,23 +7,32 @@ import cloud.autotests.allure.api.steps.JobsApi;
 import cloud.autotests.allure.api.testdata.JobData;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import io.qameta.allure.AllureId;
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Lead;
 import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 @Owner("OlegV")
 @Feature("Jobs")
 @Layer("api")
+//@Tags({@Tag("jobs"), @Tag("microservice")})
 @Tag("jobs")
 public class JobsTests {
 
     JobsApi jobsApi = new JobsApi();
 
+    @Severity(SeverityLevel.MINOR)
+    @Description("Check that that new job may be added")
+    @Lead("s_vasenkov")
     @Test
     @AllureId("5605")
     @Story("Add a job")
@@ -75,5 +84,4 @@ public class JobsTests {
         //and
         jobsApi.deleteJob(firstJobResponse.as(Job.class).getId());
     }
-
 }

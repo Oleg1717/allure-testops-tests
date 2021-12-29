@@ -81,4 +81,13 @@ public class ProjectEditForm {
         return this;
     }
     //endregion
+
+    @Step("Add public project with name")
+    public ProjectEditForm addProjectWithName(String projectName) {
+        setNameInput(projectName);
+        fillContentWriteTextArea(projectName);
+        clickPublicCheckbox();
+        clickSubmitButton();
+        return this;
+    }
 }

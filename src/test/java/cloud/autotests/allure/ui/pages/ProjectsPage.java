@@ -19,7 +19,7 @@ public class ProjectsPage {
 
     private Sidebar sidebar = new Sidebar();
 
-    private SelenideElement header = $(".HomeLayout__filter");
+    private SelenideElement header = $(".ProjectsListControlsBar");
     private ElementsCollection headerButtons = header.$$("button[type=button]");
     private SelenideElement myProjectsButton = headerButtons.find(text("My projects"));
     private SelenideElement favoritesButton = headerButtons.find(text("Favorites"));
@@ -65,6 +65,7 @@ public class ProjectsPage {
 
     @Step("Open allure projects page")
     public ProjectsPage openProjectsPage(String projectsUrl) {
+        System.out.println(projectsUrl);
         open(projectsUrl);
         return this;
     }

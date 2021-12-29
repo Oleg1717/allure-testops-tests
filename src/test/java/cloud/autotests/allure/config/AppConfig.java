@@ -18,17 +18,27 @@ public interface AppConfig extends Config {
     @Key("api.rs.path")
     String apiRsPath();
 
-    @Key("main.user.name")
-    String mainUserName();
+    @Key("main.user.login")
+    String mainUserLogin();
 
     @Key("main.user.password")
     String mainUserPassword();
 
-    @Key("second.user.name")
-    String secondUserName();
+    @Key("main.user.fullname")
+    String mainUserFullname();
+
+    @Key("main.user.email")
+    String mainUserEmail();
+
+    @Key("main.user.id")
+    String mainUserId();
+
+    @Key("second.user.login")
+    String secondUserLogin();
 
     @Key("second.user.password")
     String secondUserPassword();
+
 
     @Key("project.id")
     Integer projectId();

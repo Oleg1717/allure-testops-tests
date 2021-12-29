@@ -83,7 +83,7 @@ pipeline {
                             -Dthreads=${THREADS} \
                             -Dselenoid.url=${SELENOID_URL} \
                             -Dvideo.storage.url=${VIDEO_STORAGE_URL} \
-                            -Dbrowser=${BROWSER_NAME} \
+                            -Dbrowser.name=${BROWSER_NAME} \
                             -Dbrowser.version=${BROWSER_VERSION} \
                             -Dbrowser.size=${BROWSER_SIZE}
                     '''

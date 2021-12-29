@@ -37,7 +37,7 @@ public class ProjectsApi {
         Map<String, String> requestParams = new HashMap<String, String>() {{
             put("v2", "true");
             put("query", projectName);
-            put("sort", "id%2Cdesc");
+            put("sort", "id,desc");
             put("size", "500");
         }};
         return ProjectsRequests
@@ -55,8 +55,8 @@ public class ProjectsApi {
         Map<String, String> requestParams = new HashMap<String, String>() {{
             put("v2", "true");
             put("query", "");
-            put("sort", "id%2Cdesc");
-            put("size", "5000");
+            put("sort", "id,desc");
+            put("size", "1000");
         }};
         return ProjectsRequests
                 .getProjectsDataResponse(requestParams)

@@ -174,4 +174,14 @@ public class DashboardWidgetEditForm {
         return this;
     }
     //endregion
+
+    //region Grouped steps
+    @Step("Add widget with name '{widgetName}' and type '{Launches}'")
+    public DashboardWidgetEditForm addWidgetWithType(String widgetName, FormTypeItem typeItem) {
+        setNameInput(widgetName);
+        selectTypeItem(typeItem);
+        clickSubmitButton();
+        return this;
+    }
+    //endregion
 }

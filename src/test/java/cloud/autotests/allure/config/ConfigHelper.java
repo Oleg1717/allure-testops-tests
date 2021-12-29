@@ -9,7 +9,9 @@ public class ConfigHelper {
         return ConfigFactory.newInstance().create(AppConfig.class, System.getProperties());
     }
 
-    public static String getBaseUrl() { return getAppConfig().baseUrl(); }
+    public static String getBaseUrl() {
+        return getAppConfig().baseUrl();
+    }
 
     public static String getApiRsPath() {
         return getAppConfig().apiRsPath();
@@ -23,16 +25,22 @@ public class ConfigHelper {
         return getAppConfig().projectId();
     }
 
-    public static String getMainUserName() {
-        return getAppConfig().mainUserName();
+    public static String getMainUserLogin() {
+        return getAppConfig().mainUserLogin();
     }
 
     public static String getMainUserPassword() {
         return getAppConfig().mainUserPassword();
     }
 
-    public static String getSecondUserName() {
-        return getAppConfig().secondUserName();
+    public static String getMainUserEmail() { return getAppConfig().mainUserEmail(); }
+
+    public static String getMainUserFullName() { return getAppConfig().mainUserFullname(); }
+
+    public static String getMainUserId() { return getAppConfig().mainUserId(); }
+
+    public static String getSecondUserLogin() {
+        return getAppConfig().secondUserLogin();
     }
 
     public static String getSecondUserPassword() {
@@ -41,7 +49,7 @@ public class ConfigHelper {
     //endregion
 
     //region Project config
-        private static ProjectConfig getProjectConfig() {
+    private static ProjectConfig getProjectConfig() {
         return ConfigFactory.newInstance().create(ProjectConfig.class, System.getProperties());
     }
 
@@ -57,13 +65,17 @@ public class ConfigHelper {
         return getProjectConfig().browserSize();
     }
 
-    public static String getRemoteDriverUrl() { return getProjectConfig().remoteDriverUrl(); }
+    public static String getRemoteDriverUrl() {
+        return getProjectConfig().remoteDriverUrl();
+    }
 
     public static String getVideoStorageUrl() {
         return getProjectConfig().videoStorageUrl();
     }
 
-    public static boolean isRemoteWebDriver() { return !getProjectConfig().remoteDriverUrl().equals(""); }
+    public static boolean isRemoteWebDriver() {
+        return !getProjectConfig().remoteDriverUrl().equals("");
+    }
 
     public static boolean isVideoOn() {
         return !getProjectConfig().videoStorageUrl().equals("");

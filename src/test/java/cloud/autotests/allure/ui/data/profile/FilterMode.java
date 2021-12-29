@@ -1,13 +1,13 @@
 package cloud.autotests.allure.ui.data.profile;
 
-public enum FilterModeItem {
+public enum FilterMode {
 
     LIST_MODE("List Mode"),
     VIEW_MODE("View Mode");
 
     private final String value;
 
-    FilterModeItem(String value) {
+    FilterMode(String value) {
         this.value = value;
     }
 
