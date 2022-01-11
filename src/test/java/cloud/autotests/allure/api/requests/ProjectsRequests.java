@@ -17,7 +17,7 @@ public class ProjectsRequests {
                 .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
-                .get(ApiEndpoint.PROJECT.path())
+                .get(ApiEndpoint.PROJECT)
                 .then()
                 .extract().response();
     }
@@ -26,7 +26,7 @@ public class ProjectsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(ApiEndpoint.PROJECT_ID.path(), projectId)
+                .get(ApiEndpoint.PROJECT_ID, projectId)
                 .then()
                 .extract().response();
     }
@@ -35,7 +35,7 @@ public class ProjectsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(ApiEndpoint.PROJECT_STATS.path(), projectId)
+                .get(ApiEndpoint.PROJECT_STATS, projectId)
                 .then()
                 .extract().response();
     }
@@ -46,7 +46,7 @@ public class ProjectsRequests {
                 .contentType(ContentType.JSON)
                 .body(projectData)
                 .when()
-                .post(ApiEndpoint.PROJECT.path())
+                .post(ApiEndpoint.PROJECT)
                 .then()
                 .extract().response();
     }
@@ -57,7 +57,7 @@ public class ProjectsRequests {
                 .contentType(ContentType.JSON)
                 .body(projectData)
                 .when()
-                .patch(ApiEndpoint.PROJECT.path())
+                .patch(ApiEndpoint.PROJECT)
                 .then()
                 .extract().response();
     }
@@ -66,7 +66,7 @@ public class ProjectsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(ApiEndpoint.PROJECT_ID.path(), projectId)
+                .delete(ApiEndpoint.PROJECT_ID, projectId)
                 .then()
                 .extract().response();
     }

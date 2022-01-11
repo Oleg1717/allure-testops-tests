@@ -1,9 +1,9 @@
 package cloud.autotests.allure.tests.api;
 
 import cloud.autotests.allure.api.data.LoginErrorMessage;
-import cloud.autotests.allure.api.helpers.AuthData;
 import cloud.autotests.allure.api.models.user.Login;
 import cloud.autotests.allure.api.steps.UserApi;
+import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
@@ -20,9 +20,9 @@ import org.junit.jupiter.api.Test;
 @Tag("login")
 public class AuthorizationTests {
 
-    private String userName = AuthData.SECOND_USER.username();
-    private String userPassword = AuthData.SECOND_USER.password();
-    private String xsrfToken = AuthData.SECOND_USER.xsrfToken();
+    private final String userName = ConfigHelper.getSecondUserLogin();
+    private final String userPassword = ConfigHelper.getSecondUserPassword();
+    private final String xsrfToken = "1234567";
     UserApi userApi = new UserApi();
 
     @Test

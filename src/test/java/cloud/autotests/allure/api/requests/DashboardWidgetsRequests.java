@@ -14,7 +14,7 @@ public class DashboardWidgetsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(ApiEndpoint.WIDGET_DATA.path(), widgetId)
+                .get(ApiEndpoint.WIDGET_DATA, widgetId)
                 .then()
                 .extract().response();
     }
@@ -25,7 +25,7 @@ public class DashboardWidgetsRequests {
                 .contentType(ContentType.JSON)
                 .body(widget)
                 .when()
-                .post(ApiEndpoint.WIDGET.path())
+                .post(ApiEndpoint.WIDGET)
                 .then()
                 .extract().response();
     }
@@ -36,7 +36,7 @@ public class DashboardWidgetsRequests {
                 .contentType(ContentType.JSON)
                 .body(widget)
                 .when()
-                .patch(ApiEndpoint.WIDGET_ID.path(), widget.getId())
+                .patch(ApiEndpoint.WIDGET_ID, widget.getId())
                 .then()
                 .extract().response();
     }
@@ -45,7 +45,7 @@ public class DashboardWidgetsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(ApiEndpoint.WIDGET_ID.path(), widgetId)
+                .delete(ApiEndpoint.WIDGET_ID, widgetId)
                 .then()
                 .extract().response();
     }

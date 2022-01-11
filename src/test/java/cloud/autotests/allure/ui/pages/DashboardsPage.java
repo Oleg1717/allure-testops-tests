@@ -1,6 +1,5 @@
 package cloud.autotests.allure.ui.pages;
 
-import cloud.autotests.allure.ui.components.forms.DashboardEditForm;
 import cloud.autotests.allure.ui.data.dashboards.DashboardActionItem;
 import cloud.autotests.allure.ui.data.dashboards.WidgetActionItem;
 import com.codeborne.selenide.ElementsCollection;
@@ -18,10 +17,6 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 
 public class DashboardsPage {
-
-    public DashboardEditForm dashboardEditForm = new DashboardEditForm();
-
-
 
     private ElementsCollection widgetsList = $(".ProjectDashboards__content").$$(".react-grid-item");
     private ElementsCollection menuItems = $$(".Menu__item");

@@ -17,7 +17,7 @@ public class JobsRequests {
                 .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
-                .get(ApiEndpoint.JOB.path())
+                .get(ApiEndpoint.JOB)
                 .then()
                 .extract().response();
     }
@@ -28,7 +28,7 @@ public class JobsRequests {
                 .contentType(ContentType.JSON)
                 .body(jobData)
                 .when()
-                .post(ApiEndpoint.JOB.path())
+                .post(ApiEndpoint.JOB)
                 .then()
                 .extract().response();
     }
@@ -37,7 +37,7 @@ public class JobsRequests {
         given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(ApiEndpoint.JOB_ID.path(), jobId)
+                .delete(ApiEndpoint.JOB_ID, jobId)
                 .then()
                 .statusCode(204);
     }

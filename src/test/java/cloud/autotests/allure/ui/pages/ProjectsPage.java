@@ -1,11 +1,13 @@
 package cloud.autotests.allure.ui.pages;
 
+import cloud.autotests.allure.ui.components.forms.ProjectEditForm;
 import cloud.autotests.allure.ui.data.projects.ProjectsPaginationItem;
 import cloud.autotests.allure.ui.components.Sidebar;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
@@ -17,8 +19,7 @@ import static java.lang.String.format;
 
 public class ProjectsPage {
 
-    private Sidebar sidebar = new Sidebar();
-
+    private SelenideElement pageHeader = $(".BreadCrumbs");
     private SelenideElement header = $(".ProjectsListControlsBar");
     private ElementsCollection headerButtons = header.$$("button[type=button]");
     private SelenideElement myProjectsButton = headerButtons.find(text("My projects"));
@@ -37,10 +38,6 @@ public class ProjectsPage {
 
     private SelenideElement getProjectRowNameLink(String projectName) {
         return $(byLinkText(projectName));
-    }
-
-    public Sidebar getSidebar() {
-        return sidebar;
     }
 
     //region Alerts steps
@@ -113,4 +110,16 @@ public class ProjectsPage {
         paginationIndexes.shouldHave(text(format("of %d items",allProjectsCount)));
         return this;
     }
+
+    @Step("Check project page elements")
+    public ProjectsPage checkProjectPageElements() {
+        SoftAssertions assertions = new SoftAssertions();
+        assertions.assertThat(pageHeader.getText()).isEqualTo("Project");
+        assertions.assertThat(header.isDisplayed()).isEqualTo(true);
+        assertions.assertThat(findProjectInput.isDisplayed()).isEqualTo(false);
+        assertions.assertThat(newProjectButton.isDisplayed()).isEqualTo(true);
+        assertions.assertAll();
+        return this;
+    }
+
 }

@@ -1,6 +1,5 @@
 package cloud.autotests.allure.api.requests;
 
-import cloud.autotests.allure.api.models.ModelsInterface;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -9,9 +8,9 @@ import java.util.Map;
 import static cloud.autotests.allure.api.helpers.RestAssuredSpec.spec;
 import static io.restassured.RestAssured.given;
 
-public class RestAssuredRequests {
+public class AllureRsRequests {
 
-    public static Response collectionDataResponse(String endpoint, Map<String, String> requestParams) {
+    public static Response getCollectionData(String endpoint, Map<String, String> requestParams) {
         return given()
                 .spec(spec().rsRequest())
                 .params(requestParams)
@@ -21,7 +20,7 @@ public class RestAssuredRequests {
                 .extract().response();
     }
 
-    public static Response elementDataResponse(String endpoint, int elementId) {
+    public static Response getElementData(String endpoint, int elementId) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
@@ -30,7 +29,7 @@ public class RestAssuredRequests {
                 .extract().response();
     }
 
-    public static Response newElementResponse(String endpoint, ModelsInterface requestBody) {
+    public static <T> Response addElement(String endpoint, T requestBody) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -41,7 +40,7 @@ public class RestAssuredRequests {
                 .extract().response();
     }
 
-    public static Response editElementResponse(String endpoint, int elementId, ModelsInterface requestBody) {
+    public static <T> Response editElement(String endpoint, int elementId, T requestBody) {
         return given()
                 .spec(spec().rsRequest())
                 .contentType(ContentType.JSON)
@@ -52,7 +51,7 @@ public class RestAssuredRequests {
                 .extract().response();
     }
 
-    public static Response deleteElementResponse(String endpoint, int id) {
+    public static Response deleteElement(String endpoint, int id) {
         return given()
                 .spec(spec().rsRequest())
                 .when()
