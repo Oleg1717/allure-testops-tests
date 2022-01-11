@@ -18,10 +18,10 @@ public class RestAssuredSpec {
                 .setBaseUri(ConfigHelper.getBaseUrl())
                 .setBasePath(basePath)
                 .addHeader("X-XSRF-TOKEN", getAuthData().xsrfToken())
-                .addCookie(getAuthData().xsrfToken())
-                .addCookie(getAuthData().sessionToken())
+                .addCookie("XSRF-TOKEN", getAuthData().xsrfToken())
+                .addCookie("ALLURE_TESTOPS_SESSION", getAuthData().sessionToken())
                 .addFilter(RestAssuredFilter.withCustomTemplates())
-                .log(LogDetail.ALL)
+                .log(LogDetail.URI)
                 .build();
     }
 
