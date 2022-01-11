@@ -8,6 +8,7 @@ public class RestAssuredFilter {
     public static AllureRestAssured withCustomTemplates() {
         FILTER.setRequestTemplate("request.ftl");
         FILTER.setResponseTemplate("response.ftl");
+        FILTER.setResponseAttachmentName("Response");
         return FILTER;
     }
 }
