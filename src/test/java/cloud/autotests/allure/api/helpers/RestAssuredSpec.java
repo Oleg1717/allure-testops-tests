@@ -19,8 +19,8 @@ public class RestAssuredSpec {
                 .setBasePath(basePath)
                 .addHeader("X-XSRF-TOKEN", getAuthData().xsrfToken())
                 .addCookies(getAuthData().sessionCookies())
-                .addFilter(RestAssuredFilter.withCustomTemplates())
-                .log(LogDetail.URI)
+                .addFilter(new RestAssuredFilter().withCustomTemplates())
+                .log(LogDetail.ALL)
                 .build();
     }
 

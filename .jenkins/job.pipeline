@@ -55,7 +55,7 @@ pipeline {
     environment{
         SELENOID_CREDS = credentials('qa-guru-selenoid-creds')
         SELENOID_DOMAIN = "selenoid.autotests.cloud"
-        SELENOID_URL = "https://${SELENOID_CREDS_USR}:${SELENOID_CREDS_PSW}@${SELENOID_DOMAIN}/wd/hub/"
+        REMOTE_DRIVER_URL = "https://${SELENOID_CREDS_USR}:${SELENOID_CREDS_PSW}@${SELENOID_DOMAIN}/wd/hub/"
         VIDEO_STORAGE_URL = "https://${SELENOID_DOMAIN}/video/"
     }
 
@@ -81,9 +81,9 @@ pipeline {
                     sh '''
                         $GRADLE_HOME/bin/gradle clean ${TASK_NAME} \
                             -Dthreads=${THREADS} \
-                            -Dselenoid.url=${SELENOID_URL} \
+                            -Dremote.driver.url=${REMOTE_DRIVER_URL} \
                             -Dvideo.storage.url=${VIDEO_STORAGE_URL} \
-                            -Dbrowser.name=${BROWSER_NAME} \
+                            -Dbrowser=${BROWSER_NAME} \
                             -Dbrowser.version=${BROWSER_VERSION} \
                             -Dbrowser.size=${BROWSER_SIZE}
                     '''
@@ -97,7 +97,7 @@ pipeline {
             allure results: [[path: 'build/allure-results']]
             sh '''
                 java  \
-                    "-DprojectName=ALLURE-TESTOPS-TESTS" \
+                    "-DprojectName=REG-FORM-TESTS" \
                     "-Denv=prod" \
                     "-DreportLink=${BUILD_URL}" \
                     "-Dconfig.file=$ALLURE_NOTIFICATIONS_HOME/config/ov_autotests_bot.json" \
