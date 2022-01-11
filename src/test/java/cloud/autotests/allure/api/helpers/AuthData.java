@@ -6,28 +6,26 @@ import cloud.autotests.allure.config.ConfigHelper;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum AuthData {
-    MAIN_USER(ConfigHelper.getMainUserLogin(), ConfigHelper.getMainUserPassword()),
-    SECOND_USER(ConfigHelper.getSecondUserLogin(), ConfigHelper.getSecondUserPassword());
+public class AuthData {
 
-    private String username;
-    private String password;
-    private String xsrfToken;
-    private String sessionToken;
-    private Map<String, String> sessionCookies = new HashMap<>();
+    private final String xsrfToken = String.valueOf((int) (Math.random() * 1000));
+    private final String sessionToken;
+    private final Map<String, String> sessionCookies = new HashMap<>();
 
-    AuthData(String username, String password) {
-        this.username = username;
-        this.password = password;
-        xsrfToken = String.valueOf((int) (Math.random() * 1000));
-        sessionToken = new UserApi().getSessionToken(xsrfToken, username, password);
+    private AuthData() {
+        sessionToken = new UserApi()
+                .getSessionToken(xsrfToken, ConfigHelper.getMainUserLogin(), ConfigHelper.getMainUserPassword());
         sessionCookies.put("XSRF-TOKEN", xsrfToken);
         sessionCookies.put("ALLURE_TESTOPS_SESSION", sessionToken);
     }
 
-    public String username() { return username; }
+    public static AuthData getAuthData() {
+        return InitAuthData.AUTH_DATA;
+    }
 
-    public String password() { return password; }
+    private static class InitAuthData {
+        private static final AuthData AUTH_DATA = new AuthData();
+    }
 
     public String xsrfToken() { return xsrfToken; }
 

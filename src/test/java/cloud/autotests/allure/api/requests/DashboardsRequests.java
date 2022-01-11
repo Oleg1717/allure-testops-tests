@@ -17,7 +17,7 @@ public class DashboardsRequests {
                 .spec(spec().rsRequest())
                 .params(requestParams)
                 .when()
-                .get(ApiEndpoint.DASHBOARD.path())
+                .get(ApiEndpoint.DASHBOARD)
                 .then()
                 .extract().response();
     }
@@ -26,7 +26,7 @@ public class DashboardsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .get(ApiEndpoint.DASHBOARD_ID.path(), dashboardId)
+                .get(ApiEndpoint.DASHBOARD_ID, dashboardId)
                 .then()
                 .extract().response();
     }
@@ -37,7 +37,7 @@ public class DashboardsRequests {
                 .contentType(ContentType.JSON)
                 .body(dashboardData)
                 .when()
-                .post(ApiEndpoint.DASHBOARD.path())
+                .post(ApiEndpoint.DASHBOARD)
                 .then()
                 .extract().response();
     }
@@ -48,7 +48,7 @@ public class DashboardsRequests {
                 .contentType(ContentType.JSON)
                 .body(dashboardData)
                 .when()
-                .patch(ApiEndpoint.DASHBOARD_ID.path(), dashboardData.getId())
+                .patch(ApiEndpoint.DASHBOARD_ID, dashboardData.getId())
                 .then()
                 .extract().response();
     }
@@ -57,7 +57,7 @@ public class DashboardsRequests {
         return given()
                 .spec(spec().rsRequest())
                 .when()
-                .delete(ApiEndpoint.DASHBOARD_ID.path(), dashboardId)
+                .delete(ApiEndpoint.DASHBOARD_ID, dashboardId)
                 .then()
                 .extract().response();
     }

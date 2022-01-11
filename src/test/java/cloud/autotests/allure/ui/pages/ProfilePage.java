@@ -1,6 +1,6 @@
 package cloud.autotests.allure.ui.pages;
 
-import cloud.autotests.allure.ui.data.TestUrls;
+import cloud.autotests.allure.ui.data.TestUrl;
 import cloud.autotests.allure.ui.data.profile.SectionName;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -27,7 +27,7 @@ public class ProfilePage {
     }
 
     public ProfilePage openProfilePage() {
-        open(TestUrls.USER_PROFILE.url());
+        open(TestUrl.USER_PROFILE);
         return this;
     }
 

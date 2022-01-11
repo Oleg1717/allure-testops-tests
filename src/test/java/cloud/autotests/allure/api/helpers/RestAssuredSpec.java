@@ -5,6 +5,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 
+import static cloud.autotests.allure.api.helpers.AuthData.getAuthData;
+
 public class RestAssuredSpec {
 
     private final RequestSpecification rsSpec = getRequestSpec(ConfigHelper.getApiRsPath());
@@ -15,8 +17,8 @@ public class RestAssuredSpec {
         return new RequestSpecBuilder()
                 .setBaseUri(ConfigHelper.getBaseUrl())
                 .setBasePath(basePath)
-                .addHeader("X-XSRF-TOKEN", AuthData.MAIN_USER.xsrfToken())
-                .addCookies(AuthData.MAIN_USER.sessionCookies())
+                .addHeader("X-XSRF-TOKEN", getAuthData().xsrfToken())
+                .addCookies(getAuthData().sessionCookies())
                 .addFilter(RestAssuredFilter.withCustomTemplates())
                 .log(LogDetail.URI)
                 .build();

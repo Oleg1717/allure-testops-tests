@@ -1,11 +1,10 @@
 package cloud.autotests.allure.api.steps;
 
 import cloud.autotests.allure.api.data.ApiEndpoint;
-import cloud.autotests.allure.api.data.ApiEndpoints;
 import cloud.autotests.allure.api.models.dashboards.Dashboard;
 import cloud.autotests.allure.api.models.dashboards.Dashboards;
 import cloud.autotests.allure.api.requests.DashboardsRequests;
-import cloud.autotests.allure.api.requests.RestAssuredRequests;
+import cloud.autotests.allure.api.requests.AllureRsRequests;
 import cloud.autotests.allure.config.ConfigHelper;
 import io.qameta.allure.Step;
 
@@ -21,15 +20,17 @@ public class DashboardsApi {
                 .projectId(ConfigHelper.getProjectId())
                 .name(dashboardName)
                 .build();
-        return RestAssuredRequests
-                .newElementResponse(ApiEndpoints.DASHBOARD, body)
+        return AllureRsRequests
+                .addElement(ApiEndpoint.DASHBOARD, body)
                 .as(Dashboard.class)
                 .getId();
     }
 
     @Step("Delete dashboard with id = {dashboardId} using API")
     public void deleteDashboard(int dashboardId) {
-        DashboardsRequests.getDeleteDashboardResponse(dashboardId);
+
+        AllureRsRequests.deleteElement(ApiEndpoint.DASHBOARD_ID, dashboardId);
+        //DashboardsRequests.getDeleteDashboardResponse(dashboardId);
     }
 
     @Step("Delete dashboard '{dashboardName}' using API")

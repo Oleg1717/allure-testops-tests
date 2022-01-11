@@ -33,11 +33,17 @@ public class ConfigHelper {
         return getAppConfig().mainUserPassword();
     }
 
-    public static String getMainUserEmail() { return getAppConfig().mainUserEmail(); }
+    public static String getMainUserEmail() {
+        return getAppConfig().mainUserEmail();
+    }
 
-    public static String getMainUserFullName() { return getAppConfig().mainUserFullname(); }
+    public static String getMainUserFullName() {
+        return getAppConfig().mainUserFullname();
+    }
 
-    public static String getMainUserId() { return getAppConfig().mainUserId(); }
+    public static String getMainUserId() {
+        return getAppConfig().mainUserId();
+    }
 
     public static String getSecondUserLogin() {
         return getAppConfig().secondUserLogin();

@@ -20,7 +20,7 @@ public class UserRequests {
                 .formParam("password", password)
                 .log().uri()
                 .when()
-                .post(ApiEndpoint.USER_LOGIN.path())
+                .post(ApiEndpoint.USER_LOGIN)
                 .then()
                 .extract().response();
     }
@@ -29,7 +29,7 @@ public class UserRequests {
         return given()
                 .spec(spec().uaaRequest())
                 .when()
-                .get(ApiEndpoint.LICENSE.path())
+                .get(ApiEndpoint.LICENSE)
                 .then()
                 .extract().response();
     }
