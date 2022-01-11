@@ -10,13 +10,11 @@ public class AuthData {
 
     private final String xsrfToken = String.valueOf((int) (Math.random() * 1000));
     private final String sessionToken;
-    private final Map<String, String> sessionCookies = new HashMap<>();
 
     private AuthData() {
         sessionToken = new UserApi()
                 .getSessionToken(xsrfToken, ConfigHelper.getMainUserLogin(), ConfigHelper.getMainUserPassword());
-        sessionCookies.put("XSRF-TOKEN", xsrfToken);
-        sessionCookies.put("ALLURE_TESTOPS_SESSION", sessionToken);
+        System.out.println(sessionToken);
     }
 
     public static AuthData getAuthData() {
@@ -31,9 +29,5 @@ public class AuthData {
 
     public String sessionToken() {
         return sessionToken;
-    }
-
-    public Map<String, String> sessionCookies() {
-        return sessionCookies;
     }
 }
