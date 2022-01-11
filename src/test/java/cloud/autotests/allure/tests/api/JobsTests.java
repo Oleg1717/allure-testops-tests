@@ -42,6 +42,7 @@ public class JobsTests {
         Job jobRequestData = JobData.maxJobData;
         //when
         Response response = jobsApi.addJob(jobRequestData);
+        System.out.println(response.body().asString());
         Job jobResponseData = response.as(Job.class);
         //then
         jobsApi.checkStatusCode(response.statusCode(), 200);
@@ -59,6 +60,7 @@ public class JobsTests {
         Job jobRequestData = JobData.minJobData;
         //when
         Response response = jobsApi.addJob(jobRequestData);
+        System.out.println(response.body().asString());
         Job jobResponseData = response.as(Job.class);
         //then
         jobsApi.checkStatusCode(response.statusCode(), 200);
@@ -75,8 +77,11 @@ public class JobsTests {
         //given
         Job jobRequestData = JobData.maxJobData;
         Response firstJobResponse = jobsApi.addJob(jobRequestData);
+        System.out.println(firstJobResponse.body().asString());
         //when
         Response secondJobResponse = jobsApi.addJob(jobRequestData);
+        System.out.println(secondJobResponse.body().asString());
+
         ResponseErrorBody errorBody = secondJobResponse.as(ResponseErrorBody.class);
         //then
         jobsApi.checkStatusCode(secondJobResponse.statusCode(), 409);
