@@ -22,14 +22,15 @@ public class JobData {
     public Job getMaxJobData() {
         JobParameter allureNotificationsVersion = getJobParameter("ALLURE_NOTIFICATIONS_VERSION", "3.1.1");
         JobParameter threads = getJobParameter("THREADS", "5");
+        String name = "co7-ov-regform-max-" + faker.idNumber();
         return Job.builder()
                 .projectId(ConfigHelper.getProjectId())
                 .canRun(true)
                 .buildServerId(1)
-                .name("co7-ov-regform-max-" + faker.idNumber())
+                .name(name)
                 .url("https://jenkins.autotests.cloud/job/c07-ov-regform/")
                 .type("jenkins")
-                .externalId("co7-ov-regform-max")
+                .externalId(name)
                 .parameters(Arrays.asList(allureNotificationsVersion, threads))
                 .build();
     }
