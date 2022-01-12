@@ -24,11 +24,11 @@ import org.junit.jupiter.api.Test;
 @Owner("OlegV")
 @Feature("Jobs")
 @Layer("api")
-//@Tags({@Tag("jobs"), @Tag("microservice")})
 @Tag("jobs")
 public class JobsTests {
 
     JobsApi jobsApi = new JobsApi();
+    JobData jobData = new JobData();
 
     @Severity(SeverityLevel.MINOR)
     @Description("Check that that new job may be added")
@@ -39,10 +39,9 @@ public class JobsTests {
     @DisplayName("Add a job with max valid data")
     public void addJobWithFullValidData() {
         //given
-        Job jobRequestData = JobData.maxJobData;
+        Job jobRequestData = jobData.getMaxJobData();
         //when
         Response response = jobsApi.addJob(jobRequestData);
-        System.out.println(response.body().asString());
         Job jobResponseData = response.as(Job.class);
         //then
         jobsApi.checkStatusCode(response.statusCode(), 200);
@@ -57,15 +56,13 @@ public class JobsTests {
     @DisplayName("Add a job with min valid data")
     public void addJobWithMinValidData() {
         //given
-        Job jobRequestData = JobData.minJobData;
+        Job jobRequestData = jobData.getMinJobData();
         //when
         Response response = jobsApi.addJob(jobRequestData);
-        System.out.println(response.body().asString());
         Job jobResponseData = response.as(Job.class);
         //then
         jobsApi.checkStatusCode(response.statusCode(), 200);
         jobsApi.checkResponseBody(jobRequestData, jobResponseData);
-
         //and
         jobsApi.deleteJob(jobResponseData.getId());
     }
@@ -75,13 +72,10 @@ public class JobsTests {
     @DisplayName("Add a copy of existing job")
     public void addCopyOfExistingJob() {
         //given
-        Job jobRequestData = JobData.maxJobData;
+        Job jobRequestData = jobData.getMaxJobData();
         Response firstJobResponse = jobsApi.addJob(jobRequestData);
-        System.out.println(firstJobResponse.body().asString());
         //when
         Response secondJobResponse = jobsApi.addJob(jobRequestData);
-        System.out.println(secondJobResponse.body().asString());
-
         ResponseErrorBody errorBody = secondJobResponse.as(ResponseErrorBody.class);
         //then
         jobsApi.checkStatusCode(secondJobResponse.statusCode(), 409);
