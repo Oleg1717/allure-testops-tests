@@ -29,15 +29,15 @@ allure {
 
 dependencies {
     testImplementation(
-            "com.codeborne:selenide:$selenideVersion",
-            "io.qameta.allure:allure-selenide:$allureVersion",
-            "io.rest-assured:rest-assured:4.4.0",
-            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "com.github.javafaker:javafaker:1.0.2",
             "org.aeonbits.owner:owner:1.0.12",
             "org.assertj:assertj-core:3.22.0",
-            "com.github.javafaker:javafaker:1.0.2",
+            "io.rest-assured:rest-assured:4.4.0",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
             "com.fasterxml.jackson.core:jackson-databind:2.13.1",
             "com.fasterxml.jackson.core:jackson-annotations:2.13.1",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "org.junit.jupiter:junit-jupiter-params:$junitVersion")
     testRuntimeOnly(

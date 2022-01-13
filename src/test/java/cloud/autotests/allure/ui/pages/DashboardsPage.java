@@ -18,16 +18,16 @@ import static com.codeborne.selenide.Selenide.sleep;
 
 public class DashboardsPage {
 
-    private ElementsCollection widgetsList = $(".ProjectDashboards__content").$$(".react-grid-item");
-    private ElementsCollection menuItems = $$(".Menu__item");
+    private final ElementsCollection widgetsList = $(".ProjectDashboards__content").$$(".react-grid-item");
+    private final ElementsCollection menuItems = $$(".Menu__item");
 
-    private SelenideElement newDashboardButton = $(".ProjectDashboards__title").$("button[type=button]");
-    private SelenideElement dashboardsTabs = $(".ProjectDashboards__tabs");
-    private SelenideElement dashboardActionsButton = $(".ProjectDashboards__navigation").$("button[type=button]");
+    private final SelenideElement newDashboardButton = $(".ProjectDashboards__title").$("button[type=button]");
+    private final SelenideElement dashboardsTabs = $(".ProjectDashboards__tabs");
+    private final SelenideElement dashboardActionsButton = $(".ProjectDashboards__navigation").$("button[type=button]");
 
-    private SelenideElement fullScreenControls = $(".Dashboard__fullscreen-controls");
-    private SelenideElement addWidgetButton = $(".Dashboard__empty .Button");
-    private SelenideElement notification = $(".Toastify__toast-body");
+    private final SelenideElement fullScreenControls = $(".Dashboard__fullscreen-controls");
+    private final SelenideElement addWidgetButton = $(".Dashboard__empty .Button");
+    private final SelenideElement notification = $(".Toastify__toast-body");
 
     //region Get elements methods
     private SelenideElement getDashboardTabByName(String dashboardName) {

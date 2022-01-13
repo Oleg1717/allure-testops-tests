@@ -1,4 +1,4 @@
-package cloud.autotests.allure.ui.components.forms;
+package cloud.autotests.allure.ui.pages.components.forms;
 
 import cloud.autotests.allure.ui.data.dashboards.FormGroupByItem;
 import cloud.autotests.allure.ui.data.dashboards.FormLaunchAnalyticMetricItem;

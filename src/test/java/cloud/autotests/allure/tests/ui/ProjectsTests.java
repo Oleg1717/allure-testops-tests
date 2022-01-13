@@ -2,8 +2,8 @@ package cloud.autotests.allure.tests.ui;
 
 import cloud.autotests.allure.api.models.projects.Project;
 import cloud.autotests.allure.api.steps.ProjectsApi;
-import cloud.autotests.allure.ui.components.Sidebar;
-import cloud.autotests.allure.ui.components.forms.ProjectEditForm;
+import cloud.autotests.allure.ui.pages.components.Sidebar;
+import cloud.autotests.allure.ui.pages.components.forms.ProjectEditForm;
 import cloud.autotests.allure.ui.data.FormErrorMessages;
 import cloud.autotests.allure.ui.data.TestUrl;
 import cloud.autotests.allure.ui.data.projects.ProjectsPaginationItem;
@@ -12,7 +12,6 @@ import cloud.autotests.allure.ui.helpers.WithLogin;
 import cloud.autotests.allure.ui.helpers.allure.AutoMember;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.helpers.allure.ManualMember;
-import cloud.autotests.allure.ui.pages.DashboardsPage;
 import cloud.autotests.allure.ui.pages.ProjectsPage;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
