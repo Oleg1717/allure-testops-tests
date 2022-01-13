@@ -1,4 +1,4 @@
-package cloud.autotests.allure.ui.components;
+package cloud.autotests.allure.ui.pages.components;
 
 import cloud.autotests.allure.ui.data.sidebar.SideMenuNavItem;
 import cloud.autotests.allure.ui.data.sidebar.UserMenuItem;

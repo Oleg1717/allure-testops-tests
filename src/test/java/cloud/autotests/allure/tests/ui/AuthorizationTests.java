@@ -1,11 +1,10 @@
 package cloud.autotests.allure.tests.ui;
 
 import cloud.autotests.allure.config.ConfigHelper;
-import cloud.autotests.allure.ui.components.Sidebar;
 import cloud.autotests.allure.ui.data.sidebar.SideMenuNavItem;
 import cloud.autotests.allure.ui.helpers.allure.Layer;
 import cloud.autotests.allure.ui.pages.LoginPage;
-import cloud.autotests.allure.ui.pages.ProjectsPage;
+import cloud.autotests.allure.ui.pages.components.Sidebar;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;

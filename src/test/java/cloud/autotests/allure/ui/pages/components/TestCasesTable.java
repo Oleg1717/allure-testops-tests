@@ -1,4 +1,4 @@
-package cloud.autotests.allure.ui.components;
+package cloud.autotests.allure.ui.pages.components;
 
 import com.codeborne.selenide.ElementsCollection;
 import io.qameta.allure.Step;

@@ -2,9 +2,9 @@ package cloud.autotests.allure.tests.ui;
 
 import cloud.autotests.allure.api.steps.DashboardsApi;
 import cloud.autotests.allure.config.ConfigHelper;
-import cloud.autotests.allure.ui.components.forms.DashboardEditForm;
-import cloud.autotests.allure.ui.components.forms.DashboardWidgetEditForm;
-import cloud.autotests.allure.ui.components.forms.DeleteForm;
+import cloud.autotests.allure.ui.pages.components.forms.DashboardEditForm;
+import cloud.autotests.allure.ui.pages.components.forms.DashboardWidgetEditForm;
+import cloud.autotests.allure.ui.pages.components.forms.DeleteForm;
 import cloud.autotests.allure.ui.data.FormErrorMessages;
 import cloud.autotests.allure.ui.data.TestUrl;
 import cloud.autotests.allure.ui.data.dashboards.DashboardActionItem;
