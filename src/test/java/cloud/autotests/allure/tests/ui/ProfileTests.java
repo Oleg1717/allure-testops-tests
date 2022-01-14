@@ -3,7 +3,7 @@ package cloud.autotests.allure.tests.ui;
 import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.data.profile.AuthoritiesType;
 import cloud.autotests.allure.ui.helpers.WithLogin;
-import cloud.autotests.allure.ui.helpers.allure.Layer;
+import cloud.autotests.allure.ui.helpers.allure.annotations.Layer;
 import cloud.autotests.allure.ui.pages.ProfilePage;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;

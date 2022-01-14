@@ -22,19 +22,13 @@ public class CustomTestWatcher implements TestWatcher {
 
     @Override
     public void testFailed(ExtensionContext extensionContext, Throwable throwable) {
-        step("Add attachments", () -> {
-            String sessionId = DriverUtils.getSessionId();
-
+        //step("Add attachments", () -> {
             AllureAttachments.addScreenshotAs("Last screenshot");
             AllureAttachments.addPageSource();
             AllureAttachments.addBrowserConsoleLogs();
-
+            AllureAttachments.addVideo();
             Selenide.closeWebDriver();
-
-            if (ConfigHelper.isVideoOn()) {
-                AllureAttachments.addVideo(sessionId);
-            }
-        });
+        //});
     }
 
     @Override

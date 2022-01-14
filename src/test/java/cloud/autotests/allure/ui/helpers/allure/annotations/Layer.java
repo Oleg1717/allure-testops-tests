@@ -1,4 +1,6 @@
-package cloud.autotests.allure.ui.helpers.allure;
+package cloud.autotests.allure.ui.helpers.allure.annotations;
+
+import io.qameta.allure.LabelAnnotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -11,8 +13,9 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
-public @interface JiraIssues {
+@LabelAnnotation(name = "layer")
+public @interface Layer {
 
-    JiraIssue[] value();
+    String value();
 
 }

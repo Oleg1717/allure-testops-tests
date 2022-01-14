@@ -4,7 +4,7 @@ import cloud.autotests.allure.api.data.LoginErrorMessage;
 import cloud.autotests.allure.api.models.user.Login;
 import cloud.autotests.allure.api.steps.UserApi;
 import cloud.autotests.allure.config.ConfigHelper;
-import cloud.autotests.allure.ui.helpers.allure.Layer;
+import cloud.autotests.allure.ui.helpers.allure.annotations.Layer;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;

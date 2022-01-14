@@ -1,4 +1,4 @@
-package cloud.autotests.allure.ui.helpers.allure;
+package cloud.autotests.allure.ui.helpers.allure.annotations;
 
 import io.qameta.allure.LabelAnnotation;
 

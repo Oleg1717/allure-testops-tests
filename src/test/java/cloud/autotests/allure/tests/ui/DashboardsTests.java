@@ -15,7 +15,7 @@ import cloud.autotests.allure.ui.data.dashboards.FormTreeItem;
 import cloud.autotests.allure.ui.data.dashboards.FormTypeItem;
 import cloud.autotests.allure.ui.data.dashboards.WidgetActionItem;
 import cloud.autotests.allure.ui.helpers.WithLogin;
-import cloud.autotests.allure.ui.helpers.allure.Layer;
+import cloud.autotests.allure.ui.helpers.allure.annotations.Layer;
 import cloud.autotests.allure.ui.pages.DashboardsPage;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
