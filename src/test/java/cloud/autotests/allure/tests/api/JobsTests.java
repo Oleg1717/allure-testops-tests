@@ -5,7 +5,7 @@ import cloud.autotests.allure.api.models.ResponseErrorBody;
 import cloud.autotests.allure.api.models.jobs.Job;
 import cloud.autotests.allure.api.steps.JobsApi;
 import cloud.autotests.allure.api.testdata.JobData;
-import cloud.autotests.allure.ui.helpers.allure.Layer;
+import cloud.autotests.allure.ui.helpers.allure.annotations.Layer;
 import io.qameta.allure.AllureId;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
@@ -15,10 +15,8 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 @Owner("OlegV")

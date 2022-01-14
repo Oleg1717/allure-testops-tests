@@ -2,7 +2,7 @@ package cloud.autotests.allure.tests.ui;
 
 import cloud.autotests.allure.config.ConfigHelper;
 import cloud.autotests.allure.ui.data.sidebar.SideMenuNavItem;
-import cloud.autotests.allure.ui.helpers.allure.Layer;
+import cloud.autotests.allure.ui.helpers.allure.annotations.Layer;
 import cloud.autotests.allure.ui.pages.LoginPage;
 import cloud.autotests.allure.ui.pages.components.Sidebar;
 import com.codeborne.selenide.WebDriverRunner;
