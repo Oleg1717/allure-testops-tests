@@ -6,6 +6,7 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 
 import static cloud.autotests.allure.api.helpers.AuthData.getAuthData;
+import static cloud.autotests.allure.api.helpers.CustomLogFilter.customLogFilter;
 
 public class RestAssuredSpec {
 
@@ -20,7 +21,7 @@ public class RestAssuredSpec {
                 .addHeader("X-XSRF-TOKEN", getAuthData().xsrfToken())
                 .addCookie("XSRF-TOKEN", getAuthData().xsrfToken())
                 .addCookie("ALLURE_TESTOPS_SESSION", getAuthData().sessionToken())
-                .addFilter(RestAssuredFilter.withCustomTemplates())
+                .addFilter(customLogFilter().withCustomTemplates())
                 .log(LogDetail.ALL)
                 .build();
     }
