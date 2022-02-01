@@ -9,7 +9,7 @@ repositories {
 }
 
 def allureVersion = "2.17.2",
-    selenideVersion = "6.1.2",
+    selenideVersion = "6.2.1",
     junitVersion = "5.8.2"
 
 allure {
@@ -32,7 +32,7 @@ dependencies {
             "com.github.javafaker:javafaker:1.0.2",
             "org.aeonbits.owner:owner:1.0.12",
             "org.assertj:assertj-core:3.22.0",
-            "io.rest-assured:rest-assured:4.4.0",
+            "io.rest-assured:rest-assured:4.5.0",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "com.fasterxml.jackson.core:jackson-databind:2.13.1",
             "com.fasterxml.jackson.core:jackson-annotations:2.13.1",
@@ -41,7 +41,7 @@ dependencies {
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "org.junit.jupiter:junit-jupiter-params:$junitVersion")
     testRuntimeOnly(
-            "org.slf4j:slf4j-simple:1.7.32",
+            "org.slf4j:slf4j-simple:1.7.33",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 
@@ -59,7 +59,7 @@ tasks.withType(Test) {
         systemProperties += [
                 'junit.jupiter.execution.parallel.enabled'                 : true,
                 'junit.jupiter.execution.parallel.mode.default'            : 'concurrent',
-                'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
+                //'junit.jupiter.execution.parallel.mode.classes.default'    : 'concurrent',
                 'junit.jupiter.execution.parallel.config.strategy'         : 'fixed',
                 'junit.jupiter.execution.parallel.config.fixed.parallelism': System.getProperty("threads").toInteger()
         ]
