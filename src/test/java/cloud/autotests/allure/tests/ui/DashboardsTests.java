@@ -85,6 +85,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @Tag("positive_negative")
     @Tag("positive_only")
     @AllureId("5572")
     @Story("Add new dashboards")
