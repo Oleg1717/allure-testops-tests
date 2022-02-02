@@ -297,6 +297,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @Tag("positive_negative")
     @AllureId("5568")
     @Story("Change widgets")
     @DisplayName("Clone widget")
