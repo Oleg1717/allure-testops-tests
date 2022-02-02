@@ -22,7 +22,7 @@ public class RestAssuredSpec {
                 .addCookie("XSRF-TOKEN", getAuthData().xsrfToken())
                 .addCookie("ALLURE_TESTOPS_SESSION", getAuthData().sessionToken())
                 .addFilter(customLogFilter().withCustomTemplates())
-                .log(LogDetail.ALL)
+                .log(LogDetail.URI)
                 .build();
     }
 
