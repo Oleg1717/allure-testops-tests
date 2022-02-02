@@ -28,11 +28,12 @@ public class JobsTests {
     JobsApi jobsApi = new JobsApi();
     JobData jobData = new JobData();
 
-    @Severity(SeverityLevel.MINOR)
-    @Description("Check that that new job may be added")
-    @Lead("s_vasenkov")
     @Test
     @AllureId("5605")
+    @Severity(SeverityLevel.MINOR)
+    @Tag("positive_only")
+    @Tag("positive_negative")
+    @Description("Check that that new job may be added")
     @Story("Add a job")
     @DisplayName("Add a job with max valid data")
     public void addJobWithFullValidData() {
@@ -51,6 +52,7 @@ public class JobsTests {
     @Test
     @AllureId("5602")
     @Story("Add a job")
+    @Tag("positive_negative")
     @DisplayName("Add a job with min valid data")
     public void addJobWithMinValidData() {
         //given
@@ -59,13 +61,15 @@ public class JobsTests {
         Response response = jobsApi.addJob(jobRequestData);
         Job jobResponseData = response.as(Job.class);
         //then
-        jobsApi.checkStatusCode(response.statusCode(), 200);
+        jobsApi.checkStatusCode(response.statusCode(), 404);
         jobsApi.checkResponseBody(jobRequestData, jobResponseData);
         //and
         jobsApi.deleteJob(jobResponseData.getId());
     }
 
     @Test
+    @Tag("positive_only")
+    @Tag("positive_negative")
     @Story("Add a job")
     @DisplayName("Add a copy of existing job")
     public void addCopyOfExistingJob() {

@@ -69,7 +69,8 @@ public class DashboardsTests extends TestBase {
     //region Add new dashboards tests
     @WithLogin
     @Test
-    @AllureId("5576")
+    @Tag("positive_only")
+    @Tag("positive_negative")
     @Story("Add new dashboards")
     @DisplayName("Add new dashboard")
     void addDashboard() {
@@ -111,6 +112,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @Tag("positive_negative")
     @AllureId("5569")
     @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard using cancel button")
@@ -126,6 +128,8 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @Tag("positive_only")
+    @Tag("positive_negative")
     @AllureId("5561")
     @Story("Add new dashboards")
     @DisplayName("Cancel adding new dashboard using close button")
