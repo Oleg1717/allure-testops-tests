@@ -70,6 +70,7 @@ public class JobsTests {
     @Test
     @Tag("positive_only")
     @Tag("positive_negative")
+    @AllureId("6655")
     @Story("Add a job")
     @DisplayName("Add a copy of existing job")
     public void addCopyOfExistingJob() {
