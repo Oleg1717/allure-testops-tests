@@ -97,3 +97,15 @@ task dashboards_tests(type: Test) {
         includeTags 'dashboards'
     }
 }
+
+task positive_only(type: Test) {
+    useJUnitPlatform {
+        includeTags 'positive_only'
+    }
+}
+
+task positive_negative(type: Test) {
+    useJUnitPlatform {
+        includeTags 'positive_negative'
+    }
+}
