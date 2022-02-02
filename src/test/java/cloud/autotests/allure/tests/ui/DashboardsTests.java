@@ -69,6 +69,7 @@ public class DashboardsTests extends TestBase {
     //region Add new dashboards tests
     @WithLogin
     @Test
+    @AllureId("7053")
     @Tag("positive_only")
     @Tag("positive_negative")
     @Story("Add new dashboards")
@@ -84,6 +85,7 @@ public class DashboardsTests extends TestBase {
 
     @WithLogin
     @Test
+    @Tag("positive_only")
     @AllureId("5572")
     @Story("Add new dashboards")
     @DisplayName("Add dashboard with blank name")
