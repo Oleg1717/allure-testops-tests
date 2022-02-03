@@ -36,11 +36,11 @@ public class AuthorizationTests extends TestBase {
     @DisplayName("Successful login as testuser")
     void loginTest() {
         loginPage.openLoginPage("")
-                .setUsernameInput(ConfigHelper.getMainUserLogin())
-                .setPasswordInput(ConfigHelper.getMainUserLogin())
+                .setUsernameInput(ConfigHelper.APP_CONFIG.mainUserLogin())
+                .setPasswordInput(ConfigHelper.APP_CONFIG.mainUserPassword())
                 .clickContinueButton();
         sidebar.navigateTo(SideMenuNavItem.USER_MENU)
-                .checkUsername(ConfigHelper.getMainUserLogin());
+                .checkUsername(ConfigHelper.APP_CONFIG.mainUserLogin());
     }
 
     @Test
@@ -65,6 +65,6 @@ public class AuthorizationTests extends TestBase {
 
         step("Verify successful authorization", () ->
                 $("img.Avatar__img").shouldHave(
-                        attribute("alt", ConfigHelper.getMainUserLogin())));
+                        attribute("alt", ConfigHelper.APP_CONFIG.mainUserLogin())));
     }
 }

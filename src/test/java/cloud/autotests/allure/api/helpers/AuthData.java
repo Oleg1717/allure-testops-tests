@@ -10,7 +10,8 @@ public class AuthData {
 
     private AuthData() {
         sessionToken = new UserApi()
-                .getSessionToken(xsrfToken, ConfigHelper.getMainUserLogin(), ConfigHelper.getMainUserPassword());
+                .getSessionToken(xsrfToken, ConfigHelper.APP_CONFIG.mainUserLogin(), ConfigHelper.APP_CONFIG.mainUserPassword());
+        System.out.println(sessionToken);
     }
 
     public static AuthData getAuthData() {

@@ -13,7 +13,7 @@ public class JobData {
 
     public Job getMinJobData() {
         return Job.builder()
-                .projectId(ConfigHelper.getProjectId())
+                .projectId(ConfigHelper.APP_CONFIG.projectId())
                 .name("co7-ov-regform-min-" + faker.idNumber())
                 .type("jenkins")
                 .build();
@@ -24,7 +24,7 @@ public class JobData {
         JobParameter threads = getJobParameter("THREADS", "5");
         String name = "co7-ov-regform-max-" + faker.idNumber();
         return Job.builder()
-                .projectId(ConfigHelper.getProjectId())
+                .projectId(ConfigHelper.APP_CONFIG.projectId())
                 .canRun(true)
                 .buildServerId(1)
                 .name(name)
