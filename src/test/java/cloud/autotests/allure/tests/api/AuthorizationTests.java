@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
 @Tag("login")
 public class AuthorizationTests {
 
-    private final String userName = ConfigHelper.getSecondUserLogin();
-    private final String userPassword = ConfigHelper.getSecondUserPassword();
+    private final String userName = ConfigHelper.APP_CONFIG.secondUserLogin();
+    private final String userPassword = ConfigHelper.APP_CONFIG.secondUserPassword();
     private final String xsrfToken = "1234567";
     UserApi userApi = new UserApi();
 

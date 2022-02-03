@@ -14,7 +14,7 @@ properties([
              tagFilter: '*',
              type: 'PT_BRANCH',
              useRepository: 'git@github.com:Oleg1717/allure-testops-tests.git'),
-        choice(choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests'], name: 'TASK_NAME'),
+        choice(choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests', 'positive_only', 'positive_negative'], name: 'TASK_NAME'),
         choice(choices: ['chrome', 'firefox', 'opera'], name: 'BROWSER_NAME'),
         [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',

@@ -16,20 +16,20 @@ public class DriverSettings {
             "--disable-popup-blocking", "--disable-notifications", "--lang=en-en");
 
     public static void configure() {
-        Configuration.browser = ConfigHelper.getBrowserName();
-        Configuration.browserVersion = ConfigHelper.getBrowserVersion();
-        Configuration.browserSize = ConfigHelper.getBrowserSize();
-        Configuration.baseUrl = ConfigHelper.getBaseUrl();
+        Configuration.browser = ConfigHelper.PROJECT_CONFIG.browserName();
+        Configuration.browserVersion = ConfigHelper.PROJECT_CONFIG.browserVersion();
+        Configuration.browserSize = ConfigHelper.PROJECT_CONFIG.browserSize();
+        Configuration.baseUrl = ConfigHelper.APP_CONFIG.baseUrl();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         if (ConfigHelper.isRemoteWebDriver()) {
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
-            Configuration.remote = ConfigHelper.getRemoteDriverUrl();
+            Configuration.remote = ConfigHelper.PROJECT_CONFIG.remoteDriverUrl();
         }
 
-        switch (ConfigHelper.getBrowserName()) {
+        switch (ConfigHelper.PROJECT_CONFIG.browserName()) {
             case "chrome":
                 capabilities.setCapability(ChromeOptions.CAPABILITY,
                         new ChromeOptions().addArguments(browserOptionsList));

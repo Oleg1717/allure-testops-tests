@@ -10,13 +10,13 @@ import static cloud.autotests.allure.api.helpers.CustomLogFilter.customLogFilter
 
 public class RestAssuredSpec {
 
-    private final RequestSpecification rsSpec = getRequestSpec(ConfigHelper.getApiRsPath());
+    private final RequestSpecification rsSpec = getRequestSpec(ConfigHelper.APP_CONFIG.apiRsPath());
 
-    private final RequestSpecification uaaSpec = getRequestSpec(ConfigHelper.getApiUaaPath());
+    private final RequestSpecification uaaSpec = getRequestSpec(ConfigHelper.APP_CONFIG.apiUaaPath());
 
     private RequestSpecification getRequestSpec(String basePath) {
         return new RequestSpecBuilder()
-                .setBaseUri(ConfigHelper.getBaseUrl())
+                .setBaseUri(ConfigHelper.APP_CONFIG.baseUrl())
                 .setBasePath(basePath)
                 .addHeader("X-XSRF-TOKEN", getAuthData().xsrfToken())
                 .addCookie("XSRF-TOKEN", getAuthData().xsrfToken())
