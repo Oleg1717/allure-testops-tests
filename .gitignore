@@ -39,5 +39,4 @@ target/
 /gradlew
 /gradlew.bat
 .todo
-#*.pipeline
 *.properties
