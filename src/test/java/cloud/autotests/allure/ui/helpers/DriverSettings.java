@@ -12,39 +12,24 @@ import java.util.List;
 
 public class DriverSettings {
 
-    private static List<String> browserOptionsList = Arrays.asList("--no-sandbox", "--disable-infobars",
+    private static final List<String> browserOptionsList = Arrays.asList("--no-sandbox", "--disable-infobars",
             "--disable-popup-blocking", "--disable-notifications", "--lang=en-en");
 
     public static void configure() {
+        Configuration.baseUrl = ConfigHelper.APP_CONFIG.baseUrl();
         Configuration.browser = ConfigHelper.PROJECT_CONFIG.browserName();
         Configuration.browserVersion = ConfigHelper.PROJECT_CONFIG.browserVersion();
-        Configuration.browserSize = ConfigHelper.PROJECT_CONFIG.browserSize();
-        Configuration.baseUrl = ConfigHelper.APP_CONFIG.baseUrl();
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-
+        ChromeOptions options = new ChromeOptions();
         if (ConfigHelper.IS_REMOTE_WEBDRIVER) {
-            capabilities.setCapability("enableVNC", true);
-            capabilities.setCapability("enableVideo", true);
+            options.setCapability("enableVNC", true);
+            options.setCapability("enableVideo", true);
             Configuration.remote = ConfigHelper.PROJECT_CONFIG.remoteDriverUrl();
+            Configuration.browserSize = ConfigHelper.PROJECT_CONFIG.browserSize();
+        } else {
+            Configuration.browserSize = null;
+            options.addArguments("start-maximized");
         }
-
-        switch (ConfigHelper.PROJECT_CONFIG.browserName()) {
-            case "chrome":
-                capabilities.setCapability(ChromeOptions.CAPABILITY,
-                        new ChromeOptions().addArguments(browserOptionsList));
-                break;
-            case "firefox":
-                capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS,
-                        new OperaOptions().addArguments(browserOptionsList));
-                break;
-            case "opera":
-                OperaOptions operaOptions = new OperaOptions()
-                        .addArguments(browserOptionsList);
-                capabilities.setCapability(OperaOptions.CAPABILITY,
-                        new OperaOptions().addArguments(browserOptionsList));
-        }
-
-        Configuration.browserCapabilities = capabilities;
+        Configuration.browserCapabilities = options;
     }
 }
