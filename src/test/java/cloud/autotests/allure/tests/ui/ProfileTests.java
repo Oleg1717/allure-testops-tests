@@ -26,9 +26,9 @@ public class ProfileTests extends TestBase{
     @DisplayName("Check user data")
     public void checkUserData() {
         profilePage.openProfilePage()
-                .checkThatUserNameEquals(ConfigHelper.getMainUserLogin())
-                .checkThatFullNameEquals(ConfigHelper.getMainUserFullName())
-                .checkThatEmailEquals(ConfigHelper.getMainUserEmail())
+                .checkThatUserNameEquals(ConfigHelper.APP_CONFIG.mainUserLogin())
+                .checkThatFullNameEquals(ConfigHelper.APP_CONFIG.mainUserFullname())
+                .checkThatEmailEquals(ConfigHelper.APP_CONFIG.mainUserEmail())
                 .checkThatAuthoritiesEquals(AuthoritiesType.USER.value())
                 .clickApiTokenCreateButton();
     }

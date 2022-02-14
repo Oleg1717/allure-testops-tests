@@ -63,7 +63,7 @@ public class DashboardsTests extends TestBase {
 
     @AfterAll
     void deleteDashboardsAfterTests() {
-        dashboardsApi.deleteAllDashboards(ConfigHelper.getProjectId());
+        dashboardsApi.deleteAllDashboards(ConfigHelper.APP_CONFIG.projectId());
     }
 
     //region Add new dashboards tests

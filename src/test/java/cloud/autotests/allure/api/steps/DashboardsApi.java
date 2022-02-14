@@ -17,7 +17,7 @@ public class DashboardsApi {
     @Step("Add dashboard '{dashboardName}' using API")
     public Integer addDashboard(String dashboardName) {
         Dashboard body = Dashboard.builder()
-                .projectId(ConfigHelper.getProjectId())
+                .projectId(ConfigHelper.APP_CONFIG.projectId())
                 .name(dashboardName)
                 .build();
         return AllureRsRequests
