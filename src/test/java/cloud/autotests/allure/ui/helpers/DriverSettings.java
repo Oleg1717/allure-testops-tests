@@ -23,7 +23,7 @@ public class DriverSettings {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        if (ConfigHelper.isRemoteWebDriver()) {
+        if (ConfigHelper.IS_REMOTE_WEBDRIVER) {
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
             Configuration.remote = ConfigHelper.PROJECT_CONFIG.remoteDriverUrl();
