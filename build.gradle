@@ -27,7 +27,7 @@ dependencies {
             "com.codeborne:selenide:$selenideVersion",
             "org.junit.jupiter:junit-jupiter:$junitVersion")
     testRuntimeOnly(
-            "org.slf4j:slf4j-simple:1.7.33",
+            'org.slf4j:slf4j-simple:1.7.35',
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 
@@ -54,7 +54,6 @@ tasks.withType(Test) {
 
     testLogging {
         lifecycle {
-//            events "started", "failed"
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
@@ -94,11 +93,5 @@ task positive_only(type: Test) {
 task positive_negative(type: Test) {
     useJUnitPlatform {
         includeTags 'positive_negative'
-    }
-}
-
-task one_test(type: Test) {
-    useJUnitPlatform {
-        includeTags 'one_test'
     }
 }
