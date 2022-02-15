@@ -4,8 +4,7 @@ import org.aeonbits.owner.Config;
 
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "system:properties",
-        "classpath:config/local.properties"
+        "system:properties"
 })
 public interface ProjectConfig extends Config {
 
@@ -22,8 +21,7 @@ public interface ProjectConfig extends Config {
     String browserSize();
 
     @Key("remote.driver.url")
+    //@DefaultValue("http://192.168.1.102:8080/wd/hub/")
+    @DefaultValue("")
     String remoteDriverUrl();
-
-    @Key("video.storage.url")
-    String videoStorageUrl();
 }
