@@ -8,11 +8,13 @@ repositories {
 }
 
 def allureVersion = "2.17.2",
-    selenideVersion = "6.2.1",
-    junitVersion = "5.8.2"
+    selenideVersion = '6.3.0',
+    junitVersion = "5.8.2",
+    jacksonVersion = "2.13.1"
 
 dependencies {
     testImplementation(
+            'ch.qos.logback:logback-classic:1.2.10',
             "com.github.javafaker:javafaker:1.0.2",
             "org.aeonbits.owner:owner:1.0.12",
             "org.assertj:assertj-core:3.22.0",
@@ -20,8 +22,8 @@ dependencies {
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.qameta.allure:allure-junit5:$allureVersion",
-            "com.fasterxml.jackson.core:jackson-databind:2.13.1",
-            "com.fasterxml.jackson.core:jackson-annotations:2.13.1",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion",
             "com.codeborne:selenide:$selenideVersion",
             "org.junit.jupiter:junit-jupiter:$junitVersion")
     testRuntimeOnly(
@@ -92,5 +94,11 @@ task positive_only(type: Test) {
 task positive_negative(type: Test) {
     useJUnitPlatform {
         includeTags 'positive_negative'
+    }
+}
+
+task one_test(type: Test) {
+    useJUnitPlatform {
+        includeTags 'one_test'
     }
 }
