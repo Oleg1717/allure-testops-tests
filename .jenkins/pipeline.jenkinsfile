@@ -1,9 +1,7 @@
-pipeline {
-    agent any
-
-    parameters{
-        string(name: 'THREADS', defaultValue: '5');
-        string(name: 'BASE_URL', defaultValue: 'https://allure.autotests.cloud');
+properties([
+    parameters([
+        string(name: 'THREADS', defaultValue: '5'),
+        string(name: 'BASE_URL', defaultValue: 'https://allure.autotests.cloud'),
         gitParameter(name: 'BRANCH_NAME',
             branch: '',
             branchFilter: 'origin/(.*)',
@@ -15,9 +13,9 @@ pipeline {
             sortMode: 'NONE',
             tagFilter: '*',
             type: 'PT_BRANCH',
-            useRepository: 'git@github.com:Oleg1717/allure-testops-tests.git');
-        choice(name: 'TASK_NAME', choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests', 'positive_only', 'positive_negative']);
-        choice(name: 'BROWSER_NAME', choices: ['chrome', 'firefox', 'opera']);
+            useRepository: 'git@github.com:Oleg1717/allure-testops-tests.git'),
+        choice(name: 'TASK_NAME', choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests', 'positive_only', 'positive_negative']),
+        choice(name: 'BROWSER_NAME', choices: ['chrome', 'firefox', 'opera']),
         [$class: 'CascadeChoiceParameter',
             name: 'BROWSER_VERSION',
             choiceType: 'PT_SINGLE_SELECT',
@@ -47,10 +45,13 @@ pipeline {
                     }'''
                 ]
             ]
-        ];
-        choice(name: 'BROWSER_SIZE', choices: ['1920x1080', '1440x900', '1280x1024', '1366x768', '1280x720', '1024x768']);
-    }
+        ],
+        choice(name: 'BROWSER_SIZE', choices: ['1920x1080', '1440x900', '1280x1024', '1366x768', '1280x720', '1024x768'])
+    ])
+])
 
+pipeline {
+    agent any
     environment{
         SELENOID_CREDS = credentials('qa-guru-selenoid-creds')
         SELENOID_DOMAIN = "selenoid.autotests.cloud"
