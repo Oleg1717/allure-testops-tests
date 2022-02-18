@@ -1,4 +1,6 @@
-properties([
+pipeline {
+    agent any
+
     parameters([
         string(name: 'THREADS', defaultValue: '5'),
         string(name: 'BASE_URL', defaultValue: 'https://allure.autotests.cloud'),
@@ -14,8 +16,7 @@ properties([
             tagFilter: '*',
             type: 'PT_BRANCH',
             useRepository: 'git@github.com:Oleg1717/allure-testops-tests.git'),
-        choice(name: 'TASK_NAME',
-            choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests', 'positive_only', 'positive_negative']),
+        choice(name: 'TASK_NAME', choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests', 'positive_only', 'positive_negative']),
         choice(name: 'BROWSER_NAME', choices: ['chrome', 'firefox', 'opera']),
         [$class: 'CascadeChoiceParameter',
             name: 'BROWSER_VERSION',
@@ -49,10 +50,7 @@ properties([
         ],
         choice(name: 'BROWSER_SIZE', choices: ['1920x1080', '1440x900', '1280x1024', '1366x768', '1280x720', '1024x768'])
     ])
-])
 
-pipeline {
-    agent any
     environment{
         SELENOID_CREDS = credentials('qa-guru-selenoid-creds')
         SELENOID_DOMAIN = "selenoid.autotests.cloud"
@@ -79,10 +77,10 @@ pipeline {
             steps {
                 withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}',
                                  projectId: '443',
-                                 results: [[path: 'build/allure-results']],
+                                 results: [path: 'build/allure-results'],
                                  serverId: 'allure-server') {
                     sh '''
-                        $GRADLE_HOME/bin/gradle clean ${TASK_NAME} \
+                        $GRADLE_HOME/bin/gradle clean smoke \
                             -Dthreads=${THREADS} \
                             -Dremote.driver.url=${REMOTE_DRIVER_URL} \
                             -Dbrowser.name=${BROWSER_NAME} \
