@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    parameters([
+    parameters{
         string(name: 'THREADS', defaultValue: '5'),
         string(name: 'BASE_URL', defaultValue: 'https://allure.autotests.cloud'),
         gitParameter(name: 'BRANCH_NAME',
@@ -49,7 +49,7 @@ pipeline {
             ]
         ],
         choice(name: 'BROWSER_SIZE', choices: ['1920x1080', '1440x900', '1280x1024', '1366x768', '1280x720', '1024x768'])
-    ])
+    }
 
     environment{
         SELENOID_CREDS = credentials('qa-guru-selenoid-creds')
