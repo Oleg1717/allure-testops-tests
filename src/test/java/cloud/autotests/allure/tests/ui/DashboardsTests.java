@@ -45,25 +45,23 @@ import static io.qameta.allure.Allure.parameter;
 @Feature("Dashboards")
 @Tags({@Tag("dashboards"), @Tag("microservice")})
 //@Tag("dashboards")
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DashboardsTests extends TestBase {
 
     DashboardsPage dashboardsPage = new DashboardsPage();
     DashboardEditForm dashboardEditForm = new DashboardEditForm();
     DashboardWidgetEditForm dashboardWidgetEditForm = new DashboardWidgetEditForm();
     DeleteForm deleteForm = new DeleteForm();
-    DashboardsApi dashboardsApi = new DashboardsApi();
 
-    String dashboardForTestsUrl;
+    static String dashboardForTestsUrl;
 
     @BeforeAll
-    void addDashboardForTests() {
-        dashboardForTestsUrl = TestUrl.DASHBOARDS + dashboardsApi.addDashboard("ForWidgetsTests");
+    static void addDashboardForTests() {
+        dashboardForTestsUrl = TestUrl.DASHBOARDS + DashboardsApi.addDashboard("ForWidgetsTests");
     }
 
     @AfterAll
-    void deleteDashboardsAfterTests() {
-        dashboardsApi.deleteAllDashboards(ConfigHelper.APP_CONFIG.projectId());
+    static void deleteDashboardsAfterTests() {
+        DashboardsApi.deleteAllDashboards(ConfigHelper.APP_CONFIG.projectId());
     }
 
     //region Add new dashboards tests
@@ -183,7 +181,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Switch dashboard full screen mode on/off")
     void dashboardFullScreenMode() {
         String dashboardName = "FullScreen";
-        String dashboardUrl = TestUrl.DASHBOARDS + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestUrl.DASHBOARDS + DashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .selectDashboardAction(DashboardActionItem.FULLSCREEN_MODE)
                 .checkFullScreenModeIsOn()
@@ -199,7 +197,7 @@ public class DashboardsTests extends TestBase {
     void editDashboardName() {
         String dashboardName = "Edit";
         String newDashboardName = "EditNew";
-        String dashboardUrl = TestUrl.DASHBOARDS + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestUrl.DASHBOARDS + DashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .selectDashboardAction(DashboardActionItem.EDIT_DASHBOARD);
         dashboardEditForm.setNameInput(newDashboardName)
@@ -214,7 +212,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Delete dashboard")
     void deleteDashboard() {
         String dashboardName = "Delete";
-        String dashboardUrl = TestUrl.DASHBOARDS + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestUrl.DASHBOARDS + DashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .selectDashboardAction(DashboardActionItem.DELETE_DASHBOARD);
         deleteForm.clickDeleteButton();
@@ -242,7 +240,7 @@ public class DashboardsTests extends TestBase {
     @DisplayName("Add widget using 'Add widget' button")
     void addWidgetByAddWidgetButton() {
         String dashboardName = "ByAddWidgetButton";
-        String dashboardUrl = TestUrl.DASHBOARDS + dashboardsApi.addDashboard(dashboardName);
+        String dashboardUrl = TestUrl.DASHBOARDS + DashboardsApi.addDashboard(dashboardName);
         dashboardsPage.openDashboardPage(dashboardUrl)
                 .addWidgetButtonClick();
         dashboardWidgetEditForm.setNameInput(dashboardName)

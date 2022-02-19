@@ -11,22 +11,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JobsApi {
 
     @Step("Add project using API")
-    public Response addJob(Job newJob) {
+    public static Response addJob(Job newJob) {
         return JobsRequests.getAddJobResponse(newJob);
     }
 
     @Step("Delete job with id = {jobId} using API")
-    public void deleteJob(int jobId) {
+    public static void deleteJob(int jobId) {
         JobsRequests.getDeleteJobResponse(jobId);
     }
 
     @Step("Check that response status code is '{expectedCode}'")
-    public void checkStatusCode(Integer actualCode, Integer expectedCode) {
+    public static void checkStatusCode(Integer actualCode, Integer expectedCode) {
         assertThat(actualCode).isEqualTo(expectedCode);
     }
 
     @Step("Check response body")
-    public void checkResponseBody(Job expectedBody, Job actualBody) {
+    public static void checkResponseBody(Job expectedBody, Job actualBody) {
         assertThat(actualBody)
                 .usingRecursiveComparison()
                 .ignoringFields("id", "createdDate", "lastModifiedDate", "createdBy", "lastModifiedBy")
@@ -34,7 +34,7 @@ public class JobsApi {
     }
 
     @Step("Check that response error message is '{expectedErrorMessage}'")
-    public void checkResponseErrorMessage(String actualErrorMessage, JobsErrorMessage expectedErrorMessage) {
+    public static void checkResponseErrorMessage(String actualErrorMessage, JobsErrorMessage expectedErrorMessage) {
         assertThat(actualErrorMessage).contains(expectedErrorMessage.text());
     }
 }

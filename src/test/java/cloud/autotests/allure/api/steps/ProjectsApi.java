@@ -11,12 +11,12 @@ import java.util.Map;
 public class ProjectsApi {
 
     @Step("Delete project with id = {projectId} using API")
-    public void deleteProject(int projectId) {
+    public static void deleteProject(int projectId) {
         ProjectsRequests.getDeleteProjectResponse(projectId);
     }
 
     @Step("Add project '{projectName}' using API")
-    public Project addProject(String projectName, boolean isPublic) {
+    public static Project addProject(String projectName, boolean isPublic) {
         Project newProject = Project.builder()
                 .name(projectName)
                 .isPublic(isPublic)
@@ -27,14 +27,14 @@ public class ProjectsApi {
     }
 
     @Step("Delete project '{projectName}' using API")
-    public void deleteProjectByName(String projectName) {
+    public static void deleteProjectByName(String projectName) {
         Project project = getProjectByName(projectName);
         deleteProject(project.getId());
     }
 
     @Step("Get data of project '{projectName}' using API")
-    public Project getProjectByName(String projectName) {
-        Map<String, String> requestParams = new HashMap<String, String>() {{
+    public static Project getProjectByName(String projectName) {
+        Map<String, String> requestParams = new HashMap<>() {{
             put("v2", "true");
             put("query", projectName);
             put("sort", "id,desc");
@@ -51,8 +51,8 @@ public class ProjectsApi {
     }
 
     @Step("Get projects count by API")
-    public int getProjectsCount() {
-        Map<String, String> requestParams = new HashMap<String, String>() {{
+    public static int getProjectsCount() {
+        Map<String, String> requestParams = new HashMap<>() {{
             put("v2", "true");
             put("query", "");
             put("sort", "id,desc");

@@ -23,7 +23,6 @@ public class AuthorizationTests {
     private final String userName = ConfigHelper.APP_CONFIG.secondUserLogin();
     private final String userPassword = ConfigHelper.APP_CONFIG.secondUserPassword();
     private final String xsrfToken = "1234567";
-    UserApi userApi = new UserApi();
 
     @Test
     @AllureId("5607")
@@ -32,9 +31,9 @@ public class AuthorizationTests {
     public void checkAuthorizationWithValidUserData() {
         //given
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
+        Response response = UserApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
-        userApi.checkThatAuthorizationIsSuccess(response.as(Login.class).getStatus());
+        UserApi.checkThatAuthorizationIsSuccess(response.as(Login.class).getStatus());
     }
 
     @Test
@@ -45,9 +44,9 @@ public class AuthorizationTests {
         //given
         String userName = "";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
+        Response response = UserApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
-        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+        UserApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.VALIDATION_ERROR.text());
     }
 
@@ -59,9 +58,9 @@ public class AuthorizationTests {
         //given
         String userName = "usr";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, "usr", userPassword);
+        Response response = UserApi.getAuthorizeData(xsrfToken, "usr", userPassword);
         //then
-        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+        UserApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.BAD_CREDENTIALS.text());
     }
 
@@ -73,9 +72,9 @@ public class AuthorizationTests {
         //given
         String userPassword = "";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
+        Response response = UserApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
-        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+        UserApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.VALIDATION_ERROR.text());
     }
 
@@ -87,9 +86,9 @@ public class AuthorizationTests {
         //given
         String xsrfToken = "";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
+        Response response = UserApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
-        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+        UserApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.text());
     }
 
@@ -101,9 +100,9 @@ public class AuthorizationTests {
         //given
         String xsrfToken = "   ";
         //when
-        Response response = userApi.getAuthorizeData(xsrfToken, userName, userPassword);
+        Response response = UserApi.getAuthorizeData(xsrfToken, userName, userPassword);
         //then
-        userApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
+        UserApi.checkThatResponseErrorIs(response.as(Login.class).getMessage(),
                 LoginErrorMessage.AN_EXPECTED_CSRF_TOKEN_CANNOT_BE_FOUND.text());
     }
 }

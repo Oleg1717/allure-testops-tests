@@ -38,7 +38,6 @@ public class ProjectsTests extends TestBase {
 
     ProjectsPage projectsPage = new ProjectsPage();
     ProjectEditForm projectEditForm = new ProjectEditForm();
-    ProjectsApi projectsApi = new ProjectsApi();
     Sidebar sidebar = new Sidebar();
 
     @Test
@@ -70,7 +69,7 @@ public class ProjectsTests extends TestBase {
         projectEditForm.addProjectWithName(projectName);
         sidebar.navigateTo(SideMenuNavItem.TO_THE_MAIN_SCREEN);
         projectsPage.checkThatProjectExist(projectName);
-        projectsApi.deleteProjectByName(projectName);
+        ProjectsApi.deleteProjectByName(projectName);
     }
 
     @Test
@@ -80,13 +79,13 @@ public class ProjectsTests extends TestBase {
     @DisplayName("Add project with existing name")
     void addNewProjectWithExistingName() {
         String projectName = "C07-Oleg1717-new-project-exist-name";
-        Project project = projectsApi.addProject(projectName, true);
+        Project project = ProjectsApi.addProject(projectName, true);
         projectsPage.openProjectsPage(TestUrl.MAIN_SCREEN)
                 .newProjectButtonClick();
         projectEditForm.setNameInput(projectName)
                 .clickSubmitButton()
                 .checkThatFormAlertIs(FormErrorMessages.PROJECT_EXIST.error());
-        projectsApi.deleteProject(project.getId());
+        ProjectsApi.deleteProject(project.getId());
     }
 
     @Test
@@ -95,7 +94,7 @@ public class ProjectsTests extends TestBase {
     @Story("Check projects page pagination")
     @DisplayName("Check pagination items count")
     void checkPaginationItemsCount() {
-        int projectsCount = projectsApi.getProjectsCount();
+        int projectsCount = ProjectsApi.getProjectsCount();
         projectsPage.openProjectsPage(TestUrl.MAIN_SCREEN)
                 .allProjectsButtonClick()
                 .checkPaginationItemsCount(projectsCount);

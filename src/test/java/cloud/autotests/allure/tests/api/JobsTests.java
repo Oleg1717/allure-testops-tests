@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 @Tag("jobs")
 public class JobsTests {
 
-    JobsApi jobsApi = new JobsApi();
     JobData jobData = new JobData();
 
     @Test
@@ -40,13 +39,13 @@ public class JobsTests {
         //given
         Job jobRequestData = jobData.getMaxJobData();
         //when
-        Response response = jobsApi.addJob(jobRequestData);
+        Response response = JobsApi.addJob(jobRequestData);
         Job jobResponseData = response.as(Job.class);
         //then
-        jobsApi.checkStatusCode(response.statusCode(), 200);
-        jobsApi.checkResponseBody(jobRequestData, jobResponseData);
+        JobsApi.checkStatusCode(response.statusCode(), 200);
+        JobsApi.checkResponseBody(jobRequestData, jobResponseData);
         //and
-        jobsApi.deleteJob(jobResponseData.getId());
+        JobsApi.deleteJob(jobResponseData.getId());
     }
 
     @Test
@@ -58,13 +57,13 @@ public class JobsTests {
         //given
         Job jobRequestData = jobData.getMinJobData();
         //when
-        Response response = jobsApi.addJob(jobRequestData);
+        Response response = JobsApi.addJob(jobRequestData);
         Job jobResponseData = response.as(Job.class);
         //then
-        jobsApi.checkStatusCode(response.statusCode(), 404);
-        jobsApi.checkResponseBody(jobRequestData, jobResponseData);
+        JobsApi.checkStatusCode(response.statusCode(), 404);
+        JobsApi.checkResponseBody(jobRequestData, jobResponseData);
         //and
-        jobsApi.deleteJob(jobResponseData.getId());
+        JobsApi.deleteJob(jobResponseData.getId());
     }
 
     @Test
@@ -76,14 +75,14 @@ public class JobsTests {
     public void addCopyOfExistingJob() {
         //given
         Job jobRequestData = jobData.getMaxJobData();
-        Response firstJobResponse = jobsApi.addJob(jobRequestData);
+        Response firstJobResponse = JobsApi.addJob(jobRequestData);
         //when
-        Response secondJobResponse = jobsApi.addJob(jobRequestData);
+        Response secondJobResponse = JobsApi.addJob(jobRequestData);
         ResponseErrorBody errorBody = secondJobResponse.as(ResponseErrorBody.class);
         //then
-        jobsApi.checkStatusCode(secondJobResponse.statusCode(), 409);
-        jobsApi.checkResponseErrorMessage(errorBody.getMessage(), JobsErrorMessage.COULD_NOT_EXECUTE_STATEMENT);
+        JobsApi.checkStatusCode(secondJobResponse.statusCode(), 409);
+        JobsApi.checkResponseErrorMessage(errorBody.getMessage(), JobsErrorMessage.COULD_NOT_EXECUTE_STATEMENT);
         //and
-        jobsApi.deleteJob(firstJobResponse.as(Job.class).getId());
+        JobsApi.deleteJob(firstJobResponse.as(Job.class).getId());
     }
 }

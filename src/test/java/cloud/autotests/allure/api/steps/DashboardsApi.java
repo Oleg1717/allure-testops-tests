@@ -15,7 +15,7 @@ import java.util.Map;
 public class DashboardsApi {
 
     @Step("Add dashboard '{dashboardName}' using API")
-    public Integer addDashboard(String dashboardName) {
+    public static Integer addDashboard(String dashboardName) {
         Dashboard body = Dashboard.builder()
                 .projectId(ConfigHelper.APP_CONFIG.projectId())
                 .name(dashboardName)
@@ -27,21 +27,21 @@ public class DashboardsApi {
     }
 
     @Step("Delete dashboard with id = {dashboardId} using API")
-    public void deleteDashboard(int dashboardId) {
+    public static void deleteDashboard(int dashboardId) {
 
         AllureRsRequests.deleteElement(ApiEndpoint.DASHBOARD_ID, dashboardId);
         //DashboardsRequests.getDeleteDashboardResponse(dashboardId);
     }
 
     @Step("Delete dashboard '{dashboardName}' using API")
-    public void deleteDashboardByName(int projectId, String dashboardName) {
+    public static void deleteDashboardByName(int projectId, String dashboardName) {
         Dashboard dashboard = getDashboardIdByName(projectId, dashboardName);
         deleteDashboard(dashboard.getId());
     }
 
     @Step("Get id of dashboard '{dashboardName}' using API")
-    public Dashboard getDashboardIdByName(Integer projectId, String dashboardName) {
-        Map<String, String> requestParams = new HashMap<String, String>() {{
+    public static Dashboard getDashboardIdByName(Integer projectId, String dashboardName) {
+        Map<String, String> requestParams = new HashMap<>() {{
             put("projectId", projectId.toString());
             put("size", "5000");
         }};
@@ -56,8 +56,8 @@ public class DashboardsApi {
     }
 
     @Step("Delete all tests dashboards using API")
-    public void deleteAllDashboards(Integer projectId) {
-        Map<String, String> requestParams = new HashMap<String, String>() {{
+    public static void deleteAllDashboards(Integer projectId) {
+        Map<String, String> requestParams = new HashMap<>() {{
             put("projectId", projectId.toString());
             put("size", "5000");
         }};
