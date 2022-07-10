@@ -1,0 +1,138 @@
+properties([
+    parameters([
+        string(name: 'THREADS', defaultValue: '5'),
+        string(name: 'BASE_URL', defaultValue: 'https://allure.autotests.cloud'),
+        gitParameter(name: 'BRANCH_NAME',
+            branch: '',
+            branchFilter: 'origin/(.*)',
+            defaultValue: 'master',
+            description: '',
+            listSize: '3',
+            quickFilterEnabled: false,
+            selectedValue: 'NONE',
+            sortMode: 'NONE',
+            tagFilter: '*',
+            type: 'PT_BRANCH',
+            useRepository: 'git@github.com:Oleg1717/allure-testops-tests.git'),
+        choice(name: 'TASK_NAME', choices: ['test', 'login_tests', 'jobs_tests', 'projects_tests', 'dashboards_tests', 'positive_only', 'positive_negative']),
+        choice(name: 'BROWSER_NAME', choices: ['chrome', 'firefox', 'opera']),
+        [$class: 'CascadeChoiceParameter',
+            name: 'BROWSER_VERSION',
+            choiceType: 'PT_SINGLE_SELECT',
+            filterLength: 1,
+            filterable: false,
+            randomName: 'choice-parameter-28281155397613',
+            referencedParameters: 'BROWSER_NAME',
+            script: [
+                $class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: false,
+                    script: 'return ["error"]'
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: false,
+                    script: '''switch (BROWSER_NAME) {
+                        case "chrome":
+                            return ["91.0","90.0"]
+                        case "firefox":
+                            return ["89.0","88.0"]
+                        case "opera":
+                            return ["77.0","76.0"]
+                        default:
+                            return [""]
+                    }'''
+                ]
+            ]
+        ],
+        choice(name: 'BROWSER_SIZE', choices: ['1920x1080', '1440x900', '1280x1024', '1366x768', '1280x720', '1024x768']),
+		booleanParam(name: 'WITH_ALLURE_UPLOADS', defaultValue: false),
+        booleanParam(name: 'ADD_ALLURE_RESULTS', defaultValue: true),
+        booleanParam(name: 'SEND_TELEGRAM_NOTIFICATION', defaultValue: false)
+    ])
+])
+
+pipeline {
+    agent any
+    environment{
+        SELENOID_CREDS = credentials('qa-guru-selenoid-creds')
+        SELENOID_DOMAIN = "selenoid.autotests.cloud"
+        REMOTE_DRIVER_URL = "https://${SELENOID_CREDS_USR}:${SELENOID_CREDS_PSW}@${SELENOID_DOMAIN}/wd/hub/"
+    }
+
+    stages {
+        stage('Check URLs') {
+            steps {
+                httpRequest url: "https://${SELENOID_DOMAIN}/status", validResponseCodes: '200'
+                httpRequest url: "${BASE_URL}/favicon.ico", validResponseCodes: '200'
+            }
+        }
+
+        stage('Source code') {
+            steps {
+                git branch: "${BRANCH_NAME}",
+                    credentialsId: '0338b4f6-cbc3-4550-8e91-99976debed8d',
+                    url: 'git@github.com:Oleg1717/allure-testops-tests.git'
+            }
+        }
+        stage("Run tests") {
+            parallel {
+                stage("With allure upload") {
+                    when { expression { params.WITH_ALLURE_UPLOADS } }
+                    steps {
+                        catchError (buildResult: "FAILURE", stageResult: "FAILURE") {
+							withAllureUpload(name: '${JOB_NAME} - #${BUILD_NUMBER}',
+											 projectId: '443',
+											 results: [[path: 'build/allure-results']],
+											 serverId: 'allure-server') {
+								sh '''
+									$GRADLE_HOME/bin/gradle clean ${TASK_NAME} \
+										-Dthreads=${THREADS} \
+										-Dremote.driver.url=${REMOTE_DRIVER_URL} \
+										-Dbrowser.name=${BROWSER_NAME} \
+										-Dbrowser.version=${BROWSER_VERSION} \
+										-Dbrowser.size=${BROWSER_SIZE}
+								'''
+                            }
+                        }
+                    }
+                }
+                stage('Without allure upload') {
+                    when { expression { !params.WITH_ALLURE_UPLOADS } }
+                    steps {
+                        catchError (buildResult: "FAILURE", stageResult: "FAILURE") {
+                    sh '''
+                        $GRADLE_HOME/bin/gradle clean ${TASK_NAME} \
+                            -Dthreads=${THREADS} \
+                            -Dremote.driver.url=${REMOTE_DRIVER_URL} \
+                            -Dbrowser.name=${BROWSER_NAME} \
+                            -Dbrowser.version=${BROWSER_VERSION} \
+                            -Dbrowser.size=${BROWSER_SIZE}
+                    '''
+                        }
+                    }
+                }
+            }
+        }
+        stage('Allure results') {
+            when { expression { params.ADD_ALLURE_RESULTS } }
+            steps {
+                allure results: [[path: 'build/allure-results']]
+            }
+        }
+        stage('Telegram notification') {
+            when { expression { params.SEND_TELEGRAM_NOTIFICATION } }
+            steps {
+				sh '''
+					java  \
+						"-DprojectName=test results" \
+						"-Denv=prod" \
+						"-DreportLink=${BUILD_URL}" \
+						"-Dconfig.file=$ALLURE_NOTIFICATIONS_HOME/config/ov_autotests_bot.json" \
+						-jar $ALLURE_NOTIFICATIONS_HOME/releases/allure-notifications-3.1.1.jar
+				'''
+            }
+        }
+    }
+}
