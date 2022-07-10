@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class JobData {
 
-    private Faker faker = new Faker();
+    private final Faker faker = new Faker();
 
     public Job getMinJobData() {
         return Job.builder()
@@ -22,7 +22,7 @@ public class JobData {
     public Job getMaxJobData() {
         JobParameter allureNotificationsVersion = getJobParameter("ALLURE_NOTIFICATIONS_VERSION", "3.1.1");
         JobParameter threads = getJobParameter("THREADS", "5");
-        String name = "co7-ov-regform-max-" + faker.idNumber();
+        String name = "co7-ov-regform-max-" + faker.idNumber().valid();
         return Job.builder()
                 .projectId(ConfigHelper.APP_CONFIG.projectId())
                 .canRun(true)
