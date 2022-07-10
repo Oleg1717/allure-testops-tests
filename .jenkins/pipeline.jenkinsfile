@@ -81,7 +81,7 @@ pipeline {
                                  results: [path: 'build/allure-results'],
                                  serverId: 'allure-server') {
                     sh '''
-                        $GRADLE_HOME/bin/gradle clean smoke \
+                        $GRADLE_HOME/bin/gradle clean ${TASK_NAME} \
                             -Dthreads=${THREADS} \
                             -Dremote.driver.url=${REMOTE_DRIVER_URL} \
                             -Dbrowser.name=${BROWSER_NAME} \
